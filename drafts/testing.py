@@ -60,7 +60,7 @@ def main() -> None:
     vid = cv2.VideoCapture(1)
     # vid = cv2.VideoCapture(r'/Users/egorken/Downloads/Exercise Tutorial - Squat.mp4')
     # vid = cv2.VideoCapture(r'/Users/egorken/Downloads/x2mate.com-How to do a Dumbbell Hammer Curl.mp4')
-    model = YOLO('../weights/yolov8x-pose.pt')
+    model = YOLO('../src/models/weights/yolov8m-pose.pt')
     count = 0
     dir = 0
     pTime = 0

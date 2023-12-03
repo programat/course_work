@@ -5,7 +5,7 @@ class AngleCalculationStrategy(ABC):
     def calculate_angles(self, landmarks):
         pass
 
-class DefaultAngleCalculation(AngleCalculationStrategy):
+class Angle2DCalculation(AngleCalculationStrategy):
     def calculate_angles(self, landmarks):
-        # Реализация вычисления углов по умолчанию
+
         pass
