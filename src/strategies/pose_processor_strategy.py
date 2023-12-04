@@ -15,8 +15,8 @@ class PoseProcessor:
     def __init__(self, detection_strategy: dc.DetectionStrategy,
                  angle_calculation_strategy: acs.AngleCalculationStrategy, level=0):
 
-        self.detection_strategy = detection_strategy
-        self.angle_calculation_strategy = angle_calculation_strategy
+        self.detector = detection_strategy
+        self.angle_calculation = angle_calculation_strategy
 
         self.cv_elem = opencv_elements.OpenCVElements
 
@@ -85,7 +85,7 @@ class SquatsProcessor(PoseProcessor):
     #     self.angle_calculation_strategy = angle_calculation_strategy
 
     def calculate_angle(self, landmarks):
-        return self.angle_calculation_strategy.calculate_angles(landmarks)
+        return self.angle_calculation.calculate_angles(landmarks)
 
     def _show_feedback(self, frame, c_frame, dict_maps, lower_hips_disp):
 
@@ -114,24 +114,23 @@ class SquatsProcessor(PoseProcessor):
     def process_pose(self):
         pass
 
-    def process(self, frame: np.array, pose):
+    def process(self, frame: np.array):
         play_sound = None
 
         frame_height, frame_width, _ = frame.shape
 
+        self.detector.process_frame(frame)
         # Process the image.
-        keypoints = self.detection_strategy.get_coordinates()
+        keypoints = self.detector.get_coordinates()
 
-        if keypoints.pose_landmarks:
-            ps_lm = keypoints.
+        if len(keypoints):
+            nose_coord = self.detector.get_landmark_coordinates('nose')
+            left_shldr_coord, left_elbow_coord, left_wrist_coord, left_hip_coord, left_knee_coord, left_ankle_coord = \
+                self.detector.get_landmark_coordinates('left')
+            right_shldr_coord, right_elbow_coord, right_wrist_coord, right_hip_coord, right_knee_coord, right_ankle_coord = \
+                self.detector.get_landmark_coordinates('right')
 
-            nose_coord = get_landmark_features(ps_lm.landmark, self.dict_features, 'nose', frame_width, frame_height)
-            left_shldr_coord, left_elbow_coord, left_wrist_coord, left_hip_coord, left_knee_coord, left_ankle_coord, left_foot_coord = \
-                get_landmark_features(ps_lm.landmark, self.dict_features, 'left', frame_width, frame_height)
-            right_shldr_coord, right_elbow_coord, right_wrist_coord, right_hip_coord, right_knee_coord, right_ankle_coord, right_foot_coord = \
-                get_landmark_features(ps_lm.landmark, self.dict_features, 'right', frame_width, frame_height)
-
-            offset_angle = find_angle(left_shldr_coord, right_shldr_coord, nose_coord)
+            offset_angle = self.angle_calculation.calculate_angle(left_shldr_coord, right_shldr_coord, nose_coord)
 
             if offset_angle > self.thresholds['OFFSET_THRESH']:
 
@@ -150,8 +149,8 @@ class SquatsProcessor(PoseProcessor):
                 cv2.circle(frame, left_shldr_coord, 7, self.COLORS['yellow'], -1)
                 cv2.circle(frame, right_shldr_coord, 7, self.COLORS['magenta'], -1)
 
-                if self.flip_frame:
-                    frame = cv2.flip(frame, 1)
+                # if self.flip_frame:
+                #     frame = cv2.flip(frame, 1)
 
                 if display_inactivity:
                     # cv2.putText(frame, 'Resetting SQUAT_COUNT due to inactivity!!!', (10, frame_height - 90),
@@ -160,7 +159,7 @@ class SquatsProcessor(PoseProcessor):
                     self.state_tracker['INACTIVE_TIME_FRONT'] = 0.0
                     self.state_tracker['start_inactive_time_front'] = time.perf_counter()
 
-                draw_text(
+                self.cv_elem.draw_text(
                     frame,
                     "CORRECT: " + str(self.state_tracker['SQUAT_COUNT']),
                     pos=(int(frame_width * 0.68), 30),
@@ -169,17 +168,16 @@ class SquatsProcessor(PoseProcessor):
                     text_color_bg=(18, 185, 0)
                 )
 
-                draw_text(
+                self.cv_elem.draw_text(
                     frame,
                     "INCORRECT: " + str(self.state_tracker['IMPROPER_SQUAT']),
                     pos=(int(frame_width * 0.68), 80),
                     text_color=(255, 255, 230),
                     font_scale=0.7,
-                    text_color_bg=(221, 0, 0),
-
+                    text_color_bg=(221, 0, 0)
                 )
 
-                draw_text(
+                self.cv_elem.draw_text(
                     frame,
                     'CAMERA NOT ALIGNED PROPERLY!!!',
                     pos=(30, frame_height - 60),
@@ -188,7 +186,7 @@ class SquatsProcessor(PoseProcessor):
                     text_color_bg=(255, 153, 0),
                 )
 
-                draw_text(
+                self.cv_elem.draw_text(
                     frame,
                     'OFFSET ANGLE: ' + str(offset_angle),
                     pos=(30, frame_height - 30),
@@ -209,8 +207,8 @@ class SquatsProcessor(PoseProcessor):
                 self.state_tracker['INACTIVE_TIME_FRONT'] = 0.0
                 self.state_tracker['start_inactive_time_front'] = time.perf_counter()
 
-                dist_l_sh_hip = abs(left_foot_coord[1] - left_shldr_coord[1])
-                dist_r_sh_hip = abs(right_foot_coord[1] - right_shldr_coord)[1]
+                dist_l_sh_hip = abs(left_ankle_coord[1] - left_shldr_coord[1])
+                dist_r_sh_hip = abs(right_ankle_coord[1] - right_shldr_coord)[1]
 
                 shldr_coord = None
                 elbow_coord = None
@@ -227,10 +225,8 @@ class SquatsProcessor(PoseProcessor):
                     hip_coord = left_hip_coord
                     knee_coord = left_knee_coord
                     ankle_coord = left_ankle_coord
-                    foot_coord = left_foot_coord
 
                     multiplier = -1
-
 
                 else:
                     shldr_coord = right_shldr_coord
@@ -239,58 +235,57 @@ class SquatsProcessor(PoseProcessor):
                     hip_coord = right_hip_coord
                     knee_coord = right_knee_coord
                     ankle_coord = right_ankle_coord
-                    foot_coord = right_foot_coord
 
                     multiplier = 1
 
                 # ------------------- Verical Angle calculation --------------
 
-                hip_vertical_angle = find_angle(shldr_coord, np.array([hip_coord[0], 0]), hip_coord)
+                hip_vertical_angle = self.angle_calculation.calculate_angle(shldr_coord, np.array([hip_coord[0], 0]), hip_coord)
                 cv2.ellipse(frame, hip_coord, (30, 30),
                             angle=0, startAngle=-90, endAngle=-90 + multiplier * hip_vertical_angle,
                             color=self.COLORS['white'], thickness=3, lineType=self.linetype)
 
-                draw_dotted_line(frame, hip_coord, start=hip_coord[1] - 80, end=hip_coord[1] + 20,
+                self.cv_elem.draw_dotted_line(frame, hip_coord, start=hip_coord[1] - 80, end=hip_coord[1] + 20,
                                  line_color=self.COLORS['blue'])
 
-                knee_vertical_angle = find_angle(hip_coord, np.array([knee_coord[0], 0]), knee_coord)
+                knee_vertical_angle = self.angle_calculation.calculate_angle(hip_coord, np.array([knee_coord[0], 0]), knee_coord)
                 cv2.ellipse(frame, knee_coord, (20, 20),
                             angle=0, startAngle=-90, endAngle=-90 - multiplier * knee_vertical_angle,
                             color=self.COLORS['white'], thickness=3, lineType=self.linetype)
 
-                draw_dotted_line(frame, knee_coord, start=knee_coord[1] - 50, end=knee_coord[1] + 20,
+                self.cv_elem.draw_dotted_line(frame, knee_coord, start=knee_coord[1] - 50, end=knee_coord[1] + 20,
                                  line_color=self.COLORS['blue'])
 
-                ankle_vertical_angle = find_angle(knee_coord, np.array([ankle_coord[0], 0]), ankle_coord)
+                ankle_vertical_angle = self.angle_calculation.calculate_angle(knee_coord, np.array([ankle_coord[0], 0]), ankle_coord)
                 cv2.ellipse(frame, ankle_coord, (30, 30),
                             angle=0, startAngle=-90, endAngle=-90 + multiplier * ankle_vertical_angle,
                             color=self.COLORS['white'], thickness=3, lineType=self.linetype)
 
-                draw_dotted_line(frame, ankle_coord, start=ankle_coord[1] - 50, end=ankle_coord[1] + 20,
+                self.cv_elem.draw_dotted_line(frame, ankle_coord, start=ankle_coord[1] - 50, end=ankle_coord[1] + 20,
                                  line_color=self.COLORS['blue'])
 
                 # ------------------------------------------------------------
 
-                # Join landmarks.
-                cv2.line(frame, shldr_coord, elbow_coord, self.COLORS['light_blue'], 4, lineType=self.linetype)
-                cv2.line(frame, wrist_coord, elbow_coord, self.COLORS['light_blue'], 4, lineType=self.linetype)
-                cv2.line(frame, shldr_coord, hip_coord, self.COLORS['light_blue'], 4, lineType=self.linetype)
-                cv2.line(frame, knee_coord, hip_coord, self.COLORS['light_blue'], 4, lineType=self.linetype)
-                cv2.line(frame, ankle_coord, knee_coord, self.COLORS['light_blue'], 4, lineType=self.linetype)
-                cv2.line(frame, ankle_coord, foot_coord, self.COLORS['light_blue'], 4, lineType=self.linetype)
+                # # Join landmarks.
+                # cv2.line(frame, shldr_coord, elbow_coord, self.COLORS['light_blue'], 4, lineType=self.linetype)
+                # cv2.line(frame, wrist_coord, elbow_coord, self.COLORS['light_blue'], 4, lineType=self.linetype)
+                # cv2.line(frame, shldr_coord, hip_coord, self.COLORS['light_blue'], 4, lineType=self.linetype)
+                # cv2.line(frame, knee_coord, hip_coord, self.COLORS['light_blue'], 4, lineType=self.linetype)
+                # cv2.line(frame, ankle_coord, knee_coord, self.COLORS['light_blue'], 4, lineType=self.linetype)
+                # cv2.line(frame, ankle_coord, foot_coord, self.COLORS['light_blue'], 4, lineType=self.linetype)
+                # 
+                # # Plot landmark points
+                # cv2.circle(frame, shldr_coord, 7, self.COLORS['yellow'], -1, lineType=self.linetype)
+                # cv2.circle(frame, elbow_coord, 7, self.COLORS['yellow'], -1, lineType=self.linetype)
+                # cv2.circle(frame, wrist_coord, 7, self.COLORS['yellow'], -1, lineType=self.linetype)
+                # cv2.circle(frame, hip_coord, 7, self.COLORS['yellow'], -1, lineType=self.linetype)
+                # cv2.circle(frame, knee_coord, 7, self.COLORS['yellow'], -1, lineType=self.linetype)
+                # cv2.circle(frame, ankle_coord, 7, self.COLORS['yellow'], -1, lineType=self.linetype)
+                # cv2.circle(frame, foot_coord, 7, self.COLORS['yellow'], -1, lineType=self.linetype)
 
-                # Plot landmark points
-                cv2.circle(frame, shldr_coord, 7, self.COLORS['yellow'], -1, lineType=self.linetype)
-                cv2.circle(frame, elbow_coord, 7, self.COLORS['yellow'], -1, lineType=self.linetype)
-                cv2.circle(frame, wrist_coord, 7, self.COLORS['yellow'], -1, lineType=self.linetype)
-                cv2.circle(frame, hip_coord, 7, self.COLORS['yellow'], -1, lineType=self.linetype)
-                cv2.circle(frame, knee_coord, 7, self.COLORS['yellow'], -1, lineType=self.linetype)
-                cv2.circle(frame, ankle_coord, 7, self.COLORS['yellow'], -1, lineType=self.linetype)
-                cv2.circle(frame, foot_coord, 7, self.COLORS['yellow'], -1, lineType=self.linetype)
-
-                current_state = self._get_state(int(knee_vertical_angle))
+                current_state = self.exercise.get_state(int(knee_vertical_angle))
                 self.state_tracker['curr_state'] = current_state
-                self._update_state_sequence(current_state)
+                self.exercise._update_state_sequence(current_state, self.state_tracker)
 
                 # -------------------------------------- COMPUTE COUNTERS --------------------------------------
 
@@ -367,11 +362,11 @@ class SquatsProcessor(PoseProcessor):
                 knee_text_coord_x = knee_coord[0] + 15
                 ankle_text_coord_x = ankle_coord[0] + 10
 
-                if self.flip_frame:
-                    frame = cv2.flip(frame, 1)
-                    hip_text_coord_x = frame_width - hip_coord[0] + 10
-                    knee_text_coord_x = frame_width - knee_coord[0] + 15
-                    ankle_text_coord_x = frame_width - ankle_coord[0] + 10
+                # if self.flip_frame:
+                #     frame = cv2.flip(frame, 1)
+                #     hip_text_coord_x = frame_width - hip_coord[0] + 10
+                #     knee_text_coord_x = frame_width - knee_coord[0] + 15
+                #     ankle_text_coord_x = frame_width - ankle_coord[0] + 10
 
                 if 's3' in self.state_tracker['state_seq'] or current_state == 's1':
                     self.state_tracker['LOWER_HIPS'] = False
@@ -394,7 +389,7 @@ class SquatsProcessor(PoseProcessor):
                 cv2.putText(frame, str(int(ankle_vertical_angle)), (ankle_text_coord_x, ankle_coord[1]), self.font, 0.6,
                             self.COLORS['light_green'], 2, lineType=self.linetype)
 
-                draw_text(
+                self.cv_elem.draw_text(
                     frame,
                     "CORRECT: " + str(self.state_tracker['SQUAT_COUNT']),
                     pos=(int(frame_width * 0.68), 30),
@@ -403,7 +398,7 @@ class SquatsProcessor(PoseProcessor):
                     text_color_bg=(18, 185, 0)
                 )
 
-                draw_text(
+                self.cv_elem.draw_text(
                     frame,
                     "INCORRECT: " + str(self.state_tracker['IMPROPER_SQUAT']),
                     pos=(int(frame_width * 0.68), 80),
@@ -440,7 +435,7 @@ class SquatsProcessor(PoseProcessor):
 
             self.state_tracker['start_inactive_time'] = end_time
 
-            draw_text(
+            self.cv_elem.draw_text(
                 frame,
                 "CORRECT: " + str(self.state_tracker['SQUAT_COUNT']),
                 pos=(int(frame_width * 0.68), 30),
@@ -449,7 +444,7 @@ class SquatsProcessor(PoseProcessor):
                 text_color_bg=(18, 185, 0)
             )
 
-            draw_text(
+            self.cv_elem.draw_text(
                 frame,
                 "INCORRECT: " + str(self.state_tracker['IMPROPER_SQUAT']),
                 pos=(int(frame_width * 0.68), 80),

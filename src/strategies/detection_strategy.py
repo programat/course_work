@@ -1,6 +1,8 @@
 # detection_strategy.py
 
 from abc import ABC, abstractmethod
+
+import numpy as np
 from ultralytics import YOLO
 import os
 
@@ -20,10 +22,13 @@ class DetectionStrategy(ABC):
     @abstractmethod
     def process_frame(self, frame):
         pass
+    @abstractmethod
+    def get_landmark_coordinates(self, feature):
+        pass
 
 
 class YOLOStrategy(DetectionStrategy):
-    def __init__(self, imgsz=320, weights_path=os.path.join(os.path.dirname(__file__), r'.../models/weights/yolo8s-pose.pt'), conf=0.25, iou = 0.7,):
+    def __init__(self, imgsz=320, weights_path=os.path.join(os.path.dirname(__file__), r'../models/weights/yolov8s-pose.pt'), conf=0.25, iou=0.7,):
         self.weights_path = weights_path
         self.imgsz = imgsz,
         self.conf = conf,
@@ -56,7 +61,7 @@ class YOLOStrategy(DetectionStrategy):
         self.landmark_features_dict['right'] = self.landmark_features_dict_right
         self.landmark_features_dict['nose'] = 0
 
-    def change_parameters(self, imgsz, path, conf, iou):
+    def change_parameters(self, path='', imgsz=-1, conf=-1, iou=-1):
         if path != '':
             self.path_weights = path
 
@@ -74,20 +79,36 @@ class YOLOStrategy(DetectionStrategy):
     def create_model(self):
         if self.model is not None:
             del self.model
-        self.model = YOLO(self.path_weights)
+        self.model = YOLO(self.weights_path)
         return self
 
-    def process_frame(self, frame, verbouse=False, device='cpu'):
-        self.results = self.model(frame, verbouse=verbouse, device=device, imgsz=self.imgsz)
+    def process_frame(self, frame, verbose=False, device='cpu'):
+        self.results = self.model(frame, verbose=verbose, device=device, imgsz=self.imgsz)
         annotated_frame = self.results[0].plot(labels=False, boxes=False)
+        # тут обдумать трек для нескольких людей
         return annotated_frame
 
     def get_coordinates(self):
         res_coord = [r.keypoints.xy.to(int).numpy() for r in self.results]
-        return res_coord
+        return res_coord[0]
 
     def get_landmark_features(self):
         return self.landmark_features_dict
+
+    def get_landmark_coordinates(self, feature):
+        if feature == 'nose':
+            return self.get_coordinates()[0][self.landmark_features_dict[feature]]
+        if feature == 'left' or 'right':
+            shldr_coord = self.get_coordinates()[0][self.landmark_features_dict[feature]['shoulder']]
+            elbow_coord = self.get_coordinates()[0][self.landmark_features_dict[feature]['elbow']]
+            wrist_coord = self.get_coordinates()[0][self.landmark_features_dict[feature]['wrist']]
+            hip_coord = self.get_coordinates()[0][self.landmark_features_dict[feature]['hip']]
+            knee_coord = self.get_coordinates()[0][self.landmark_features_dict[feature]['knee']]
+            ankle_coord = self.get_coordinates()[0][self.landmark_features_dict[feature]['ankle']]
+
+            return shldr_coord, elbow_coord, wrist_coord, hip_coord, knee_coord, ankle_coord
+        else:
+            raise ValueError('Feature needs to be "nose", "left" or "right"')
 
 
 class YoloNasStrategy(DetectionStrategy):

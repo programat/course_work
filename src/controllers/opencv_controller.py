@@ -28,6 +28,9 @@ class OpenCVController:
         self.pose_processor_strategy = strategy
 
     def process_frame(self, frame):
+        vid = cv2.VideoCapture(1)
+
+
         if self.selected_exercise is None or \
            self.angle_calculation_strategy is None or \
            self.detection_strategy is None or \

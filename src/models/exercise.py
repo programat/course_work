@@ -32,13 +32,13 @@ class SquatExercise(Exercise):
             'PASS': (70, 95)
         }
         self.thresholds_beginner = {
-            'HIP_KNEE_VERT': self._ANGLE_HIP_KNEE_VERT,
+            'HIP_KNEE_VERT': self._ANGLE_HIP_KNEE_VERT_BEGINNER,
 
             'HIP_THRESH': [10, 50],
             'ANKLE_THRESH': 45,
             'KNEE_THRESH': [50, 70, 95],
 
-            'OFFSET_THRESH': 35.0,
+            'OFFSET_THRESH': 45.0,
             'INACTIVE_THRESH': 15.0,
 
             'CNT_FRAME_THRESH': 50
@@ -56,7 +56,7 @@ class SquatExercise(Exercise):
             'ANKLE_THRESH': 30,
             'KNEE_THRESH': [50, 80, 95],
 
-            'OFFSET_THRESH': 35.0,
+            'OFFSET_THRESH': 45.0,
             'INACTIVE_THRESH': 15.0,
 
             'CNT_FRAME_THRESH': 50
@@ -97,12 +97,12 @@ class SquatExercise(Exercise):
 
         return f's{knee}' if knee else None
 
-    def _update_state_sequence(self, state):
+    def _update_state_sequence(self, state, state_tracker):
         if state == 's2':
-            if (('s3' not in self.state_tracker['state_seq']) and (self.state_tracker['state_seq'].count('s2')) == 0) or \
-                    (('s3' in self.state_tracker['state_seq']) and (self.state_tracker['state_seq'].count('s2') == 1)):
-                self.state_tracker['state_seq'].append(state)
+            if (('s3' not in state_tracker['state_seq']) and (state_tracker['state_seq'].count('s2')) == 0) or \
+                    (('s3' in state_tracker['state_seq']) and (state_tracker['state_seq'].count('s2') == 1)):
+                state_tracker['state_seq'].append(state)
 
         elif state == 's3':
-            if (state not in self.state_tracker['state_seq']) and 's2' in self.state_tracker['state_seq']:
-                self.state_tracker['state_seq'].append(state)
+            if (state not in state_tracker['state_seq']) and 's2' in state_tracker['state_seq']:
+                state_tracker['state_seq'].append(state)
