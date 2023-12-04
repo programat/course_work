@@ -1,8 +1,8 @@
-# ui_controller.py
+# main_window_controller.py
 
 import cv2
 
-class UIController:
+class MainWindowController:
     def __init__(self):
         # Инициализация UI, создание окна и т.д.
         pass

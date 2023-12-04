@@ -5,8 +5,9 @@
       <excludeFolder url="file://$MODULE_DIR$/src/models/weights" />
       <excludeFolder url="file://$MODULE_DIR$/venv" />
       <excludeFolder url="file://$MODULE_DIR$/weights" />
+      <excludeFolder url="file://$MODULE_DIR$/cw_venv" />
     </content>
-    <orderEntry type="inheritedJdk" />
+    <orderEntry type="jdk" jdkName="Python 3.10 (course work)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
 </module>
