@@ -165,7 +165,7 @@ class SquatsProcessor(PoseProcessor):
                     pos=(int(frame_width * 0.68), 30),
                     text_color=(255, 255, 230),
                     font_scale=0.7,
-                    text_color_bg=(18, 185, 0)
+                    text_color_bg=(10, 228, 72)
                 )
 
                 self.cv_elem.draw_text(
@@ -174,7 +174,7 @@ class SquatsProcessor(PoseProcessor):
                     pos=(int(frame_width * 0.68), 80),
                     text_color=(255, 255, 230),
                     font_scale=0.7,
-                    text_color_bg=(221, 0, 0)
+                    text_color_bg=(254, 197, 251)
                 )
 
                 self.cv_elem.draw_text(
@@ -393,7 +393,7 @@ class SquatsProcessor(PoseProcessor):
                     pos=(int(frame_width * 0.68), 30),
                     text_color=(255, 255, 230),
                     font_scale=0.7,
-                    text_color_bg=(18, 185, 0)
+                    text_color_bg=(10, 228, 72)
                 )
 
                 self.cv_elem.draw_text(
@@ -402,8 +402,7 @@ class SquatsProcessor(PoseProcessor):
                     pos=(int(frame_width * 0.68), 80),
                     text_color=(255, 255, 230),
                     font_scale=0.7,
-                    text_color_bg=(221, 0, 0),
-
+                    text_color_bg=(254, 197, 251)
                 )
 
                 self.state_tracker['DISPLAY_TEXT'][
