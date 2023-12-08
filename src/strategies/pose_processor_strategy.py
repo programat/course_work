@@ -118,7 +118,6 @@ class SquatsProcessor(PoseProcessor):
     def draw_landmark_line(self, frame, p1, p2, color, thickness):
         if not np.array_equal(p1, [0, 0]) and not np.array_equal(p2, [0, 0]):
             cv2.line(frame, p1, p2, color, thickness, lineType=self.linetype)
-        # print(p1,p2)
         return frame
 
 
@@ -716,28 +715,27 @@ class DumbellProcessor(PoseProcessor):
 
                         # --- Perform feedback
 
-                        else:
-                            if elbow_angle > self.thresholds['HIP_THRESH'][1]:
-                                self.state_tracker['DISPLAY_TEXT'][0] = True
+                    else:
+                        if elbow_angle > self.thresholds['HIP_THRESH'][1]:
+                            self.state_tracker['DISPLAY_TEXT'][0] = True
+
+                        elif elbow_angle < self.thresholds['HIP_THRESH'][0] and \
+                                self.state_tracker['state_seq'].count('s2') == 1:
+                            self.state_tracker['DISPLAY_TEXT'][1] = True
+
+                        if self.thresholds['KNEE_THRESH'][0] < elbow_angle < self.thresholds['KNEE_THRESH'][
+                            1] and \
+                                self.state_tracker['state_seq'].count('s2') == 1:
+                            self.state_tracker['LOWER_HIPS'] = True
 
 
-                            elif elbow_angle < self.thresholds['HIP_THRESH'][0] and \
-                                    self.state_tracker['state_seq'].count('s2') == 1:
-                                self.state_tracker['DISPLAY_TEXT'][1] = True
+                        elif elbow_angle > self.thresholds['KNEE_THRESH'][2]:
+                            self.state_tracker['DISPLAY_TEXT'][3] = True
+                            self.state_tracker['INCORRECT_POSTURE'] = True
 
-                            if self.thresholds['KNEE_THRESH'][0] < elbow_angle < self.thresholds['KNEE_THRESH'][
-                                1] and \
-                                    self.state_tracker['state_seq'].count('s2') == 1:
-                                self.state_tracker['LOWER_HIPS'] = True
-
-
-                            elif elbow_angle > self.thresholds['KNEE_THRESH'][2]:
-                                self.state_tracker['DISPLAY_TEXT'][3] = True
-                                self.state_tracker['INCORRECT_POSTURE'] = True
-
-                            if (elbow_angle > self.thresholds['ANKLE_THRESH']):
-                                self.state_tracker['DISPLAY_TEXT'][2] = True
-                                self.state_tracker['INCORRECT_POSTURE'] = True
+                        if (elbow_angle > self.thresholds['ANKLE_THRESH']):
+                            self.state_tracker['DISPLAY_TEXT'][2] = True
+                            self.state_tracker['INCORRECT_POSTURE'] = True
 
 
 

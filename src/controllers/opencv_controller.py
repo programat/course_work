@@ -30,7 +30,8 @@ class OpenCVController:
         if stream:
             self.vid = cv2.VideoCapture(1)
         else:
-            self.vid = cv2.VideoCapture('/Users/egorken/Downloads/How to bodyweight squat.mp4')
+            # self.vid = cv2.VideoCapture('/Users/egorken/Downloads/How to bodyweight squat.mp4')
+            self.vid = cv2.VideoCapture('/Users/egorken/Downloads/10 Min Squat Workout with 10 Variations - No Repeats No Talking.mp4')
 
         if self.selected_exercise is None or \
                 self.angle_calculation_strategy is None or \
@@ -56,7 +57,7 @@ class OpenCVController:
         try:
             while self.vid.isOpened():
                 _, self.frame = self.vid.read()
-                self.frame = self.detection_strategy.process_frame(self.frame, plot=False)
+                self.frame = self.detection_strategy.process_frame(self.frame, plot=True)
 
                 try:
                     self.pose_processor.process(self.frame, curls=curls)

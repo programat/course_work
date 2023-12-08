@@ -39,7 +39,9 @@ class SquatExercise(Exercise):
             'KNEE_THRESH': [50, 70, 95],
 
             'OFFSET_THRESH': 45.0,
-            'INACTIVE_THRESH': 25.0
+            'INACTIVE_THRESH': 25.0,
+
+            'CNT_FRAME_THRESH': 50
         }
 
         self._ANGLE_HIP_KNEE_VERT_PRO = {
@@ -55,7 +57,10 @@ class SquatExercise(Exercise):
             'KNEE_THRESH': [50, 80, 95],
 
             'OFFSET_THRESH': 45.0,
-            'INACTIVE_THRESH': 15.0
+            'INACTIVE_THRESH': 15.0,
+
+            'CNT_FRAME_THRESH': 50
+
         }
         
         self.set_level(level)
@@ -120,6 +125,7 @@ class DumbellExercise(Exercise):
 
             'OFFSET_THRESH': 45.0,
             'INACTIVE_THRESH': 25.0,
+            'CNT_FRAME_THRESH': 50
         }
 
         self._ANGLE_HIP_KNEE_VERT_PRO = {
@@ -135,6 +141,7 @@ class DumbellExercise(Exercise):
 
             'OFFSET_THRESH': 45.0,
             'INACTIVE_THRESH': 15.0,
+            'CNT_FRAME_THRESH': 50
         }
 
         self.set_level(level)
