@@ -26,9 +26,9 @@ class OpenCVController:
     def set_pose_processor_strategy(self, strategy):
         self.pose_processor = strategy
 
-    def setup(self, stream=0, video_source=0):
+    def setup(self, stream=0, level=0, video_source=0):
         if stream:
-            self.vid = cv2.VideoCapture(0)
+            self.vid = cv2.VideoCapture(1)
         else:
             self.vid = cv2.VideoCapture('/Users/egorken/Downloads/How to bodyweight squat.mp4')
 
@@ -50,7 +50,7 @@ class OpenCVController:
             raise ValueError(f"Unknown exercise: {self.selected_exercise}")
         return self
 
-    def process(self, show_fps=False):
+    def process(self, show_fps=False, curls=None):
         pTime = 0
 
         try:
@@ -59,7 +59,7 @@ class OpenCVController:
                 self.frame = self.detection_strategy.process_frame(self.frame, plot=False)
 
                 try:
-                    self.pose_processor.process(self.frame)
+                    self.pose_processor.process(self.frame, curls=curls)
                 except Exception as ex:
                     print(ex)
 

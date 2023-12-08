@@ -39,9 +39,7 @@ class SquatExercise(Exercise):
             'KNEE_THRESH': [50, 70, 95],
 
             'OFFSET_THRESH': 45.0,
-            'INACTIVE_THRESH': 15.0,
-
-            'CNT_FRAME_THRESH': 50
+            'INACTIVE_THRESH': 25.0
         }
 
         self._ANGLE_HIP_KNEE_VERT_PRO = {
@@ -57,10 +55,7 @@ class SquatExercise(Exercise):
             'KNEE_THRESH': [50, 80, 95],
 
             'OFFSET_THRESH': 45.0,
-            'INACTIVE_THRESH': 15.0,
-
-            'CNT_FRAME_THRESH': 50
-
+            'INACTIVE_THRESH': 15.0
         }
         
         self.set_level(level)
@@ -96,6 +91,85 @@ class SquatExercise(Exercise):
             knee = 3
 
         return f's{knee}' if knee else None
+
+    def _update_state_sequence(self, state, state_tracker):
+        if state == 's2':
+            if (('s3' not in state_tracker['state_seq']) and (state_tracker['state_seq'].count('s2')) == 0) or \
+                    (('s3' in state_tracker['state_seq']) and (state_tracker['state_seq'].count('s2') == 1)):
+                state_tracker['state_seq'].append(state)
+
+        elif state == 's3':
+            if (state not in state_tracker['state_seq']) and 's2' in state_tracker['state_seq']:
+                state_tracker['state_seq'].append(state)
+
+class DumbellExercise(Exercise):
+    def __init__(self, level=0):
+        super().__init__()
+
+        self.thresholds = None
+        self._ANGLE_HIP_KNEE_VERT_BEGINNER = {
+            'NORMAL': (130, 110),
+            'TRANS': (110, 80),
+            'PASS': (80, 50)
+        }
+        self.thresholds_beginner = {
+            'SHLDR_ELBOW_WRIST': self._ANGLE_HIP_KNEE_VERT_BEGINNER,
+
+            'ELBOW_THRESH': 45,
+            'WRIST_THRESH': [50, 70, 95],
+
+            'OFFSET_THRESH': 45.0,
+            'INACTIVE_THRESH': 25.0,
+        }
+
+        self._ANGLE_HIP_KNEE_VERT_PRO = {
+            'NORMAL': (140, 110),
+            'TRANS': (110, 80),
+            'PASS': (80, 40)
+        }
+        self.thresholds_pro = {
+            'SHLDR_ELBOW_WRIST': self._ANGLE_HIP_KNEE_VERT_PRO,
+
+            'ELBOW_THRESH': 30,
+            'WRIST_THRESH': [50, 80, 95],
+
+            'OFFSET_THRESH': 45.0,
+            'INACTIVE_THRESH': 15.0,
+        }
+
+        self.set_level(level)
+
+    def set_level(self, level=0):
+        """setting the level of difficulty,
+        where
+        0 = beginner, 1 = pro
+        """
+        if level:
+            self.thresholds = self.thresholds_pro
+        else:
+            self.thresholds = self.thresholds_beginner
+
+    def _get_thresholds_beginner(self):
+        return self.thresholds_beginner
+
+    def _get_thresholds_pro(self):
+        return self.thresholds_pro
+
+    def get_thresholds(self):
+        return self.thresholds
+
+    def get_state(self, elbow_angle):
+
+        elbow = None
+
+        if self.thresholds['SHLDR_ELBOW_WRIST']['NORMAL'][0] <= elbow_angle <= self.thresholds['SHLDR_ELBOW_WRIST']['NORMAL'][1]:
+            elbow = 1
+        elif self.thresholds['SHLDR_ELBOW_WRIST']['PASS'][0] <= elbow_angle <= self.thresholds['SHLDR_ELBOW_WRIST']['TRANS'][1]:
+            elbow = 2
+        elif self.thresholds['SHLDR_ELBOW_WRIST']['PASS'][0] <= elbow_angle <= self.thresholds['SHLDR_ELBOW_WRIST']['TRANS'][1]:
+            elbow = 3
+
+        return f's{elbow}' if elbow else None
 
     def _update_state_sequence(self, state, state_tracker):
         if state == 's2':

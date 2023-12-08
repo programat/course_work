@@ -30,8 +30,8 @@ class MainWindowController:
                 detector = detection_strategy.YOLOStrategy().create_model()
                 angle = angle_calculation_strategy.Angle2DCalculation()
                 self.opencv_controller = opencv_controller.OpenCVController(detector, angle, self.chosen_exercise())
-                self.opencv_controller.setup(self.chosen_stream())
-                self.opencv_controller.process(show_fps=True)
+                self.opencv_controller.setup(stream=self.chosen_stream(), level=self.get_level())
+                self.opencv_controller.process(show_fps=True, curls=number)
             else:
                 # setting a style with a red border to indicate invalid input
                 self.window.curls.setStyleSheet(f"{style_sheet} border-bottom: 1px solid red;")
@@ -48,7 +48,9 @@ class MainWindowController:
     def chosen_exercise(self):
         return self.window.exercise.currentText()
 
-
+    def get_level(self):
+        if self.window.radioButton.pressed: return 0
+        return 1
 
 
 
