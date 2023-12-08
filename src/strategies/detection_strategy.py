@@ -25,6 +25,9 @@ class DetectionStrategy(ABC):
     @abstractmethod
     def get_landmark_coordinates(self, feature):
         pass
+    @abstractmethod
+    def is_plotted(self):
+        pass
 
 
 class YOLOStrategy(DetectionStrategy):
@@ -34,6 +37,7 @@ class YOLOStrategy(DetectionStrategy):
         self.conf = conf,
         self.iou = iou
         self.model = None
+        self._is_plotted = False
 
         # Dictionary to maintain the various landmark features.
         self.landmark_features_dict = {}
@@ -82,11 +86,15 @@ class YOLOStrategy(DetectionStrategy):
         self.model = YOLO(self.weights_path)
         return self
 
-    def process_frame(self, frame, verbose=False, device='cpu'):
+    def process_frame(self, frame, verbose=False, device='cpu', plot=False):
+        self.is_plotted=plot
         self.results = self.model(frame, verbose=verbose, device=device, imgsz=self.imgsz)
-        annotated_frame = self.results[0].plot(labels=False, boxes=False)
+        if plot:
+            annotated_frame = self.results[0].plot(labels=False, boxes=False)
+            return annotated_frame
+        else:
+            return frame
         # тут обдумать трек для нескольких людей
-        return annotated_frame
 
     def get_coordinates(self):
         res_coord = [r.keypoints.xy.to(int).numpy() for r in self.results]
@@ -109,6 +117,10 @@ class YOLOStrategy(DetectionStrategy):
             return shldr_coord, elbow_coord, wrist_coord, hip_coord, knee_coord, ankle_coord
         else:
             raise ValueError('Feature needs to be "nose", "left" or "right"')
+
+    def is_plotted(self):
+        return self._is_plotted
+
 
 
 class YoloNasStrategy(DetectionStrategy):

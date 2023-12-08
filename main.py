@@ -21,7 +21,7 @@ if __name__ == '__main__':
             pose_pr.process(frame)
         except Exception as ex:
             print(ex)
-        annotated_frame = detector.process_frame(frame)
+        annotated_frame = detector.process_frame(frame, plot=True)
         # res_coord = detector.get_coordinates()
         # print(res_coord)
 

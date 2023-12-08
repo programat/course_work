@@ -41,7 +41,8 @@ if __name__ == '__main__':
     app = QApplication([])
     w = MainWindow().create()
     w.show()
-    sys.exit(app.exec())
+    # sys.exit(app.exec())
+    app.exec()
 
     # app = QApplication([])
     # ui_file = QFile("/Users/egorken/PycharmProjects/course work/src/ui/main.ui")

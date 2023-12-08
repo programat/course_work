@@ -119,7 +119,7 @@ class SquatsProcessor(PoseProcessor):
 
         frame_height, frame_width, _ = frame.shape
 
-        self.detector.process_frame(frame)
+        # self.detector.process_frame(frame)
         # Process the image.
         keypoints = self.detector.get_coordinates()
 
@@ -266,20 +266,21 @@ class SquatsProcessor(PoseProcessor):
 
                 # ------------------------------------------------------------
 
-                # # # Join landmarks.
-                # cv2.line(frame, shldr_coord, elbow_coord, self.COLORS['light_blue'], 4, lineType=self.linetype)
-                # cv2.line(frame, wrist_coord, elbow_coord, self.COLORS['light_blue'], 4, lineType=self.linetype)
-                # cv2.line(frame, shldr_coord, hip_coord, self.COLORS['light_blue'], 4, lineType=self.linetype)
-                # cv2.line(frame, knee_coord, hip_coord, self.COLORS['light_blue'], 4, lineType=self.linetype)
-                # cv2.line(frame, ankle_coord, knee_coord, self.COLORS['light_blue'], 4, lineType=self.linetype)
-                #
-                # # Plot landmark points
-                # cv2.circle(frame, shldr_coord, 7, self.COLORS['yellow'], -1, lineType=self.linetype)
-                # cv2.circle(frame, elbow_coord, 7, self.COLORS['yellow'], -1, lineType=self.linetype)
-                # cv2.circle(frame, wrist_coord, 7, self.COLORS['yellow'], -1, lineType=self.linetype)
-                # cv2.circle(frame, hip_coord, 7, self.COLORS['yellow'], -1, lineType=self.linetype)
-                # cv2.circle(frame, knee_coord, 7, self.COLORS['yellow'], -1, lineType=self.linetype)
-                # cv2.circle(frame, ankle_coord, 7, self.COLORS['yellow'], -1, lineType=self.linetype)
+                if not self.detector.is_plotted:
+                    # Join landmarks.
+                    cv2.line(frame, shldr_coord, elbow_coord, self.COLORS['light_blue'], 4, lineType=self.linetype)
+                    cv2.line(frame, wrist_coord, elbow_coord, self.COLORS['light_blue'], 4, lineType=self.linetype)
+                    cv2.line(frame, shldr_coord, hip_coord, self.COLORS['light_blue'], 4, lineType=self.linetype)
+                    cv2.line(frame, knee_coord, hip_coord, self.COLORS['light_blue'], 4, lineType=self.linetype)
+                    cv2.line(frame, ankle_coord, knee_coord, self.COLORS['light_blue'], 4, lineType=self.linetype)
+
+                    # Plot landmark points
+                    cv2.circle(frame, shldr_coord, 7, self.COLORS['yellow'], -1, lineType=self.linetype)
+                    cv2.circle(frame, elbow_coord, 7, self.COLORS['yellow'], -1, lineType=self.linetype)
+                    cv2.circle(frame, wrist_coord, 7, self.COLORS['yellow'], -1, lineType=self.linetype)
+                    cv2.circle(frame, hip_coord, 7, self.COLORS['yellow'], -1, lineType=self.linetype)
+                    cv2.circle(frame, knee_coord, 7, self.COLORS['yellow'], -1, lineType=self.linetype)
+                    cv2.circle(frame, ankle_coord, 7, self.COLORS['yellow'], -1, lineType=self.linetype)
 
                 current_state = self.exercise.get_state(int(knee_vertical_angle))
                 self.state_tracker['curr_state'] = current_state

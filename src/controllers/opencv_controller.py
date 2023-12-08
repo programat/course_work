@@ -2,18 +2,17 @@
 
 import time
 import cv2
-from src.strategies import angle_calculation_strategy as acs
-from src.strategies import detection_strategy as dc
 from src.strategies import pose_processor_strategy as pps
 
 
 # В opencv_controller.py
 class OpenCVController:
-    def __init__(self):
-        self.angle_calculation_strategy = None
-        self.detection_strategy = None
-        self.pose_processor_strategy = None
-        self.selected_exercise = None
+    def __init__(self, detection_strategy=None,  angle_calculation_strategy=None,
+                 selected_exercise=None):
+        self.angle_calculation_strategy = angle_calculation_strategy
+        self.detection_strategy = detection_strategy
+        self.selected_exercise = selected_exercise
+        self.pose_processor = None
 
     def set_selected_exercise(self, exercise_name):
         self.selected_exercise = exercise_name
@@ -25,43 +24,59 @@ class OpenCVController:
         self.detection_strategy = strategy
 
     def set_pose_processor_strategy(self, strategy):
-        self.pose_processor_strategy = strategy
+        self.pose_processor = strategy
 
-    def process_frame(self, frame):
-        vid = cv2.VideoCapture(1)
-
+    def setup(self, stream=0, video_source=0):
+        if stream:
+            self.vid = cv2.VideoCapture(0)
+        else:
+            self.vid = cv2.VideoCapture('/Users/egorken/Downloads/How to bodyweight squat.mp4')
 
         if self.selected_exercise is None or \
-           self.angle_calculation_strategy is None or \
-           self.detection_strategy is None or \
-           self.pose_processor_strategy is None:
-            raise ValueError("Не установлены все необходимые компоненты. Установите их перед обработкой.")
+                self.angle_calculation_strategy is None or \
+                self.detection_strategy is None:
+            raise ValueError("All required components isn't installed. Install them first.")
 
+        # setting chosen strategies
+        self.set_detection_strategy(self.detection_strategy)
+        self.set_angle_calculation_strategy(self.angle_calculation_strategy)
 
-        # Выбор стратегии вычисления углов
-        angle_calculation_strategy = acs.Angle2DCalculation()
-
-        # Выбор стратегии распознавания
-        detection_strategy = dc.YOLOStrategy()
-
-        # Установка выбранных стратегий
-        self.set_detection_strategy(detection_strategy)
-        self.set_angle_calculation_strategy(angle_calculation_strategy)
-
-        # Выбор стратегии распознавания
-        if self.selected_exercise == "squats":
-            squats_processor = pps.SquatsProcessor(detection_strategy, angle_calculation_strategy)
-            self.set_pose_processor_strategy(squats_processor)
-        elif self.selected_exercise == "dumbbell":
+        # choosing pose_processor strategy
+        if self.selected_exercise == "Squats":
+            self.set_pose_processor_strategy(pps.SquatsProcessor(self.detection_strategy, self.angle_calculation_strategy))
+        elif self.selected_exercise == "Dumbbell":
             pass
         else:
-            raise ValueError(f"Неизвестное упражнение: {self.selected_exercise}")
+            raise ValueError(f"Unknown exercise: {self.selected_exercise}")
+        return self
 
-        # Выполнение действий с использованием выбранных стратегий
-        angles = self.angle_calculation_strategy.calculate_angles(frame)
-        detections = self.detection_strategy.detect_objects(frame)
-        processed_pose = self.pose_processor_strategy.process_pose(detections, angles)
+    def process(self, show_fps=False):
+        pTime = 0
 
-        # Возможно, дополнительная логика обработки результатов
+        try:
+            while self.vid.isOpened():
+                _, self.frame = self.vid.read()
+                self.frame = self.detection_strategy.process_frame(self.frame, plot=False)
 
-        return processed_pose
+                try:
+                    self.pose_processor.process(self.frame)
+                except Exception as ex:
+                    print(ex)
+
+
+                if show_fps and self.vid.isOpened():
+                    cTime = time.time()
+                    fps = 1 / (cTime - pTime)
+                    pTime = cTime
+                    cv2.putText(self.frame, f'fps: {int(fps)}', (1160, 60), cv2.FONT_HERSHEY_PLAIN, 1.2,
+                                 (255, 255, 255), 2)
+
+                    cv2.imshow('AI Trainer: Squats training', self.frame)
+
+                if cv2.waitKey(1) & 0xFF == ord('q'):
+                    break
+        except cv2.error:
+            pass
+
+        self.vid.release()
+        cv2.destroyAllWindows()
