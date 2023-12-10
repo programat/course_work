@@ -174,19 +174,23 @@ class SquatsProcessor(PoseProcessor):
                 self.cv_elem.draw_text(
                     frame,
                     "CORRECT: " + str(self.state_tracker['CURLS']),
-                    pos=(int(frame_width * 0.18), 30),
+                    pos=(int(frame_width * 0.08), int(frame_height - 80)),
                     text_color=(255, 255, 230),
-                    font_scale=0.7,
-                    text_color_bg=(10, 228, 72)
+                    font_scale=1,
+                    font_thickness=3,
+                    text_color_bg=(10, 228, 72),
+                    increased_size=3
                 )
 
                 self.cv_elem.draw_text(
                     frame,
                     "INCORRECT: " + str(self.state_tracker['BAD_CURLS']),
-                    pos=(int(frame_width * 0.18), 80),
+                    pos=(int(frame_width * 0.78), int(frame_height - 80)),
                     text_color=(255, 255, 230),
-                    font_scale=0.7,
-                    text_color_bg=(254, 197, 251)
+                    font_scale=1,
+                    font_thickness=3,
+                    text_color_bg=(254, 197, 251),
+                    increased_size=3
                 )
 
 
@@ -194,7 +198,7 @@ class SquatsProcessor(PoseProcessor):
                     self.cv_elem.draw_text(
                         frame,
                         "CURLS: " + str(self.state_tracker['CURLS'] + self.state_tracker['BAD_CURLS']) + '/' + str(curls),
-                        pos=(int(frame_width * 0.08), 57),
+                        pos=(int(frame_width), 57),
                         text_color=(255, 255, 230),
                         font_scale=0.5,
                         text_color_bg=self.COLORS['black']

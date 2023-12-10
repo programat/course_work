@@ -3,11 +3,17 @@ import numpy as np
 
 class OpenCVElements:
     @staticmethod
-    def draw_rounded_rect(frame, rect_start, rect_end, corner_width, box_color):
+    def draw_rounded_rect(frame, rect_start, rect_end, corner_width, box_color, increased_size=0):
         """method for drawing rounded rectangle"""
         x1, y1 = rect_start
         x2, y2 = rect_end
-        w = corner_width
+
+        x1 -= increased_size
+        y1 -= increased_size
+        x2 += increased_size
+        y2 += increased_size
+
+        w = corner_width + increased_size
 
         # draw filled rectangles
         cv2.rectangle(frame, (x1 + w, y1), (x2 - w, y1 + w), box_color, -1)
@@ -52,15 +58,16 @@ class OpenCVElements:
             text_color=(0, 255, 0),
             text_color_bg=(0, 0, 0),
             box_offset=(20, 10),
+            increased_size=0
     ):
-        offset = box_offset
+        offset = tuple([i+increased_size for i in box_offset])
         x, y = pos
         text_size, _ = cv2.getTextSize(msg, font, font_scale, font_thickness)
         text_w, text_h = text_size
         rec_start = tuple(p - o for p, o in zip(pos, offset))
         rec_end = tuple(m + n - o for m, n, o in zip((x + text_w, y + text_h), offset, (25, 0)))
 
-        img = OpenCVElements.draw_rounded_rect(frame, rec_start, rec_end, width, text_color_bg)
+        img = OpenCVElements.draw_rounded_rect(frame, rec_start, rec_end, width, text_color_bg, increased_size)
 
         cv2.putText(
             img,

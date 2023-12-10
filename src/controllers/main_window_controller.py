@@ -18,7 +18,7 @@ class MainWindowController:
     @window.setter
     def window(self, new):
         self._window = new
-
+    #
     def clicked_start(self):
         text = self.window.curls.text()
         style_sheet = self.window.curls.styleSheet()

@@ -57,12 +57,12 @@ class OpenCVController:
         try:
             while self.vid.isOpened():
                 _, self.frame = self.vid.read()
-                self.frame = self.detection_strategy.process_frame(self.frame, plot=True)
+                self.frame = self.detection_strategy.process_frame(self.frame, plot=False)
 
                 try:
                     self.pose_processor.process(self.frame, curls=curls)
                 except Exception as ex:
-                    print(ex)
+                    print(f'opencv_controller: {ex}')
 
 
                 if show_fps and self.vid.isOpened():
