@@ -97,20 +97,24 @@ class SquatsProcessor(PoseProcessor):
             self.cv_elem.draw_text(
                 frame,
                 'LOWER YOUR HIPS',
-                pos=(frame.shape[0], 80),
+                pos=(int(frame.shape[1] * 0.78), 80),
                 text_color=(0, 0, 0),
-                font_scale=0.6,
-                text_color_bg=(255, 255, 0)
+                font_scale=1,
+                font_thickness=3,
+                text_color_bg=(255, 255, 0),
+                increased_size=3
             )
 
         for idx in np.where(c_frame)[0]:
             self.cv_elem.draw_text(
                 frame,
                 dict_maps[idx][0],
-                pos=(frame.shape[0]-30, dict_maps[idx][1]),
+                pos=(int(frame.shape[1] * 0.78), dict_maps[idx][1]),
                 text_color=(255, 255, 230),
-                font_scale=0.6,
-                text_color_bg=dict_maps[idx][2]
+                font_scale=1,
+                font_thickness=3,
+                text_color_bg=dict_maps[idx][2],
+                increased_size=3
             )
 
         return frame
@@ -161,7 +165,7 @@ class SquatsProcessor(PoseProcessor):
                 #     frame = cv2.flip(frame, 1)
 
                 if display_inactivity or (time.time() - self.state_tracker['INACTIVE_TIME_START']) <= 3:
-                    cv2.putText(frame, 'Resetting CURLS due to inactivity!', (10, frame_height - 90),
+                    cv2.putText(frame, 'Resetting CURLS due to inactivity!', (10, 90),
                                 self.font, 0.5, self.COLORS['red'], 2, lineType=self.linetype)
                     play_sound = 'reset_counters'
                     self.state_tracker['INACTIVE_TIME_FRONT'] = 0.0
@@ -174,7 +178,7 @@ class SquatsProcessor(PoseProcessor):
                 self.cv_elem.draw_text(
                     frame,
                     "CORRECT: " + str(self.state_tracker['CURLS']),
-                    pos=(int(frame_width * 0.08), int(frame_height - 80)),
+                    pos=(int(frame_width * 0.06), int(frame_height - 80)),
                     text_color=(255, 255, 230),
                     font_scale=1,
                     font_thickness=3,
@@ -198,7 +202,7 @@ class SquatsProcessor(PoseProcessor):
                     self.cv_elem.draw_text(
                         frame,
                         "CURLS: " + str(self.state_tracker['CURLS'] + self.state_tracker['BAD_CURLS']) + '/' + str(curls),
-                        pos=(int(frame_width), 57),
+                        pos=(int(frame_width / 2.1), frame_height - 30),
                         text_color=(255, 255, 230),
                         font_scale=0.5,
                         text_color_bg=self.COLORS['black']
@@ -207,7 +211,7 @@ class SquatsProcessor(PoseProcessor):
                 self.cv_elem.draw_text(
                     frame,
                     'CAMERA NOT ALIGNED PROPERLY!!!',
-                    pos=(30, frame_height - 60),
+                    pos=(30, 60),
                     text_color=(255, 255, 230),
                     font_scale=0.65,
                     text_color_bg=(255, 153, 0),
@@ -216,7 +220,7 @@ class SquatsProcessor(PoseProcessor):
                 self.cv_elem.draw_text(
                     frame,
                     'OFFSET ANGLE: ' + str(offset_angle),
-                    pos=(30, frame_height - 30),
+                    pos=(30, 30),
                     text_color=(255, 255, 230),
                     font_scale=0.65,
                     text_color_bg=(255, 153, 0),
@@ -332,7 +336,7 @@ class SquatsProcessor(PoseProcessor):
                     self.state_tracker['state_seq'] = []
                     self.state_tracker['INCORRECT_POSTURE'] = False
 
-                # --- End of computing
+                    # --- End of computing
 
                 # --- Perform feedback
 
@@ -397,11 +401,15 @@ class SquatsProcessor(PoseProcessor):
                 frame = self._show_feedback(frame, self.state_tracker['COUNT_FRAMES'], self.FEEDBACK_ID_MAP,
                                             self.state_tracker['LOWER_HIPS'])
 
-                if display_inactivity:
-                    cv2.putText(frame, 'Resetting COUNTERS due to inactivity!!!', (10, frame_height - 20), self.font, 0.5, self.COLORS['red'], 2, lineType=self.linetype)
+                if display_inactivity or (time.time() - self.state_tracker['INACTIVE_TIME_START']) <= 3:
+                    cv2.putText(frame, 'Resetting CURLS due to inactivity!', (10, 90),
+                                self.font, 0.5, self.COLORS['red'], 2, lineType=self.linetype)
                     play_sound = 'reset_counters'
-                    self.state_tracker['start_inactive_time'] = time.perf_counter()
-                    self.state_tracker['INACTIVE_TIME'] = 0.0
+                    self.state_tracker['INACTIVE_TIME_FRONT'] = 0.0
+                    self.state_tracker['start_inactive_time_front'] = time.perf_counter()
+
+                    if not (time.time() - self.state_tracker['INACTIVE_TIME_START']) <= 3:
+                        self.state_tracker['INACTIVE_TIME_START'] = time.time()
 
                 cv2.putText(frame, str(int(hip_vertical_angle)), (hip_text_coord_x, hip_coord[1]), self.font, 0.6,
                             self.COLORS['light_green'], 2, lineType=self.linetype)
@@ -413,26 +421,31 @@ class SquatsProcessor(PoseProcessor):
                 self.cv_elem.draw_text(
                     frame,
                     "CORRECT: " + str(self.state_tracker['CURLS']),
-                    pos=(int(frame_width * 0.18), 30),
+                    pos=(int(frame_width * 0.06), int(frame_height - 80)),
                     text_color=(255, 255, 230),
-                    font_scale=0.7,
-                    text_color_bg=(10, 228, 72)
+                    font_scale=1,
+                    font_thickness=3,
+                    text_color_bg=(10, 228, 72),
+                    increased_size=3
                 )
 
                 self.cv_elem.draw_text(
                     frame,
                     "INCORRECT: " + str(self.state_tracker['BAD_CURLS']),
-                    pos=(int(frame_width * 0.18), 80),
+                    pos=(int(frame_width * 0.78), int(frame_height - 80)),
                     text_color=(255, 255, 230),
-                    font_scale=0.7,
-                    text_color_bg=(254, 197, 251)
+                    font_scale=1,
+                    font_thickness=3,
+                    text_color_bg=(254, 197, 251),
+                    increased_size=3
                 )
 
                 if curls is not None:
                     self.cv_elem.draw_text(
                         frame,
-                        "CURLS: " + str(self.state_tracker['CURLS'] + self.state_tracker['BAD_CURLS']) + '/' + str(curls),
-                        pos=(int(frame_width * 0.08), 57),
+                        "CURLS: " + str(self.state_tracker['CURLS'] + self.state_tracker['BAD_CURLS']) + '/' + str(
+                            curls),
+                        pos=(int(frame_width / 2.1), frame_height - 30),
                         text_color=(255, 255, 230),
                         font_scale=0.5,
                         text_color_bg=self.COLORS['black']
@@ -470,36 +483,45 @@ class SquatsProcessor(PoseProcessor):
             self.cv_elem.draw_text(
                 frame,
                 "CORRECT: " + str(self.state_tracker['CURLS']),
-                pos=(int(frame_width * 0.18), 30),
+                pos=(int(frame_width * 0.06), int(frame_height - 80)),
                 text_color=(255, 255, 230),
-                font_scale=0.7,
-                text_color_bg=(18, 185, 0)
+                font_scale=1,
+                font_thickness=3,
+                text_color_bg=(10, 228, 72),
+                increased_size=3
             )
 
             self.cv_elem.draw_text(
                 frame,
                 "INCORRECT: " + str(self.state_tracker['BAD_CURLS']),
-                pos=(int(frame_width * 0.18), 80),
+                pos=(int(frame_width * 0.78), int(frame_height - 80)),
                 text_color=(255, 255, 230),
-                font_scale=0.7,
-                text_color_bg=(221, 0, 0),
-
+                font_scale=1,
+                font_thickness=3,
+                text_color_bg=(254, 197, 251),
+                increased_size=3
             )
 
             if curls is not None:
                 self.cv_elem.draw_text(
                     frame,
                     "CURLS: " + str(self.state_tracker['CURLS'] + self.state_tracker['BAD_CURLS']) + '/' + str(curls),
-                    pos=(int(frame_width * 0.08), 57),
+                    pos=(int(frame_width / 2.1), frame_height - 30),
                     text_color=(255, 255, 230),
                     font_scale=0.5,
+                    font_thickness=0.5,
                     text_color_bg=self.COLORS['black']
                 )
 
-            if display_inactivity:
+            if display_inactivity or (time.time() - self.state_tracker['INACTIVE_TIME_START']) <= 3:
+                cv2.putText(frame, 'Resetting CURLS due to inactivity!', (10, 90),
+                            self.font, 0.5, self.COLORS['red'], 2, lineType=self.linetype)
                 play_sound = 'reset_counters'
-                self.state_tracker['start_inactive_time'] = time.perf_counter()
-                self.state_tracker['INACTIVE_TIME'] = 0.0
+                self.state_tracker['INACTIVE_TIME_FRONT'] = 0.0
+                self.state_tracker['start_inactive_time_front'] = time.perf_counter()
+
+                if not (time.time() - self.state_tracker['INACTIVE_TIME_START'])<= 3:
+                    self.state_tracker['INACTIVE_TIME_START'] = time.time()
 
             # Reset all other state variables
 
@@ -517,6 +539,7 @@ class DumbellProcessor(PoseProcessor):
     def __init__(self, detection_strategy: dc.DetectionStrategy,
                  angle_calculation_strategy: acs.AngleCalculationStrategy, level=0):
         super().__init__(detection_strategy, angle_calculation_strategy, level)
+
         self.exercise = exr.DumbellExercise(level)
         self.thresholds = self.exercise.get_thresholds()
 
@@ -530,7 +553,7 @@ class DumbellProcessor(PoseProcessor):
             'INACTIVE_TIME_START': 0.0,
 
             # 0 --> Bend Backwards, 1 --> Bend Forward, 2 --> Keep shin straight, 3 --> Deep squat
-            'DISPLAY_TEXT': np.full((5,), False),
+            'DISPLAY_TEXT': np.full((3,), False),
             'COUNT_FRAMES': np.zeros((4,), dtype=np.int64),
 
             'INCORRECT_POSTURE': False,
@@ -543,10 +566,10 @@ class DumbellProcessor(PoseProcessor):
         }
 
         self.FEEDBACK_ID_MAP = {
-            0: ('LOWER YOUR HAND', 225, self.COLORS['purple']),
-            1: ('HIGH YOUR HAND', 225, self.COLORS['pink'])
+            0: ('LOWER YOUR WRIST', 225, self.COLORS['purple']),
+            1: ('HIGHER YOUR WRIST', 225, self.COLORS['pink']),
+            2: ('KEEP YOUR HAND NEAR THE BODY', 225, (255, 80, 80))
         }
-
 
         def calculate_angle(self, p1, p2, ref_pt=np.array([0,0])):
             return self.angle_calculation.calculate_angles(p1, p2, ref_pt)
@@ -556,11 +579,18 @@ class DumbellProcessor(PoseProcessor):
                 self.cv_elem.draw_text(
                     frame,
                     dict_maps[idx][0],
-                    pos=(frame.shape[0]*.68, dict_maps[idx][1]),
+                    pos=(frame.shape[1]*.78, dict_maps[idx][1]),
                     text_color=(255,255,230),
-                    font_scale=0.6,
-                    text_color_bg=dict_maps[idx][2]
+                    font_scale=1,
+                    font_thickness=3,
+                    text_color_bg=dict_maps[idx][2],
+                    increased_size=3
                 )
+            return frame
+
+        def draw_landmark_line(self, frame, p1, p2, color, thickness):
+            if not np.array_equal(p1, [0, 0]) and not np.array_equal(p2, [0, 0]):
+                cv2.line(frame, p1, p2, color, thickness, lineType=self.linetype)
             return frame
 
         def process(self, frame: np.array, curls=None):
@@ -594,29 +624,44 @@ class DumbellProcessor(PoseProcessor):
                     cv2.circle(frame, left_shldr_coord, 7, self.COLORS['yellow'], -1)
                     cv2.circle(frame, right_shldr_coord, 7, self.COLORS['magenta'], -1)
 
+                    if display_inactivity or (time.time() - self.state_tracker['INACTIVE_TIME_START']) <= 3:
+                        cv2.putText(frame, 'Resetting CURLS due to inactivity!', (10, 90),
+                                    self.font, 0.5, self.COLORS['red'], 2, lineType=self.linetype)
+                        play_sound = 'reset_counters'
+                        self.state_tracker['INACTIVE_TIME_FRONT'] = 0.0
+                        self.state_tracker['start_inactive_time_front'] = time.perf_counter()
+
+                        if not (time.time() - self.state_tracker['INACTIVE_TIME_START']) <= 3:
+                            self.state_tracker['INACTIVE_TIME_START'] = time.time()
+
                     self.cv_elem.draw_text(
                         frame,
                         "CORRECT: " + str(self.state_tracker['CURLS']),
-                        pos=(int(frame_width * 0.68), 30),
+                        pos=(int(frame_width * 0.06), int(frame_height - 80)),
                         text_color=(255, 255, 230),
-                        font_scale=0.7,
-                        text_color_bg=(10, 228, 72)
+                        font_scale=1,
+                        font_thickness=3,
+                        text_color_bg=(10, 228, 72),
+                        increased_size=3
                     )
 
                     self.cv_elem.draw_text(
                         frame,
                         "INCORRECT: " + str(self.state_tracker['BAD_CURLS']),
-                        pos=(int(frame_width * 0.68), 80),
+                        pos=(int(frame_width * 0.78), int(frame_height - 80)),
                         text_color=(255, 255, 230),
-                        font_scale=0.7,
-                        text_color_bg=(254, 197, 251)
+                        font_scale=1,
+                        font_thickness=3,
+                        text_color_bg=(254, 197, 251),
+                        increased_size=3
                     )
 
                     if curls is not None:
                         self.cv_elem.draw_text(
                             frame,
-                            "CURLS: " + str(self.state_tracker['CURLS'] + self.state_tracker['BAD_CURLS']) + '/' + str(curls),
-                            pos=(int(frame_width * 0.08), 57),
+                            "CURLS: " + str(self.state_tracker['CURLS'] + self.state_tracker['BAD_CURLS']) + '/' + str(
+                                curls),
+                            pos=(int(frame_width / 2.1), frame_height - 30),
                             text_color=(255, 255, 230),
                             font_scale=0.5,
                             text_color_bg=self.COLORS['black']
@@ -625,7 +670,7 @@ class DumbellProcessor(PoseProcessor):
                     self.cv_elem.draw_text(
                         frame,
                         'CAMERA NOT ALIGNED PROPERLY!!!',
-                        pos=(30, frame_height - 60),
+                        pos=(30, 60),
                         text_color=(255, 255, 230),
                         font_scale=0.65,
                         text_color_bg=(255, 153, 0),
@@ -634,7 +679,7 @@ class DumbellProcessor(PoseProcessor):
                     self.cv_elem.draw_text(
                         frame,
                         'OFFSET ANGLE: ' + str(offset_angle),
-                        pos=(30, frame_height - 30),
+                        pos=(30, 30),
                         text_color=(255, 255, 230),
                         font_scale=0.65,
                         text_color_bg=(255, 153, 0),
@@ -717,10 +762,10 @@ class DumbellProcessor(PoseProcessor):
 
                         # --- End of computing
 
-                        # --- Perform feedback
+                    # --- Perform feedback
 
                     else:
-                        if elbow_angle > self.thresholds['HIP_THRESH'][1]:
+                        if elbow_angle > self.thresholds['SHLDR_ELBOW_WRIST'][1]:
                             self.state_tracker['DISPLAY_TEXT'][0] = True
 
                         elif elbow_angle < self.thresholds['HIP_THRESH'][0] and \

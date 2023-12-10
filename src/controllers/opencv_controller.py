@@ -44,7 +44,7 @@ class OpenCVController:
 
         # choosing pose_processor strategy
         if self.selected_exercise == "Squats":
-            self.set_pose_processor_strategy(pps.SquatsProcessor(self.detection_strategy, self.angle_calculation_strategy))
+            self.set_pose_processor_strategy(pps.SquatsProcessor(self.detection_strategy, self.angle_calculation_strategy, level))
         elif self.selected_exercise == "Dumbbell":
             pass
         else:
@@ -62,22 +62,22 @@ class OpenCVController:
                 try:
                     self.pose_processor.process(self.frame, curls=curls)
                 except Exception as ex:
-                    print(f'opencv_controller: {ex}')
+                    print(f'pose_processor exception: {ex}')
 
 
-                if show_fps and self.vid.isOpened():
+                if show_fps:
                     cTime = time.time()
                     fps = 1 / (cTime - pTime)
                     pTime = cTime
-                    cv2.putText(self.frame, f'fps: {int(fps)}', (1160, 60), cv2.FONT_HERSHEY_PLAIN, 1.2,
+                    cv2.putText(self.frame, f'fps: {int(fps)}', (1180, 45), cv2.FONT_HERSHEY_PLAIN, 1.2,
                                  (255, 255, 255), 2)
 
                     cv2.imshow('AI Trainer: Squats training', self.frame)
 
                 if cv2.waitKey(1) & 0xFF == ord('q'):
                     break
-        except cv2.error:
-            pass
+        except cv2.error as ex:
+            print(f'opencv_controller: {ex}')
 
         self.vid.release()
         cv2.destroyAllWindows()
