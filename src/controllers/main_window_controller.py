@@ -1,9 +1,8 @@
 # main_window_controller.py
 
-from PySide6.QtWidgets import QFileDialog, QWidget, QMessageBox
+from PySide6.QtWidgets import QMessageBox
 from src.controllers import opencv_controller
 from src.strategies import detection_strategy
-from src.strategies import pose_processor_strategy
 from src.strategies import angle_calculation_strategy
 
 class MainWindowController:
@@ -36,7 +35,8 @@ class MainWindowController:
                 # setting a style with a red border to indicate invalid input
                 self.window.curls.setStyleSheet(f"{style_sheet} border-bottom: 1px solid red;")
                 QMessageBox.warning(self.window, "Warning", "Enter number from 1 to 50.")
-        except ValueError:
+        except ValueError as v:
+            print(v)
             # setting a style with a red border to indicate incorrect input
             self.window.curls.setStyleSheet(f"{style_sheet} border-bottom: 1px solid red;")
             QMessageBox.warning(self.window, "Warning", "Enter correct number.")

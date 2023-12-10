@@ -113,15 +113,15 @@ class DumbellExercise(Exercise):
 
         self.thresholds = None
         self._ANGLE_HIP_KNEE_VERT_BEGINNER = {
-            'NORMAL': (130, 110),
+            'NORMAL': (180, 110),
             'TRANS': (110, 80),
             'PASS': (80, 50)
         }
         self.thresholds_beginner = {
             'SHLDR_ELBOW_WRIST': self._ANGLE_HIP_KNEE_VERT_BEGINNER,
 
-            'ELBOW_THRESH': 45,
-            'WRIST_THRESH': [50, 70, 95],
+            'ELBOW_THRESH': [45, 110],
+            'HAND_THRESH': [0, 20, 25],
 
             'OFFSET_THRESH': 45.0,
             'INACTIVE_THRESH': 25.0,
@@ -169,11 +169,11 @@ class DumbellExercise(Exercise):
 
         elbow = None
 
-        if self.thresholds['SHLDR_ELBOW_WRIST']['NORMAL'][0] <= elbow_angle <= self.thresholds['SHLDR_ELBOW_WRIST']['NORMAL'][1]:
+        if self.thresholds['SHLDR_ELBOW_WRIST']['NORMAL'][0] >= elbow_angle >= self.thresholds['SHLDR_ELBOW_WRIST']['NORMAL'][1]:
             elbow = 1
-        elif self.thresholds['SHLDR_ELBOW_WRIST']['PASS'][0] <= elbow_angle <= self.thresholds['SHLDR_ELBOW_WRIST']['TRANS'][1]:
+        elif self.thresholds['SHLDR_ELBOW_WRIST']['TRANS'][0] >= elbow_angle >= self.thresholds['SHLDR_ELBOW_WRIST']['TRANS'][1]:
             elbow = 2
-        elif self.thresholds['SHLDR_ELBOW_WRIST']['PASS'][0] <= elbow_angle <= self.thresholds['SHLDR_ELBOW_WRIST']['TRANS'][1]:
+        elif self.thresholds['SHLDR_ELBOW_WRIST']['PASS'][0] >= elbow_angle >= self.thresholds['SHLDR_ELBOW_WRIST']['PASS'][1]:
             elbow = 3
 
         return f's{elbow}' if elbow else None

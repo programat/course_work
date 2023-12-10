@@ -1,7 +1,7 @@
 
 import cv2
 from src.strategies import detection_strategy
-from src.strategies import pose_processor_strategy
+from src.strategies.pose_processor import pose_processor
 from src.strategies import angle_calculation_strategy
 
 if __name__ == '__main__':

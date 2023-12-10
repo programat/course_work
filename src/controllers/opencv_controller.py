@@ -2,7 +2,8 @@
 
 import time
 import cv2
-from src.strategies import pose_processor_strategy as pps
+import traceback
+from src.strategies.pose_processor import squats_processor, dumbbell_processor
 
 
 # В opencv_controller.py
@@ -31,7 +32,8 @@ class OpenCVController:
             self.vid = cv2.VideoCapture(1)
         else:
             # self.vid = cv2.VideoCapture('/Users/egorken/Downloads/How to bodyweight squat.mp4')
-            self.vid = cv2.VideoCapture('/Users/egorken/Downloads/10 Min Squat Workout with 10 Variations - No Repeats No Talking.mp4')
+            # self.vid = cv2.VideoCapture('/Users/egorken/Downloads/10 Min Squat Workout with 10 Variations - No Repeats No Talking.mp4')
+            self.vid = cv2.VideoCapture('/Users/egorken/Downloads/bicep curls good.mp4')
 
         if self.selected_exercise is None or \
                 self.angle_calculation_strategy is None or \
@@ -44,9 +46,9 @@ class OpenCVController:
 
         # choosing pose_processor strategy
         if self.selected_exercise == "Squats":
-            self.set_pose_processor_strategy(pps.SquatsProcessor(self.detection_strategy, self.angle_calculation_strategy, level))
+            self.set_pose_processor_strategy(squats_processor.SquatsProcessor(self.detection_strategy, self.angle_calculation_strategy, level))
         elif self.selected_exercise == "Dumbbell":
-            pass
+            self.set_pose_processor_strategy(dumbbell_processor.DumbbellProcessor(self.detection_strategy, self.angle_calculation_strategy, level))
         else:
             raise ValueError(f"Unknown exercise: {self.selected_exercise}")
         return self
@@ -63,6 +65,7 @@ class OpenCVController:
                     self.pose_processor.process(self.frame, curls=curls)
                 except Exception as ex:
                     print(f'pose_processor exception: {ex}')
+                    print(traceback.format_exception(ex))
 
 
                 if show_fps:
