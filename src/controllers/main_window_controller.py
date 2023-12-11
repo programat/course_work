@@ -40,6 +40,8 @@ class MainWindowController:
                         self.detector = detection_strategy.YOLOStrategy(imgsz=settings_dict['imgsz'], weights_path=settings_dict['path'], conf=settings_dict['conf'], iou=settings_dict['iou']).create_model()
                     else:
                         self.detector = detection_strategy.YOLOStrategy(imgsz=settings_dict['imgsz'], conf=settings_dict['conf'], iou=settings_dict['iou']).create_model()
+                else:
+                    self.detector = detection_strategy.YOLOStrategy().create_model()
 
                 angle = angle_calculation_strategy.Angle2DCalculation()
                 self.opencv_controller = opencv_controller.OpenCVController(self.detector, angle, self.chosen_exercise())
@@ -47,7 +49,10 @@ class MainWindowController:
                     self.opencv_controller.setup(stream=self.chosen_stream(), level=self.get_level())
                 else:
                     self.opencv_controller.setup(stream=self.chosen_stream(), level=self.get_level(), video_path=self.get_path())
-                self.opencv_controller.process(show_fps=settings_dict['fps'], curls=number, plot=settings_dict['plot'])
+                if len(settings_dict) > 0:
+                    self.opencv_controller.process(show_fps=settings_dict['fps'], curls=number, plot=settings_dict['plot'])
+                else:
+                    self.opencv_controller.process(show_fps=False, curls=number, plot=False)
             else:
                 # setting a style with a red border to indicate invalid input
                 self.window.curls.setStyleSheet(f"{style_sheet} border-bottom: 1px solid red;")

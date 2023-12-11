@@ -76,7 +76,7 @@ class OpenCVController:
                     cv2.putText(self.frame, f'fps: {int(fps)}', (1180, 45), cv2.FONT_HERSHEY_PLAIN, 1.2,
                                  (255, 255, 255), 2)
 
-                    cv2.imshow(f'AI Trainer: {self.selected_exercise} training', self.frame)
+                cv2.imshow(f'AI Trainer: {self.selected_exercise} training', self.frame)
 
                 if cv2.waitKey(1) & 0xFF == ord('q'):
                     break
