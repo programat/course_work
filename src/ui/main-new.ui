@@ -7,8 +7,20 @@
     <x>0</x>
     <y>0</y>
     <width>461</width>
-    <height>624</height>
+    <height>670</height>
    </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>461</width>
+    <height>670</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>461</width>
+    <height>670</height>
+   </size>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
@@ -55,11 +67,14 @@ letter-spacing: -0.201359px;;
    <widget class="QWidget" name="widget" native="true">
     <property name="geometry">
      <rect>
-      <x>130</x>
+      <x>60</x>
       <y>80</y>
-      <width>201</width>
-      <height>451</height>
+      <width>351</width>
+      <height>531</height>
      </rect>
+    </property>
+    <property name="acceptDrops">
+     <bool>true</bool>
     </property>
     <property name="styleSheet">
      <string notr="true">#widget{color: rgb(234, 238, 212);
@@ -82,7 +97,7 @@ padding-top: 10px;
     <widget class="QComboBox" name="stream">
      <property name="geometry">
       <rect>
-       <x>30</x>
+       <x>110</x>
        <y>50</y>
        <width>150</width>
        <height>40</height>
@@ -129,20 +144,20 @@ padding-left:10px;
      </property>
      <item>
       <property name="text">
-       <string>Vid</string>
+       <string>Cam</string>
       </property>
      </item>
      <item>
       <property name="text">
-       <string>Cam</string>
+       <string>Vid</string>
       </property>
      </item>
     </widget>
     <widget class="QComboBox" name="exercise">
      <property name="geometry">
       <rect>
-       <x>30</x>
-       <y>150</y>
+       <x>110</x>
+       <y>140</y>
        <width>150</width>
        <height>40</height>
       </rect>
@@ -190,19 +205,19 @@ padding-left:10px;
      </property>
      <item>
       <property name="text">
-       <string>Dumbbell</string>
+       <string>Squats</string>
       </property>
      </item>
      <item>
       <property name="text">
-       <string>Squats</string>
+       <string>Dumbbell</string>
       </property>
      </item>
     </widget>
     <widget class="QLabel" name="exercise_label">
      <property name="geometry">
       <rect>
-       <x>40</x>
+       <x>120</x>
        <y>110</y>
        <width>121</width>
        <height>16</height>
@@ -219,12 +234,15 @@ letter-spacing: -0.201359px;;
      <property name="text">
       <string>Select exercise</string>
      </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
     </widget>
     <widget class="QLabel" name="curls_label">
      <property name="geometry">
       <rect>
-       <x>60</x>
-       <y>210</y>
+       <x>140</x>
+       <y>290</y>
        <width>81</width>
        <height>16</height>
       </rect>
@@ -244,7 +262,7 @@ letter-spacing: -0.201359px;;
     <widget class="QLabel" name="stream_label">
      <property name="geometry">
       <rect>
-       <x>60</x>
+       <x>140</x>
        <y>20</y>
        <width>91</width>
        <height>16</height>
@@ -265,8 +283,8 @@ letter-spacing: -0.201359px;;
     <widget class="QLineEdit" name="curls">
      <property name="geometry">
       <rect>
-       <x>40</x>
-       <y>240</y>
+       <x>120</x>
+       <y>310</y>
        <width>125</width>
        <height>41</height>
       </rect>
@@ -293,8 +311,8 @@ letter-spacing: -0.201359px;;
     <widget class="QPushButton" name="start_button">
      <property name="geometry">
       <rect>
-       <x>20</x>
-       <y>390</y>
+       <x>100</x>
+       <y>460</y>
        <width>161</width>
        <height>40</height>
       </rect>
@@ -339,12 +357,15 @@ letter-spacing: -0.201359px;;
      <property name="text">
       <string>Start</string>
      </property>
+     <property name="shortcut">
+      <string>Return</string>
+     </property>
     </widget>
-    <widget class="QLabel" name="curls_label_2">
+    <widget class="QLabel" name="level_lavel">
      <property name="geometry">
       <rect>
-       <x>60</x>
-       <y>300</y>
+       <x>140</x>
+       <y>370</y>
        <width>81</width>
        <height>16</height>
       </rect>
@@ -367,8 +388,8 @@ letter-spacing: -0.201359px;;
     <widget class="QWidget" name="horizontalLayoutWidget">
      <property name="geometry">
       <rect>
-       <x>20</x>
-       <y>330</y>
+       <x>100</x>
+       <y>400</y>
        <width>160</width>
        <height>51</height>
       </rect>
@@ -411,6 +432,168 @@ font-weight: 450;</string>
       </item>
      </layout>
     </widget>
+    <widget class="QLineEdit" name="file">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>50</x>
+       <y>228</y>
+       <width>211</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="font">
+      <font>
+       <family>Mori</family>
+       <pointsize>-1</pointsize>
+       <hintingpreference>PreferDefaultHinting</hintingpreference>
+       <fontweight>DemiBold</fontweight>
+      </font>
+     </property>
+     <property name="layoutDirection">
+      <enum>Qt::LeftToRight</enum>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">#file{
+	color: rgb(234, 238, 212);
+	border-style: solid;
+	border-color: rgb(234, 238, 212);
+	background-color: rgb(14,16,15);
+	border-bottom-width: 1px;
+	font-family: Mori, sans-serif;
+	font-size: 10px;
+	font-weight: 600;
+	letter-spacing: -0.201359px;;
+}
+
+#file::disabled{
+	color: rgba(234, 238, 212, 90);
+	border-color: rgba(234, 238, 212, 90);
+}
+
+</string>
+     </property>
+     <property name="text">
+      <string>_</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+     <property name="dragEnabled">
+      <bool>false</bool>
+     </property>
+     <property name="readOnly">
+      <bool>true</bool>
+     </property>
+     <property name="cursorMoveStyle">
+      <enum>Qt::LogicalMoveStyle</enum>
+     </property>
+    </widget>
+    <widget class="QLabel" name="file_label">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>120</x>
+       <y>200</y>
+       <width>121</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">#file_label{
+	color: rgb(234, 238, 212);
+	font-family: Mori, sans-serif;
+	font-size: 16px;
+	font-weight: 600;
+	letter-spacing: -0.201359px;;
+}
+
+#file_label::disabled{
+	color: rgba(234, 238, 212, 90);
+}</string>
+     </property>
+     <property name="text">
+      <string>Select file</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="folder_button">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>270</x>
+       <y>245</y>
+       <width>51</width>
+       <height>32</height>
+      </rect>
+     </property>
+     <property name="mouseTracking">
+      <bool>true</bool>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">#pushButton{
+	background-color:transparent;
+}</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>../../data/ui/folder.png</normaloff>../../data/ui/folder.png</iconset>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>24</width>
+       <height>24</height>
+      </size>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QPushButton" name="settings">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>20</y>
+      <width>51</width>
+      <height>32</height>
+     </rect>
+    </property>
+    <property name="mouseTracking">
+     <bool>true</bool>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">#pushButton{
+
+}</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="icon">
+     <iconset>
+      <normaloff>../../data/ui/settings.png</normaloff>../../data/ui/settings.png</iconset>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>24</width>
+      <height>24</height>
+     </size>
+    </property>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
@@ -437,6 +620,8 @@ font-weight: 450;</string>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
- <resources/>
+ <resources>
+  <include location="../../data/ui/settings.qrc"/>
+ </resources>
  <connections/>
 </ui>

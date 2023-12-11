@@ -114,14 +114,14 @@ class DumbellExercise(Exercise):
         self.thresholds = None
         self._ANGLE_HIP_KNEE_VERT_BEGINNER = {
             'NORMAL': (180, 110),
-            'TRANS': (110, 80),
-            'PASS': (80, 50)
+            'TRANS': (110, 60),
+            'PASS': (60, 50)
         }
         self.thresholds_beginner = {
             'SHLDR_ELBOW_WRIST': self._ANGLE_HIP_KNEE_VERT_BEGINNER,
 
-            'ELBOW_THRESH': [45, 110],
-            'HAND_THRESH': [0, 20, 25],
+            'ELBOW_THRESH': [50, 60],
+            'HAND_THRESH': [12, 20, 35],
 
             'OFFSET_THRESH': 45.0,
             'INACTIVE_THRESH': 25.0,
@@ -129,18 +129,18 @@ class DumbellExercise(Exercise):
         }
 
         self._ANGLE_HIP_KNEE_VERT_PRO = {
-            'NORMAL': (140, 110),
-            'TRANS': (110, 80),
-            'PASS': (80, 40)
+            'NORMAL': (180, 110),
+            'TRANS': (110, 60),
+            'PASS': (60, 40)
         }
-        self.thresholds_pro = {
+        self.thresholds_beginner = {
             'SHLDR_ELBOW_WRIST': self._ANGLE_HIP_KNEE_VERT_PRO,
 
-            'ELBOW_THRESH': 30,
-            'WRIST_THRESH': [50, 80, 95],
+            'ELBOW_THRESH': [50, 60],
+            'HAND_THRESH': [12, 20, 35],
 
             'OFFSET_THRESH': 45.0,
-            'INACTIVE_THRESH': 15.0,
+            'INACTIVE_THRESH': 25.0,
             'CNT_FRAME_THRESH': 50
         }
 

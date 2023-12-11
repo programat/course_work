@@ -60,7 +60,7 @@ class SquatsProcessor(PoseProcessor):
             self.cv_elem.draw_text(
                 frame,
                 'LOWER YOUR HIPS',
-                pos=(int(frame.shape[1] * 0.78), 80),
+                pos=(int(frame.shape[1] * 0.06), 80),
                 text_color=(0, 0, 0),
                 font_scale=1,
                 font_thickness=3,
@@ -72,7 +72,7 @@ class SquatsProcessor(PoseProcessor):
             self.cv_elem.draw_text(
                 frame,
                 dict_maps[idx][0],
-                pos=(int(frame.shape[1] * 0.78), dict_maps[idx][1]),
+                pos=(int(frame.shape[1] * 0.06), dict_maps[idx][1]),
                 text_color=(255, 255, 230),
                 font_scale=1,
                 font_thickness=3,
@@ -282,8 +282,7 @@ class SquatsProcessor(PoseProcessor):
 
                 # --- Computing parts of automata
 
-                print('\r', self.state_tracker['state_seq'], current_state, self.state_tracker['DISPLAY_TEXT'],
-                      self.state_tracker['COUNT_FRAMES'], end='')
+                # print('\r', self.state_tracker['state_seq'], current_state, self.state_tracker['DISPLAY_TEXT'], self.state_tracker['COUNT_FRAMES'], end='')
 
                 if current_state == 's1':
 

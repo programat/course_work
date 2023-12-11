@@ -27,13 +27,14 @@ class OpenCVController:
     def set_pose_processor_strategy(self, strategy):
         self.pose_processor = strategy
 
-    def setup(self, stream=0, level=0, video_source=0):
+    def setup(self, stream=0, level=0, video_path=None):
         if stream:
             self.vid = cv2.VideoCapture(1)
         else:
+            self.vid = cv2.VideoCapture(video_path)
             # self.vid = cv2.VideoCapture('/Users/egorken/Downloads/How to bodyweight squat.mp4')
             # self.vid = cv2.VideoCapture('/Users/egorken/Downloads/10 Min Squat Workout with 10 Variations - No Repeats No Talking.mp4')
-            self.vid = cv2.VideoCapture('/Users/egorken/Downloads/bicep curls good.mp4')
+            # self.vid = cv2.VideoCapture('/Users/egorken/Downloads/bicep curls.mp4')
 
         if self.selected_exercise is None or \
                 self.angle_calculation_strategy is None or \

@@ -27,10 +27,17 @@ class MainWindow(QMainWindow):
         self.controller = main_window_controller.MainWindowController(self.window)
 
         # invents processed by controller
+        self.window.settings.clicked.connect(lambda: self.controller.clicked_settings())
         self.window.stream.currentIndexChanged.connect(lambda: self.controller.chosen_stream())
         self.window.exercise.currentIndexChanged.connect(lambda: self.controller.chosen_exercise())
         self.window.start_button.clicked.connect(lambda: self.controller.clicked_start())
+        self.window.folder_button.clicked.connect(lambda: self.controller.clicked_dir())
 
+        self.window.setWindowTitle("AI Trainer")
+        return self.window
+
+    def show(self):
+        self.window.show()
         return self.window
 
     def closeEvent(self, QCloseEvent):
@@ -41,8 +48,7 @@ if __name__ == '__main__':
     app = QApplication([])
     w = MainWindow().create()
     w.show()
-    # sys.exit(app.exec())
-    app.exec()
+    sys.exit(app.exec())
 
     # app = QApplication([])
     # ui_file = QFile("/Users/egorken/PycharmProjects/course work/src/ui/main.ui")

@@ -20,6 +20,8 @@ class DumbbellProcessor(PoseProcessor):
         self.state_tracker = {
             'state_seq': [],
 
+            'NEAR_HAND': False,
+
             'start_inactive_time': time.perf_counter(),
             'start_inactive_time_front': time.perf_counter(),
             'INACTIVE_TIME': 0.0,
@@ -40,9 +42,9 @@ class DumbbellProcessor(PoseProcessor):
         }
 
         self.FEEDBACK_ID_MAP = {
-            0: ('LOWER YOUR WRIST', 150, self.COLORS['purple']),
-            1: ('HIGHER YOUR WRIST', 185, self.COLORS['pink']),
-            2: ('KEEP YOUR HAND NEAR THE BODY', 225, (255, 80, 80))
+            0: ('LOWER YOUR WRIST', 125, self.COLORS['purple']),
+            1: ('HIGHER YOUR WRIST', 125, self.COLORS['pink']),
+            2: ('KEEP YOUR HAND NEAR THE BODY', 60, (255, 80, 80))
         }
 
     def calculate_angle(self, p1, p2, ref_pt=np.array([0, 0])):
@@ -53,18 +55,21 @@ class DumbbellProcessor(PoseProcessor):
             self.cv_elem.draw_text(
                 frame,
                 'HAND TOO FAR FROM BODY',
-                pos=(int(frame.shape[1] * 0.78), 80),
+                pos=(int(frame.shape[1] * 0.06), 60),
                 text_color=(0, 0, 0),
                 font_scale=1,
                 font_thickness=3,
                 text_color_bg=(255, 255, 0),
                 increased_size=3
             )
+            c_frame[2] = False
+
+        # if c_frame[0]: c_frame[1] = False
         for idx in np.where(c_frame)[0]:
             self.cv_elem.draw_text(
                 frame,
                 dict_maps[idx][0],
-                pos=(int(frame.shape[1] * .78), dict_maps[idx][1]),
+                pos=(int(frame.shape[1] * 0.06), dict_maps[idx][1]),
                 text_color=(255, 255, 230),
                 font_scale=1,
                 font_thickness=3,
@@ -188,11 +193,10 @@ class DumbbellProcessor(PoseProcessor):
                 elbow_coord = None
                 wrist_coord = None
 
-                if dist_l > dist_r or True:
+                if nose_coord[0] <= left_shldr_coord[0]:
                     shldr_coord = left_shldr_coord
                     elbow_coord = left_elbow_coord
                     wrist_coord = left_wrist_coord
-                    hip_coord = left_hip_coord
 
                     multiplier = -1
 
@@ -200,7 +204,6 @@ class DumbbellProcessor(PoseProcessor):
                     shldr_coord = right_shldr_coord
                     elbow_coord = right_elbow_coord
                     wrist_coord = right_wrist_coord
-                    hip_coord = right_hip_coord
 
                     multiplier = 1
 
@@ -211,10 +214,15 @@ class DumbbellProcessor(PoseProcessor):
                             angle=elbow_angle, startAngle=0, endAngle=0,
                             color=self.COLORS['white'], thickness=3, lineType=self.linetype)
 
-                shldr_angle = self.calculate_angle(elbow_coord, np.array([shldr_coord[0], 0]), hip_coord)
-                cv2.ellipse(frame, shldr_coord, (30, 30),
-                            angle=0, startAngle=90 - multiplier * shldr_angle, endAngle=90,
-                            color=self.COLORS['white'], thickness=3, lineType=self.linetype)
+                shldr_angle = abs(180 - self.calculate_angle(elbow_coord, np.array([shldr_coord[0], 0]), shldr_coord))
+                if shldr_coord[0] >= elbow_coord[0]:
+                    cv2.ellipse(frame, shldr_coord, (30, 30),
+                                angle=0, startAngle=90 - multiplier * shldr_angle, endAngle=90,
+                                color=self.COLORS['white'], thickness=3, lineType=self.linetype)
+                else:
+                    cv2.ellipse(frame, shldr_coord, (30, 30),
+                                angle=0, startAngle=90 + multiplier * shldr_angle, endAngle=90,
+                                color=self.COLORS['white'], thickness=3, lineType=self.linetype)
 
                 self.cv_elem.draw_dotted_line(frame, shldr_coord, start=shldr_coord[1] - 20, end=shldr_coord[1] + 50,
                                               line_color=self.COLORS['purple'])
@@ -235,7 +243,7 @@ class DumbbellProcessor(PoseProcessor):
 
                 # --- Computing parts of automata
 
-                print('\r', self.state_tracker['state_seq'], current_state, self.state_tracker['DISPLAY_TEXT'], self.state_tracker['COUNT_FRAMES'], end='')
+                # print('\r', self.state_tracker['state_seq'], current_state, self.state_tracker['DISPLAY_TEXT'], self.state_tracker['COUNT_FRAMES'], self.state_tracker['NEAR_HAND'], end='')
 
                 if current_state == 's1':
 
@@ -259,20 +267,19 @@ class DumbbellProcessor(PoseProcessor):
                 # --- Perform feedback
 
                 else:
-                    if elbow_angle > self.thresholds['ELBOW_THRESH'][1]:
+                    if elbow_angle < self.thresholds['ELBOW_THRESH'][0]:
                         self.state_tracker['DISPLAY_TEXT'][0] = True
 
-                    elif elbow_angle < self.thresholds['ELBOW_THRESH'][0] and \
+                    elif elbow_angle > self.thresholds['ELBOW_THRESH'][1] and \
                             self.state_tracker['state_seq'].count('s2') == 1:
                         self.state_tracker['DISPLAY_TEXT'][1] = True
 
-                    if self.thresholds['HAND_THRESH'][0] < shldr_angle < self.thresholds['HAND_THRESH'][
-                        1] and \
+                    if self.thresholds['HAND_THRESH'][0] < shldr_angle < self.thresholds['HAND_THRESH'][1] and \
                             self.state_tracker['state_seq'].count('s2') == 1:
                         self.state_tracker['DISPLAY_TEXT'][2] = True
 
-                    if shldr_angle > self.thresholds['HAND_THRESH'][2]:
-                        self.state_tracker['DISPLAY_TEXT'][2] = True
+                    elif shldr_angle > self.thresholds['HAND_THRESH'][2]:
+                        self.state_tracker['NEAR_HAND'] = True
                         self.state_tracker['INCORRECT_POSTURE'] = True
 
                 # --- Inactivity computing
@@ -299,13 +306,13 @@ class DumbbellProcessor(PoseProcessor):
                 elbow_text_coord_x = elbow_coord[0] + 10
                 shldr_text_coord_x = shldr_coord[0] + 15
 
-                if 's3' in self.state_tracker['state_seq'] or current_state == 's1':
-                    self.state_tracker['DISPLAY_TEXT'][2] = False
+                if current_state == 's1':
+                    self.state_tracker['NEAR_HAND'] = False
 
                 self.state_tracker['COUNT_FRAMES'][self.state_tracker['DISPLAY_TEXT']] += 1
 
                 frame = self._show_feedback(frame, self.state_tracker['COUNT_FRAMES'],
-                                            self.FEEDBACK_ID_MAP)
+                                            self.FEEDBACK_ID_MAP, self.state_tracker['NEAR_HAND'])
 
                 if display_inactivity or (time.time() - self.state_tracker['INACTIVE_TIME_START']) <= 3:
                     cv2.putText(frame, 'Resetting CURLS due to inactivity!', (10, 90),
