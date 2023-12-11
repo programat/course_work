@@ -181,9 +181,7 @@ padding: 10px;
 margin-right: 10px;
 }
 #exercise::drop-down{
-
 }
-
 
 #exercise::down-arror{
 color: rgb(234, 238, 212);
@@ -545,8 +543,13 @@ font-weight: 450;</string>
       <bool>true</bool>
      </property>
      <property name="styleSheet">
-      <string notr="true">#pushButton{
+      <string notr="true">#folder_button{
 	background-color:transparent;
+	border-radius: 12px;
+}
+
+#folder_button::hover{
+	background-color:rgb(83, 88, 95)
 }</string>
      </property>
      <property name="text">
@@ -577,8 +580,13 @@ font-weight: 450;</string>
      <bool>true</bool>
     </property>
     <property name="styleSheet">
-     <string notr="true">#pushButton{
+     <string notr="true">#settings{
+	background-color: transparent;
+	border-radius: 12px;
+}
 
+#settings::hover{
+	background-color: rgb(83, 88, 95);
 }</string>
     </property>
     <property name="text">

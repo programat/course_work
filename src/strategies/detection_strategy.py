@@ -28,6 +28,9 @@ class DetectionStrategy(ABC):
     @abstractmethod
     def is_plotted(self):
         pass
+    @abstractmethod
+    def change_parameters(self, path='', imgsz=-1, conf=-1, iou=-1):
+        pass
 
 
 class YOLOStrategy(DetectionStrategy):

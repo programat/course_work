@@ -68,7 +68,7 @@ background-color: rgb(50, 50, 50);
 </string>
    </property>
    <property name="text">
-    <string>_</string>
+    <string/>
    </property>
    <property name="alignment">
     <set>Qt::AlignCenter</set>
@@ -100,7 +100,7 @@ background-color: rgb(50, 50, 50);
    </property>
    <property name="styleSheet">
     <string notr="true">#pushButton{
-	background-color:transparent;
+	background-color: rgb(83, 88, 95);
 }</string>
    </property>
    <property name="text">
@@ -117,7 +117,7 @@ background-color: rgb(50, 50, 50);
     </size>
    </property>
   </widget>
-  <widget class="QLineEdit" name="curls">
+  <widget class="QLineEdit" name="imgsz">
    <property name="geometry">
     <rect>
      <x>50</x>
@@ -145,7 +145,7 @@ letter-spacing: -0.201359px;;
     <set>Qt::AlignCenter</set>
    </property>
   </widget>
-  <widget class="QLineEdit" name="curls_2">
+  <widget class="QLineEdit" name="conf">
    <property name="geometry">
     <rect>
      <x>50</x>
@@ -173,7 +173,7 @@ letter-spacing: -0.201359px;;
     <set>Qt::AlignCenter</set>
    </property>
   </widget>
-  <widget class="QLineEdit" name="curls_3">
+  <widget class="QLineEdit" name="iou">
    <property name="geometry">
     <rect>
      <x>50</x>
@@ -226,9 +226,9 @@ letter-spacing: -0.201359px;;
    <property name="geometry">
     <rect>
      <x>40</x>
-     <y>30</y>
+     <y>50</y>
      <width>311</width>
-     <height>121</height>
+     <height>91</height>
     </rect>
    </property>
    <property name="acceptDrops">
@@ -258,26 +258,25 @@ padding-top: 10px;
       <x>20</x>
       <y>10</y>
       <width>281</width>
-      <height>101</height>
+      <height>71</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout">
      <item>
-      <widget class="QCheckBox" name="checkBox_2">
+      <widget class="QCheckBox" name="cb1">
+       <property name="styleSheet">
+        <string notr="true">color: rgb(234, 238, 212);</string>
+       </property>
        <property name="text">
         <string>Show fps</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QCheckBox" name="checkBox_3">
-       <property name="text">
-        <string>Use model's built-in landmarks plotting</string>
+      <widget class="QCheckBox" name="cb2">
+       <property name="styleSheet">
+        <string notr="true">color: rgb(234, 238, 212);</string>
        </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QCheckBox" name="checkBox">
        <property name="text">
         <string>Use model's built-in landmarks plotting</string>
        </property>
@@ -347,6 +346,78 @@ letter-spacing: -0.201359px;;
    </property>
    <property name="text">
     <string>iou</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="stream_label_2">
+   <property name="geometry">
+    <rect>
+     <x>50</x>
+     <y>20</y>
+     <width>231</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(234, 238, 212);
+font-family: Mori, sans-serif;
+font-size: 12px;
+font-weight: 600;
+letter-spacing: -0.201359px;;
+</string>
+   </property>
+   <property name="text">
+    <string>path to model's weights</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="save_button">
+   <property name="geometry">
+    <rect>
+     <x>50</x>
+     <y>410</y>
+     <width>111</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Mori</family>
+     <pointsize>-1</pointsize>
+     <fontweight>DemiBold</fontweight>
+    </font>
+   </property>
+   <property name="cursor">
+    <cursorShape>PointingHandCursor</cursorShape>
+   </property>
+   <property name="focusPolicy">
+    <enum>Qt::ClickFocus</enum>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">#save_button{
+	color: rgb(234, 238, 212);
+	border-radius: 12px;
+	border-width: 2px;
+	border-style: solid;
+	border-color: rgb(234, 238, 212);
+	background-color: rgb(14,16,15);
+	border-bottom-width: 2px;
+	font-family: Mori, sans-serif;
+	font-size: 12px;
+	font-weight: 600;
+	letter-spacing: -0.201359px;;
+	padding-left: 24px;
+	padding-right: 24px;
+}
+
+#save_button::hover{
+	background-color: rgb(70, 80, 75)
+}
+</string>
+   </property>
+   <property name="text">
+    <string>Save</string>
+   </property>
+   <property name="shortcut">
+    <string>Return</string>
    </property>
   </widget>
  </widget>

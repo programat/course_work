@@ -10,6 +10,8 @@ class MainWindowController:
     def __init__(self, window):
         self._window = window
         self.opencv_controller = None
+        self.sets = settings.Settings()
+        self.sets.create()
 
     @property
     def window(self):
@@ -20,9 +22,7 @@ class MainWindowController:
         self._window = new
 
     def clicked_settings(self):
-        sets = settings.Settings()
-        sets.create()
-        sets.show()
+        self.sets.show()
 
     def clicked_start(self):
         text = self.window.curls.text()
@@ -32,14 +32,22 @@ class MainWindowController:
             if 1 <= number <= 50:
                 self.window.curls.setStyleSheet(style_sheet.rstrip('border-bottom: 1px solid red;'))
                 print(f"Entered number {number} is correct!. Starting...")
-                detector = detection_strategy.YOLOStrategy().create_model()
+
+                settings_dict = self.sets.get_settings()
+
+                if len(settings_dict) > 0:
+                    if settings_dict['path'] != '':
+                        self.detector = detection_strategy.YOLOStrategy(imgsz=settings_dict['imgsz'], weights_path=settings_dict['path'], conf=settings_dict['conf'], iou=settings_dict['iou']).create_model()
+                    else:
+                        self.detector = detection_strategy.YOLOStrategy(imgsz=settings_dict['imgsz'], conf=settings_dict['conf'], iou=settings_dict['iou']).create_model()
+
                 angle = angle_calculation_strategy.Angle2DCalculation()
-                self.opencv_controller = opencv_controller.OpenCVController(detector, angle, self.chosen_exercise())
+                self.opencv_controller = opencv_controller.OpenCVController(self.detector, angle, self.chosen_exercise())
                 if self.chosen_stream():
                     self.opencv_controller.setup(stream=self.chosen_stream(), level=self.get_level())
                 else:
                     self.opencv_controller.setup(stream=self.chosen_stream(), level=self.get_level(), video_path=self.get_path())
-                self.opencv_controller.process(show_fps=True, curls=number)
+                self.opencv_controller.process(show_fps=settings_dict['fps'], curls=number, plot=settings_dict['plot'])
             else:
                 # setting a style with a red border to indicate invalid input
                 self.window.curls.setStyleSheet(f"{style_sheet} border-bottom: 1px solid red;")
@@ -51,7 +59,6 @@ class MainWindowController:
             QMessageBox.warning(self.window, "Warning", "Enter correct number.")
 
     def get_path(self):
-        print(self.window.file.text())
         return self.window.file.text()
 
     def clicked_dir(self):

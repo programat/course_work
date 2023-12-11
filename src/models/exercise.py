@@ -114,8 +114,8 @@ class DumbellExercise(Exercise):
         self.thresholds = None
         self._ANGLE_HIP_KNEE_VERT_BEGINNER = {
             'NORMAL': (180, 110),
-            'TRANS': (110, 60),
-            'PASS': (60, 50)
+            'TRANS': (110, 70),
+            'PASS': (70, 60)
         }
         self.thresholds_beginner = {
             'SHLDR_ELBOW_WRIST': self._ANGLE_HIP_KNEE_VERT_BEGINNER,
@@ -131,7 +131,7 @@ class DumbellExercise(Exercise):
         self._ANGLE_HIP_KNEE_VERT_PRO = {
             'NORMAL': (180, 110),
             'TRANS': (110, 60),
-            'PASS': (60, 40)
+            'PASS': (60, 50)
         }
         self.thresholds_beginner = {
             'SHLDR_ELBOW_WRIST': self._ANGLE_HIP_KNEE_VERT_PRO,

@@ -54,13 +54,13 @@ class OpenCVController:
             raise ValueError(f"Unknown exercise: {self.selected_exercise}")
         return self
 
-    def process(self, show_fps=False, curls=None):
+    def process(self, show_fps=False, curls=None, plot=False):
         pTime = 0
 
         try:
             while self.vid.isOpened():
                 _, self.frame = self.vid.read()
-                self.frame = self.detection_strategy.process_frame(self.frame, plot=False)
+                self.frame = self.detection_strategy.process_frame(self.frame, plot=plot)
 
                 try:
                     self.pose_processor.process(self.frame, curls=curls)
@@ -76,7 +76,7 @@ class OpenCVController:
                     cv2.putText(self.frame, f'fps: {int(fps)}', (1180, 45), cv2.FONT_HERSHEY_PLAIN, 1.2,
                                  (255, 255, 255), 2)
 
-                    cv2.imshow('AI Trainer: Squats training', self.frame)
+                    cv2.imshow(f'AI Trainer: {self.selected_exercise} training', self.frame)
 
                 if cv2.waitKey(1) & 0xFF == ord('q'):
                     break
