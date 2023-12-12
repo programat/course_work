@@ -2,7 +2,6 @@
 
 import time
 import cv2
-import traceback
 from src.strategies.pose_processor import squats_processor, dumbbell_processor
 
 
@@ -66,7 +65,6 @@ class OpenCVController:
                     self.pose_processor.process(self.frame, curls=curls)
                 except Exception as ex:
                     print(f'pose_processor exception: {ex}')
-                    print(traceback.format_exception(ex))
 
 
                 if show_fps:

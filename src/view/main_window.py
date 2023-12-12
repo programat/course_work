@@ -43,18 +43,3 @@ class MainWindow(QMainWindow):
     def closeEvent(self, QCloseEvent):
         # self.controller.close()
         pass
-
-if __name__ == '__main__':
-    app = QApplication([])
-    w = MainWindow().create()
-    w.show()
-    sys.exit(app.exec())
-
-    # app = QApplication([])
-    # ui_file = QFile("/Users/egorken/PycharmProjects/course work/src/ui/main.ui")
-    # ui_file.open(QFile.ReadOnly)
-    #
-    # loader = QUiLoader()
-    # window = loader.load(ui_file)
-    # window.show()
-    # sys.exit(app.exec())
