@@ -49,6 +49,8 @@ class SettingsController:
         }
         print(self.settings_dict)
 
+        self.window.close()
+
     @property
     def settings_dict(self):
         return self._settings_dict
