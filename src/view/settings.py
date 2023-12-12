@@ -29,6 +29,7 @@ class Settings(QWidget):
         # invents processed by controller
         self.window_sets.save_button.clicked.connect(lambda: self.controller.clicked_save())
         self.window_sets.folder_button.clicked.connect(lambda: self.controller.clicked_dir())
+        self.window_sets.delete_button.clicked.connect(lambda: self.controller.clicked_delete())
 
         self.window_sets.setWindowTitle("Settings")
         return self.window_sets

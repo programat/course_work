@@ -28,6 +28,12 @@ class SettingsController:
     def choose_param(self):
         return (self.window.cb1.isChecked(), self.window.cb2.isChecked())
 
+    def set_param(self, p1=False, p2=False):
+        self.window.cb1.setTristate(p1)
+        self.window.cb2.setTristate(p2)
+        return p1, p2
+
+
     def chosen_size(self):
         return self.window.imgsz.text()
 
@@ -50,6 +56,23 @@ class SettingsController:
         print(self.settings_dict)
 
         self.window.close()
+
+    def clicked_delete(self):
+        self.fps, self.plot = self.set_param()
+        self.window.file.setText('')
+        self.window.imgsz.setText(str(320))
+        self.window.conf.setText(str(0.25))
+        self.window.iou.setText(str(0.7))
+
+        self.settings_dict = {
+            'path': self.get_path(),
+            'imgsz': int(self.chosen_size()),
+            'conf': float(self.chosen_conf()),
+            'iou': float(self.chosen_iou()),
+            'fps': int(self.fps),
+            'plot': bool(self.plot)
+        }
+        print(self.settings_dict)
 
     @property
     def settings_dict(self):

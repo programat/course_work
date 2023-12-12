@@ -43,3 +43,9 @@ class MainWindow(QMainWindow):
     def closeEvent(self, QCloseEvent):
         # self.controller.close()
         pass
+
+if __name__ == '__main__':
+    app = QApplication([])
+    w = MainWindow().create()
+    w.show()
+    sys.exit(app.exec())
