@@ -42,5 +42,5 @@ class Settings(QWidget):
         return self.window_sets
 
     def closeEvent(self, QCloseEvent):
-        # self.controller.close()
+        self.controller.close()
         pass

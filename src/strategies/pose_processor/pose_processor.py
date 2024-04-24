@@ -1,17 +1,15 @@
 # pose_processor.py
 
 from abc import ABC, abstractmethod
-import time
 import cv2
 import numpy as np
 from src.strategies import angle_calculation_strategy as acs
 from src.strategies import detection_strategy as dc
-from src.models import exercise as exr
 
 from src.models import opencv_elements
 
 
-class PoseProcessor:
+class PoseProcessor(ABC):
     def __init__(self, detection_strategy: dc.DetectionStrategy,
                  angle_calculation_strategy: acs.AngleCalculationStrategy, level=0):
 

@@ -41,7 +41,7 @@ class MainWindow(QMainWindow):
         return self.window
 
     def closeEvent(self, QCloseEvent):
-        # self.controller.close()
+        self.controller.close()
         pass
 
 if __name__ == '__main__':

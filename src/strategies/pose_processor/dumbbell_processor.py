@@ -126,23 +126,23 @@ class DumbbellProcessor(PoseProcessor):
 
                 self.cv_elem.draw_text(
                     frame,
-                    "CORRECT: " + str(self.state_tracker['CURLS']),
+                    "CORRECT " + str(self.state_tracker['CURLS']),
                     pos=(int(frame_width * 0.06), int(frame_height - 80)),
-                    text_color=(255, 255, 230),
+                    text_color=(10, 228, 72),
                     font_scale=1,
                     font_thickness=3,
-                    text_color_bg=(10, 228, 72),
+                    text_color_bg=self.COLORS['black'],
                     increased_size=3
                 )
 
                 self.cv_elem.draw_text(
                     frame,
-                    "INCORRECT: " + str(self.state_tracker['BAD_CURLS']),
+                    str(self.state_tracker['BAD_CURLS']) + " INCORRECT",
                     pos=(int(frame_width * 0.78), int(frame_height - 80)),
-                    text_color=(255, 255, 230),
+                    text_color=(254, 197, 251),
                     font_scale=1,
                     font_thickness=3,
-                    text_color_bg=(254, 197, 251),
+                    text_color_bg=self.COLORS['black'],
                     increased_size=3
                 )
 
@@ -152,8 +152,9 @@ class DumbbellProcessor(PoseProcessor):
                         "CURLS: " + str(self.state_tracker['CURLS'] + self.state_tracker['BAD_CURLS']) + '/' + str(
                             curls),
                         pos=(int(frame_width / 2.1), frame_height - 30),
-                        text_color=(255, 255, 230),
+                        text_color=(255, 255, 255),
                         font_scale=0.5,
+                        font_thickness=2,
                         text_color_bg=self.COLORS['black']
                     )
 
@@ -161,7 +162,7 @@ class DumbbellProcessor(PoseProcessor):
                     frame,
                     'CAMERA NOT ALIGNED PROPERLY!!!',
                     pos=(30, 60),
-                    text_color=(255, 255, 230),
+                    text_color=(255, 255, 255),
                     font_scale=0.65,
                     text_color_bg=(255, 153, 0),
                 )
@@ -170,7 +171,7 @@ class DumbbellProcessor(PoseProcessor):
                     frame,
                     'OFFSET ANGLE: ' + str(offset_angle),
                     pos=(30, 30),
-                    text_color=(255, 255, 230),
+                    text_color=(255, 255, 255),
                     font_scale=0.65,
                     text_color_bg=(255, 153, 0),
                 )
@@ -239,6 +240,7 @@ class DumbbellProcessor(PoseProcessor):
 
                 current_state = self.exercise.get_state(int(elbow_angle))
                 self.state_tracker['curr_state'] = current_state
+                print(f'\r {current_state}',end='')
                 self.exercise._update_state_sequence(current_state, self.state_tracker)
 
                 # --- Computing parts of automata
@@ -330,25 +332,27 @@ class DumbbellProcessor(PoseProcessor):
                             self.font,
                             0.6, self.COLORS['light_green'], 2, lineType=self.linetype)
 
+                # print(f"\r{self.state_tracker['state_seq']}", end='')
+
                 self.cv_elem.draw_text(
                     frame,
-                    "CORRECT: " + str(self.state_tracker['CURLS']),
+                    "CORRECT " + str(self.state_tracker['CURLS']),
                     pos=(int(frame_width * 0.06), int(frame_height - 80)),
-                    text_color=(255, 255, 230),
+                    text_color=(10, 228, 72),
                     font_scale=1,
                     font_thickness=3,
-                    text_color_bg=(10, 228, 72),
+                    text_color_bg=self.COLORS['black'],
                     increased_size=3
                 )
 
                 self.cv_elem.draw_text(
                     frame,
-                    "INCORRECT: " + str(self.state_tracker['BAD_CURLS']),
+                    str(self.state_tracker['BAD_CURLS']) + " INCORRECT",
                     pos=(int(frame_width * 0.78), int(frame_height - 80)),
-                    text_color=(255, 255, 230),
+                    text_color=(254, 197, 251),
                     font_scale=1,
                     font_thickness=3,
-                    text_color_bg=(254, 197, 251),
+                    text_color_bg=self.COLORS['black'],
                     increased_size=3
                 )
 
@@ -358,8 +362,9 @@ class DumbbellProcessor(PoseProcessor):
                         "CURLS: " + str(self.state_tracker['CURLS'] + self.state_tracker['BAD_CURLS']) + '/' + str(
                             curls),
                         pos=(int(frame_width / 2.1), frame_height - 30),
-                        text_color=(255, 255, 230),
+                        text_color=(255, 255, 255),
                         font_scale=0.5,
+                        font_thickness=2,
                         text_color_bg=self.COLORS['black']
                     )
 
@@ -395,23 +400,23 @@ class DumbbellProcessor(PoseProcessor):
 
             self.cv_elem.draw_text(
                 frame,
-                "CORRECT: " + str(self.state_tracker['CURLS']),
+                "CORRECT " + str(self.state_tracker['CURLS']),
                 pos=(int(frame_width * 0.06), int(frame_height - 80)),
-                text_color=(255, 255, 230),
+                text_color=(10, 228, 72),
                 font_scale=1,
                 font_thickness=3,
-                text_color_bg=(10, 228, 72),
+                text_color_bg=self.COLORS['black'],
                 increased_size=3
             )
 
             self.cv_elem.draw_text(
                 frame,
-                "INCORRECT: " + str(self.state_tracker['BAD_CURLS']),
+                str(self.state_tracker['BAD_CURLS']) + " INCORRECT",
                 pos=(int(frame_width * 0.78), int(frame_height - 80)),
-                text_color=(255, 255, 230),
+                text_color=(254, 197, 251),
                 font_scale=1,
                 font_thickness=3,
-                text_color_bg=(254, 197, 251),
+                text_color_bg=self.COLORS['black'],
                 increased_size=3
             )
 
@@ -421,9 +426,9 @@ class DumbbellProcessor(PoseProcessor):
                     "CURLS: " + str(self.state_tracker['CURLS'] + self.state_tracker['BAD_CURLS']) + '/' + str(
                         curls),
                     pos=(int(frame_width / 2.1), frame_height - 30),
-                    text_color=(255, 255, 230),
+                    text_color=(255, 255, 255),
                     font_scale=0.5,
-                    font_thickness=0.5,
+                    font_thickness=2,
                     text_color_bg=self.COLORS['black']
                 )
 

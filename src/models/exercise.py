@@ -133,7 +133,7 @@ class DumbellExercise(Exercise):
             'TRANS': (110, 60),
             'PASS': (60, 50)
         }
-        self.thresholds_beginner = {
+        self.thresholds_pro = {
             'SHLDR_ELBOW_WRIST': self._ANGLE_HIP_KNEE_VERT_PRO,
 
             'ELBOW_THRESH': [50, 60],

@@ -1,5 +1,6 @@
+# opencv_elements.py
+
 import cv2
-import numpy as np
 
 class OpenCVElements:
     @staticmethod
