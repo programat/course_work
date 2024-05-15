@@ -1,0 +1,3263 @@
+---
+/Users/egorken/PycharmProjects/course work/src/__init__.py
+__init__.py:
+
+
+---
+/Users/egorken/PycharmProjects/course work/src/ui/main-new.ui
+main-new.ui:
+
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>461</width>
+    <height>670</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>461</width>
+    <height>670</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>461</width>
+    <height>670</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">background-color: rgb(14,16,15);</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QLabel" name="label_4">
+    <property name="geometry">
+     <rect>
+      <x>150</x>
+      <y>10</y>
+      <width>161</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Mori</family>
+      <pointsize>-1</pointsize>
+      <stylestrategy>PreferDefault</stylestrategy>
+      <fontweight>DemiBold</fontweight>
+     </font>
+    </property>
+    <property name="mouseTracking">
+     <bool>false</bool>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(234, 238, 212);
+font-family: Mori, sans-serif;
+font-size: 22px;
+font-weight: 600;
+letter-spacing: -0.201359px;;
+</string>
+    </property>
+    <property name="text">
+     <string>{ AI Trainer }</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QWidget" name="widget" native="true">
+    <property name="geometry">
+     <rect>
+      <x>60</x>
+      <y>80</y>
+      <width>351</width>
+      <height>531</height>
+     </rect>
+    </property>
+    <property name="acceptDrops">
+     <bool>true</bool>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">#widget{color: rgb(234, 238, 212);
+border-radius: 28px;
+border-width: 2px;
+border-style: solid;
+border-color: rgb(234, 238, 212);
+background-color: rgb(14,16,15);
+border-bottom-width: 2px;
+font-family: Mori, sans-serif;
+font-size: 16px;
+font-weight: 600;
+letter-spacing: -0.201359px;;
+padding-bottom: 10px;
+padding-left: 24px;
+padding-right: 24px;
+padding-top: 10px;
+}</string>
+    </property>
+    <widget class="QComboBox" name="stream">
+     <property name="geometry">
+      <rect>
+       <x>110</x>
+       <y>50</y>
+       <width>150</width>
+       <height>40</height>
+      </rect>
+     </property>
+     <property name="cursor">
+      <cursorShape>PointingHandCursor</cursorShape>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">#stream{
+color: rgb(234, 238, 212);
+border-radius:12px;
+border-width: 2px;
+border-style: solid;
+border-color: rgb(234, 238, 212);
+background-color: rgb(14,16,15);
+font-family: Mori, sans-serif;
+font-size: 14px;
+font-weight: 600;
+letter-spacing: -0.201359px;
+padding: 10px;
+margin-right: 10px;
+}
+#stream::drop-down{
+
+}
+
+
+#stream::down-arror{
+color: rgb(234, 238, 212);
+}
+
+#stream QListView{
+font-size: 12px;
+border: 1px solid rgb(234, 238, 212);
+padding: 5px;
+outline: 0px;
+border-radius: 2px;
+}
+
+#stream QListView::item{
+padding-left:10px;
+}</string>
+     </property>
+     <item>
+      <property name="text">
+       <string>Cam</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Vid</string>
+      </property>
+     </item>
+    </widget>
+    <widget class="QComboBox" name="exercise">
+     <property name="geometry">
+      <rect>
+       <x>110</x>
+       <y>140</y>
+       <width>150</width>
+       <height>40</height>
+      </rect>
+     </property>
+     <property name="cursor">
+      <cursorShape>PointingHandCursor</cursorShape>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">#exercise{
+color: rgb(234, 238, 212);
+border-radius:12px;
+border-width: 2px;
+border-style: solid;
+border-color: rgb(234, 238, 212);
+background-color: rgb(14,16,15);
+font-family: Mori, sans-serif;
+font-size: 14px;
+font-weight: 600;
+letter-spacing: -0.201359px;
+padding: 10px;
+margin-right: 10px;
+}
+#exercise::drop-down{
+}
+
+#exercise::down-arror{
+color: rgb(234, 238, 212);
+}
+
+#exercise QListView{
+font-size: 12px;
+border: 1px solid rgb(234, 238, 212);
+padding: 5px;
+outline: 0px;
+border-radius: 2px;
+}
+
+#exercise QListView::item{
+padding-left:10px;
+}
+
+</string>
+     </property>
+     <item>
+      <property name="text">
+       <string>Squats</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Dumbbell</string>
+      </property>
+     </item>
+    </widget>
+    <widget class="QLabel" name="exercise_label">
+     <property name="geometry">
+      <rect>
+       <x>120</x>
+       <y>110</y>
+       <width>121</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: rgb(234, 238, 212);
+font-family: Mori, sans-serif;
+font-size: 16px;
+font-weight: 600;
+letter-spacing: -0.201359px;;
+</string>
+     </property>
+     <property name="text">
+      <string>Select exercise</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+    <widget class="QLabel" name="curls_label">
+     <property name="geometry">
+      <rect>
+       <x>140</x>
+       <y>290</y>
+       <width>81</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: rgb(234, 238, 212);
+font-family: Mori, sans-serif;
+font-size: 16px;
+font-weight: 600;
+letter-spacing: -0.201359px;;
+</string>
+     </property>
+     <property name="text">
+      <string>Enter curls</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="stream_label">
+     <property name="geometry">
+      <rect>
+       <x>140</x>
+       <y>20</y>
+       <width>91</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: rgb(234, 238, 212);
+font-family: Mori, sans-serif;
+font-size: 16px;
+font-weight: 600;
+letter-spacing: -0.201359px;;
+</string>
+     </property>
+     <property name="text">
+      <string>Vid or Cam</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="curls">
+     <property name="geometry">
+      <rect>
+       <x>120</x>
+       <y>310</y>
+       <width>125</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: rgb(234, 238, 212);
+border-style: solid;
+border-color: rgb(234, 238, 212);
+background-color: rgb(14,16,15);
+border-bottom-width: 1px;
+font-family: Mori, sans-serif;
+font-size: 14px;
+font-weight: 600;
+letter-spacing: -0.201359px;;
+</string>
+     </property>
+     <property name="text">
+      <string>3</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="start_button">
+     <property name="geometry">
+      <rect>
+       <x>100</x>
+       <y>460</y>
+       <width>161</width>
+       <height>40</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Mori</family>
+       <pointsize>-1</pointsize>
+       <fontweight>DemiBold</fontweight>
+      </font>
+     </property>
+     <property name="cursor">
+      <cursorShape>PointingHandCursor</cursorShape>
+     </property>
+     <property name="focusPolicy">
+      <enum>Qt::ClickFocus</enum>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">#start_button{
+	color: rgb(234, 238, 212);
+	border-radius: 12px;
+	border-width: 2px;
+	border-style: solid;
+	border-color: qlineargradient(spread:pad, x1:0, y1:0.5, x2:1, y2:0.477273, stop:0 rgba(10, 228, 72, 255), stop:1 		rgba(171, 255, 132, 255));
+	background-color: rgb(14,16,15);
+	border-bottom-width: 2px;
+	font-family: Mori, sans-serif;
+	font-size: 16px;
+	font-weight: 600;
+	letter-spacing: -0.201359px;;
+	padding-bottom: 10px;
+	padding-left: 24px;
+	padding-right: 24px;
+	padding-top: 10px;
+}
+
+#start_button::hover{
+	background-color: rgb(70, 80, 75)
+}
+</string>
+     </property>
+     <property name="text">
+      <string>Start</string>
+     </property>
+     <property name="shortcut">
+      <string>Return</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="level_lavel">
+     <property name="geometry">
+      <rect>
+       <x>140</x>
+       <y>370</y>
+       <width>81</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: rgb(234, 238, 212);
+font-family: Mori, sans-serif;
+font-size: 16px;
+font-weight: 600;
+letter-spacing: -0.201359px;;
+</string>
+     </property>
+     <property name="text">
+      <string>Level</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+    <widget class="QWidget" name="horizontalLayoutWidget">
+     <property name="geometry">
+      <rect>
+       <x>100</x>
+       <y>400</y>
+       <width>160</width>
+       <height>51</height>
+      </rect>
+     </property>
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <item>
+       <widget class="QRadioButton" name="radioButton">
+        <property name="layoutDirection">
+         <enum>Qt::RightToLeft</enum>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">color: rgb(234, 238, 212);
+font-family: Mori, sans-serif;
+font-size: 12px;
+font-weight: 450;</string>
+        </property>
+        <property name="text">
+         <string>Easy</string>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QRadioButton" name="radioButton_2">
+        <property name="layoutDirection">
+         <enum>Qt::LeftToRight</enum>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">color: rgb(234, 238, 212);
+font-family: Mori, sans-serif;
+font-size: 12px;
+font-weight: 450;</string>
+        </property>
+        <property name="text">
+         <string>Pro</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+    <widget class="QLineEdit" name="file">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>50</x>
+       <y>228</y>
+       <width>211</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="font">
+      <font>
+       <family>Mori</family>
+       <pointsize>-1</pointsize>
+       <hintingpreference>PreferDefaultHinting</hintingpreference>
+       <fontweight>DemiBold</fontweight>
+      </font>
+     </property>
+     <property name="layoutDirection">
+      <enum>Qt::LeftToRight</enum>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">#file{
+	color: rgb(234, 238, 212);
+	border-style: solid;
+	border-color: rgb(234, 238, 212);
+	background-color: rgb(14,16,15);
+	border-bottom-width: 1px;
+	font-family: Mori, sans-serif;
+	font-size: 10px;
+	font-weight: 600;
+	letter-spacing: -0.201359px;;
+}
+
+#file::disabled{
+	color: rgba(234, 238, 212, 90);
+	border-color: rgba(234, 238, 212, 90);
+}
+
+</string>
+     </property>
+     <property name="text">
+      <string>_</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+     <property name="dragEnabled">
+      <bool>false</bool>
+     </property>
+     <property name="readOnly">
+      <bool>true</bool>
+     </property>
+     <property name="cursorMoveStyle">
+      <enum>Qt::LogicalMoveStyle</enum>
+     </property>
+    </widget>
+    <widget class="QLabel" name="file_label">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>120</x>
+       <y>200</y>
+       <width>121</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">#file_label{
+	color: rgb(234, 238, 212);
+	font-family: Mori, sans-serif;
+	font-size: 16px;
+	font-weight: 600;
+	letter-spacing: -0.201359px;;
+}
+
+#file_label::disabled{
+	color: rgba(234, 238, 212, 90);
+}</string>
+     </property>
+     <property name="text">
+      <string>Select file</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="folder_button">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>270</x>
+       <y>245</y>
+       <width>51</width>
+       <height>32</height>
+      </rect>
+     </property>
+     <property name="mouseTracking">
+      <bool>true</bool>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">#folder_button{
+	background-color:transparent;
+	border-radius: 12px;
+}
+
+#folder_button::hover{
+	background-color:rgb(83, 88, 95)
+}</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>../../data/ui/folder.png</normaloff>../../data/ui/folder.png</iconset>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>24</width>
+       <height>24</height>
+      </size>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QPushButton" name="settings">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>20</y>
+      <width>51</width>
+      <height>32</height>
+     </rect>
+    </property>
+    <property name="mouseTracking">
+     <bool>true</bool>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">#settings{
+	background-color: transparent;
+	border-radius: 12px;
+}
+
+#settings::hover{
+	background-color: rgb(83, 88, 95);
+}</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="icon">
+     <iconset>
+      <normaloff>../../data/ui/settings.png</normaloff>../../data/ui/settings.png</iconset>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>24</width>
+      <height>24</height>
+     </size>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>461</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuExit">
+    <property name="title">
+     <string>Exit</string>
+    </property>
+   </widget>
+   <widget class="QMenu" name="menuSettings">
+    <property name="title">
+     <string>Settings</string>
+    </property>
+   </widget>
+   <addaction name="menuSettings"/>
+   <addaction name="menuExit"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+ <resources>
+  <include location="../../data/ui/settings.qrc"/>
+ </resources>
+ <connections/>
+</ui>
+
+---
+/Users/egorken/PycharmProjects/course work/src/ui/settings.ui
+settings.ui:
+
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Settings</class>
+ <widget class="QWidget" name="Settings">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>381</width>
+    <height>488</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">#Settings{
+background-color: rgb(50, 50, 50);
+}</string>
+  </property>
+  <widget class="QLineEdit" name="file">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
+   <property name="geometry">
+    <rect>
+     <x>50</x>
+     <y>180</y>
+     <width>211</width>
+     <height>30</height>
+    </rect>
+   </property>
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <property name="font">
+    <font>
+     <family>Mori</family>
+     <pointsize>-1</pointsize>
+     <bold>false</bold>
+     <hintingpreference>PreferDefaultHinting</hintingpreference>
+    </font>
+   </property>
+   <property name="layoutDirection">
+    <enum>Qt::LeftToRight</enum>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">#file{
+	color: rgb(234, 238, 212);
+	border-style: solid;
+	border-color: rgb(234, 238, 212);
+	background-color: rgb(14,16,15);
+	border-bottom-width: 1px;
+	font-family: Mori, sans-serif;
+	font-size: 10px;
+	font-weight: 400;
+	letter-spacing: -0.201359px;;
+}
+
+#file::disabled{
+	color: rgba(234, 238, 212, 90);
+	border-color: rgba(234, 238, 212, 90);
+}
+
+</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+   <property name="dragEnabled">
+    <bool>false</bool>
+   </property>
+   <property name="readOnly">
+    <bool>true</bool>
+   </property>
+   <property name="cursorMoveStyle">
+    <enum>Qt::LogicalMoveStyle</enum>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="folder_button">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
+   <property name="geometry">
+    <rect>
+     <x>270</x>
+     <y>180</y>
+     <width>51</width>
+     <height>32</height>
+    </rect>
+   </property>
+   <property name="mouseTracking">
+    <bool>true</bool>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">#folder_button{
+	background-color:transparent;
+	border-radius:12px;
+}
+
+#folder_button::hover{
+	background-color:rgb(83, 88, 95);
+}
+</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="icon">
+    <iconset>
+     <normaloff>../../data/ui/folder.png</normaloff>../../data/ui/folder.png</iconset>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>24</width>
+     <height>24</height>
+    </size>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="imgsz">
+   <property name="geometry">
+    <rect>
+     <x>50</x>
+     <y>240</y>
+     <width>161</width>
+     <height>30</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(234, 238, 212);
+border-style: solid;
+border-color: rgb(234, 238, 212);
+background-color: rgb(14,16,15);
+border-bottom-width: 1px;
+font-family: Mori, sans-serif;
+font-size: 14px;
+font-weight: 600;
+letter-spacing: -0.201359px;;
+</string>
+   </property>
+   <property name="text">
+    <string>320</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="conf">
+   <property name="geometry">
+    <rect>
+     <x>50</x>
+     <y>300</y>
+     <width>161</width>
+     <height>30</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(234, 238, 212);
+border-style: solid;
+border-color: rgb(234, 238, 212);
+background-color: rgb(14,16,15);
+border-bottom-width: 1px;
+font-family: Mori, sans-serif;
+font-size: 14px;
+font-weight: 600;
+letter-spacing: -0.201359px;;
+</string>
+   </property>
+   <property name="text">
+    <string>0.25</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="iou">
+   <property name="geometry">
+    <rect>
+     <x>50</x>
+     <y>360</y>
+     <width>161</width>
+     <height>30</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(234, 238, 212);
+border-style: solid;
+border-color: rgb(234, 238, 212);
+background-color: rgb(14,16,15);
+border-bottom-width: 1px;
+font-family: Mori, sans-serif;
+font-size: 14px;
+font-weight: 600;
+letter-spacing: -0.201359px;;
+</string>
+   </property>
+   <property name="text">
+    <string>0.7</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="stream_label">
+   <property name="geometry">
+    <rect>
+     <x>50</x>
+     <y>160</y>
+     <width>231</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(234, 238, 212);
+font-family: Mori, sans-serif;
+font-size: 12px;
+font-weight: 600;
+letter-spacing: -0.201359px;;
+</string>
+   </property>
+   <property name="text">
+    <string>path to model's weights</string>
+   </property>
+  </widget>
+  <widget class="QWidget" name="widget" native="true">
+   <property name="geometry">
+    <rect>
+     <x>40</x>
+     <y>50</y>
+     <width>311</width>
+     <height>91</height>
+    </rect>
+   </property>
+   <property name="acceptDrops">
+    <bool>true</bool>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">#widget{color: rgb(234, 238, 212);
+border-radius: 12px;
+border-width: 1px;
+border-style: solid;
+border-color: rgb(234, 238, 212);
+background-color: rgb(14,16,15);
+border-bottom-width: 2px;
+font-family: Mori, sans-serif;
+font-size: 16px;
+font-weight: 600;
+letter-spacing: -0.201359px;;
+padding-bottom: 10px;
+padding-left: 24px;
+padding-right: 24px;
+padding-top: 10px;
+}</string>
+   </property>
+   <widget class="QWidget" name="verticalLayoutWidget">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>10</y>
+      <width>281</width>
+      <height>71</height>
+     </rect>
+    </property>
+    <layout class="QVBoxLayout" name="verticalLayout">
+     <item>
+      <widget class="QCheckBox" name="cb1">
+       <property name="styleSheet">
+        <string notr="true">color: rgb(234, 238, 212);</string>
+       </property>
+       <property name="text">
+        <string>Show fps</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QCheckBox" name="cb2">
+       <property name="styleSheet">
+        <string notr="true">color: rgb(234, 238, 212);</string>
+       </property>
+       <property name="text">
+        <string>Use model's built-in landmarks plotting</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+  </widget>
+  <widget class="QLabel" name="stream_label_3">
+   <property name="geometry">
+    <rect>
+     <x>50</x>
+     <y>220</y>
+     <width>231</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(234, 238, 212);
+font-family: Mori, sans-serif;
+font-size: 12px;
+font-weight: 600;
+letter-spacing: -0.201359px;;
+</string>
+   </property>
+   <property name="text">
+    <string>size of image for detection</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="stream_label_4">
+   <property name="geometry">
+    <rect>
+     <x>50</x>
+     <y>280</y>
+     <width>231</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(234, 238, 212);
+font-family: Mori, sans-serif;
+font-size: 12px;
+font-weight: 600;
+letter-spacing: -0.201359px;;
+</string>
+   </property>
+   <property name="text">
+    <string>conf for model</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="stream_label_5">
+   <property name="geometry">
+    <rect>
+     <x>50</x>
+     <y>340</y>
+     <width>231</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(234, 238, 212);
+font-family: Mori, sans-serif;
+font-size: 12px;
+font-weight: 600;
+letter-spacing: -0.201359px;;
+</string>
+   </property>
+   <property name="text">
+    <string>iou</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="stream_label_2">
+   <property name="geometry">
+    <rect>
+     <x>50</x>
+     <y>20</y>
+     <width>231</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(234, 238, 212);
+font-family: Mori, sans-serif;
+font-size: 12px;
+font-weight: 600;
+letter-spacing: -0.201359px;;
+</string>
+   </property>
+   <property name="text">
+    <string>path to model's weights</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="save_button">
+   <property name="geometry">
+    <rect>
+     <x>50</x>
+     <y>420</y>
+     <width>111</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Mori</family>
+     <pointsize>-1</pointsize>
+     <fontweight>DemiBold</fontweight>
+    </font>
+   </property>
+   <property name="cursor">
+    <cursorShape>PointingHandCursor</cursorShape>
+   </property>
+   <property name="focusPolicy">
+    <enum>Qt::ClickFocus</enum>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">#save_button{
+	color: rgb(234, 238, 212);
+	border-radius: 12px;
+	border-width: 2px;
+	border-style: solid;
+	border-color: rgb(234, 238, 212);
+	background-color: rgb(14,16,15);
+	border-bottom-width: 2px;
+	font-family: Mori, sans-serif;
+	font-size: 12px;
+	font-weight: 600;
+	letter-spacing: -0.201359px;;
+	padding-left: 24px;
+	padding-right: 24px;
+}
+
+#save_button::hover{
+	background-color: rgb(70, 80, 75)
+}
+</string>
+   </property>
+   <property name="text">
+    <string>Save</string>
+   </property>
+   <property name="shortcut">
+    <string>Return</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="delete_button">
+   <property name="geometry">
+    <rect>
+     <x>230</x>
+     <y>420</y>
+     <width>111</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Mori</family>
+     <pointsize>-1</pointsize>
+     <fontweight>DemiBold</fontweight>
+    </font>
+   </property>
+   <property name="cursor">
+    <cursorShape>PointingHandCursor</cursorShape>
+   </property>
+   <property name="focusPolicy">
+    <enum>Qt::ClickFocus</enum>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">#delete_button{
+	color: rgb(255, 105, 71);
+	border-radius: 12px;
+	border-width: 2px;
+	border-style: solid;
+	border-color:  rgb(234, 238, 212);
+	background-color: rgb(14,16,15);
+	border-bottom-width: 2px;
+	font-family: Mori, sans-serif;
+	font-size: 12px;
+	font-weight: 600;
+	letter-spacing: -0.201359px;;
+	padding-left: 24px;
+	padding-right: 24px;
+}
+
+#save_button::hover{
+	background-color: rgb(70, 80, 75)
+}
+</string>
+   </property>
+   <property name="text">
+    <string>Clear</string>
+   </property>
+   <property name="shortcut">
+    <string>Return</string>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
+
+---
+/Users/egorken/PycharmProjects/course work/src/ui/main.ui
+main.ui:
+
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="AI Trainer">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>800</width>
+    <height>635</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="0" column="0" colspan="7">
+     <widget class="QWidget" name="cvwidg" native="true"/>
+    </item>
+    <item row="1" column="0">
+     <widget class="QLabel" name="label">
+      <property name="text">
+       <string>Select exercise</string>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="1">
+     <widget class="QComboBox" name="comboBox">
+      <item>
+       <property name="text">
+        <string>Squats</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Dumbell </string>
+       </property>
+      </item>
+     </widget>
+    </item>
+    <item row="1" column="2">
+     <widget class="QLabel" name="label_2">
+      <property name="text">
+       <string>Vid or Cam</string>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="3">
+     <widget class="QComboBox" name="comboBox_2">
+      <item>
+       <property name="text">
+        <string>Cam</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Vid</string>
+       </property>
+      </item>
+     </widget>
+    </item>
+    <item row="1" column="4">
+     <widget class="QLabel" name="label_3">
+      <property name="text">
+       <string>Enter curls</string>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="5">
+     <widget class="QLineEdit" name="lineEdit"/>
+    </item>
+    <item row="1" column="6">
+     <widget class="QPushButton" name="pushButton">
+      <property name="text">
+       <string>Start</string>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="3" colspan="2">
+     <widget class="QProgressBar" name="progressBar">
+      <property name="value">
+       <number>24</number>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>800</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuExit">
+    <property name="title">
+     <string>Exit</string>
+    </property>
+   </widget>
+   <widget class="QMenu" name="menuSettings">
+    <property name="title">
+     <string>Settings</string>
+    </property>
+   </widget>
+   <addaction name="menuSettings"/>
+   <addaction name="menuExit"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
+
+---
+/Users/egorken/PycharmProjects/course work/src/strategies/angle_calculation_strategy.py
+angle_calculation_strategy.py:
+
+from abc import ABC, abstractmethod
+
+import numpy as np
+
+
+class AngleCalculationStrategy(ABC):
+    @abstractmethod
+    def calculate_angle(self, p1, p2, ref_pt):
+        pass
+
+
+class Angle2DCalculation(AngleCalculationStrategy):
+    def calculate_angle(self, p1, p2, ref_pt=np.array([0, 0])):
+        try:
+            p1_ref = p1 - ref_pt
+            p2_ref = p2 - ref_pt
+
+            cos_theta = (np.dot(p1_ref, p2_ref)) / (1.0 * np.linalg.norm(p1_ref) * np.linalg.norm(p2_ref))
+            theta = np.arccos(np.clip(cos_theta, -1.0, 1.0))
+
+            try:
+                degree = int(180 / np.pi) * theta
+            except RuntimeWarning:
+                return 0
+
+            return int(degree)
+        except Exception as exc:
+            print(exc)
+            return 0
+
+---
+/Users/egorken/PycharmProjects/course work/src/strategies/__init__.py
+__init__.py:
+
+
+---
+/Users/egorken/PycharmProjects/course work/src/strategies/detection_strategy.py
+detection_strategy.py:
+
+# detection_strategy.py
+
+from abc import ABC, abstractmethod
+
+from ultralytics import YOLO
+import os
+
+class DetectionStrategy(ABC):
+    @abstractmethod
+    def process_frame(self, frame):
+        pass
+    @abstractmethod
+    def get_coordinates(self):
+        pass
+    @abstractmethod
+    def get_landmark_features(self):
+        pass
+    @abstractmethod
+    def create_model(self):
+        pass
+    @abstractmethod
+    def process_frame(self, frame):
+        pass
+    @abstractmethod
+    def get_landmark_coordinates(self, feature):
+        pass
+    @abstractmethod
+    def is_plotted(self):
+        pass
+    @abstractmethod
+    def change_parameters(self, path='', imgsz=-1, conf=-1, iou=-1):
+        pass
+
+
+class YOLOStrategy(DetectionStrategy):
+    def __init__(self, imgsz=320, weights_path=os.path.join(os.path.dirname(__file__), r'../models/weights/yolov8s-pose.pt'), conf=0.25, iou=0.7,):
+        self.weights_path = weights_path
+        self.imgsz = imgsz,
+        self.conf = conf,
+        self.iou = iou
+        self.model = None
+        self._is_plotted = False
+
+        # Dictionary to maintain the various landmark features.
+        self.landmark_features_dict = {}
+        self.landmark_features_dict_left = {
+            'shoulder': 5,
+            'elbow': 7,
+            'wrist': 9,
+            'hip': 11,
+            'knee': 13,
+            'ankle': 15,
+            'foot': None
+        }
+
+        self.landmark_features_dict_right = {
+            'shoulder': 6,
+            'elbow': 8,
+            'wrist': 10,
+            'hip': 12,
+            'knee': 14,
+            'ankle': 16,
+            'foot': None
+        }
+
+        self.landmark_features_dict['left'] = self.landmark_features_dict_left
+        self.landmark_features_dict['right'] = self.landmark_features_dict_right
+        self.landmark_features_dict['nose'] = 0
+
+    def change_parameters(self, path='', imgsz=-1, conf=-1, iou=-1):
+        if path != '':
+            self.path_weights = path
+
+        if imgsz != -1:
+            self.imgsz = imgsz
+
+        if conf != -1:
+            self.conf = conf
+
+        if iou != -1:
+            self.iou = iou
+
+        print(self.path_weights, self.imgsz, self.conf, self.iou)
+
+    def create_model(self):
+        if self.model is not None:
+            del self.model
+        self.model = YOLO(self.weights_path)
+        return self
+
+    def process_frame(self, frame, verbose=False, device='cpu', plot=False):
+        self.is_plotted=plot
+        self.results = self.model(frame, verbose=verbose, device=device, imgsz=self.imgsz)
+        if plot:
+            annotated_frame = self.results[0].plot(labels=False, boxes=False)
+            return annotated_frame
+        else:
+            return frame
+        # тут обдумать трек для нескольких людей
+
+    def get_coordinates(self):
+        res_coord = [r.keypoints.xy.to(int).numpy() for r in self.results]
+        return res_coord[0]
+
+    def get_landmark_features(self):
+        return self.landmark_features_dict
+
+    def get_landmark_coordinates(self, feature):
+        if feature == 'nose':
+            return self.get_coordinates()[0][self.landmark_features_dict[feature]]
+        if feature == 'left' or 'right':
+            shldr_coord = self.get_coordinates()[0][self.landmark_features_dict[feature]['shoulder']]
+            elbow_coord = self.get_coordinates()[0][self.landmark_features_dict[feature]['elbow']]
+            wrist_coord = self.get_coordinates()[0][self.landmark_features_dict[feature]['wrist']]
+            hip_coord = self.get_coordinates()[0][self.landmark_features_dict[feature]['hip']]
+            knee_coord = self.get_coordinates()[0][self.landmark_features_dict[feature]['knee']]
+            ankle_coord = self.get_coordinates()[0][self.landmark_features_dict[feature]['ankle']]
+
+            return shldr_coord, elbow_coord, wrist_coord, hip_coord, knee_coord, ankle_coord
+        else:
+            raise ValueError('Feature needs to be "nose", "left" or "right"')
+
+    def is_plotted(self):
+        return self._is_plotted
+
+
+
+class YoloNasStrategy(DetectionStrategy):
+    def process_frame(self, frame):
+        # Реализация обработки изображения с использованием YOLO-NAS
+        pass
+
+
+class MPStrategy(DetectionStrategy):
+    def process_frame(self, frame):
+        # Реализация обработки изображения с использованием MediaPipe
+        pass
+
+---
+/Users/egorken/PycharmProjects/course work/src/strategies/__pycache__/detection_strategy.cpython-310.pyc
+detection_strategy.cpython-310.pyc:
+
+Ошибка при чтении файла: 'utf-8' codec can't decode byte 0xa1 in position 8: invalid start byte
+---
+/Users/egorken/PycharmProjects/course work/src/strategies/__pycache__/angle_calculation_strategy.cpython-310.pyc
+angle_calculation_strategy.cpython-310.pyc:
+
+Ошибка при чтении файла: 'utf-8' codec can't decode byte 0xf6 in position 8: invalid start byte
+---
+/Users/egorken/PycharmProjects/course work/src/strategies/__pycache__/__init__.cpython-310.pyc
+__init__.cpython-310.pyc:
+
+Ошибка при чтении файла: 'utf-8' codec can't decode byte 0xca in position 9: invalid continuation byte
+---
+/Users/egorken/PycharmProjects/course work/src/strategies/pose_processor/squats_processor.py
+squats_processor.py:
+
+# squats_processor.py
+
+from src.strategies.pose_processor.pose_processor import PoseProcessor
+import time
+import cv2
+import numpy as np
+from src.strategies import angle_calculation_strategy as acs
+from src.strategies import detection_strategy as dc
+from src.models import exercise as exr
+
+
+class SquatsProcessor(PoseProcessor):
+    def __init__(self, detection_strategy: dc.DetectionStrategy, angle_calculation_strategy: acs.AngleCalculationStrategy, level=0):
+        super().__init__(detection_strategy, angle_calculation_strategy, level)
+
+        self.exercise = exr.SquatExercise(level)
+        self.thresholds = self.exercise.get_thresholds()
+
+        self.landmark_features_dict = detection_strategy.get_landmark_features()
+        self.state_tracker = {
+            'state_seq': [],
+
+            'start_inactive_time': time.perf_counter(),
+            'start_inactive_time_front': time.perf_counter(),
+            'INACTIVE_TIME': 0.0,
+            'INACTIVE_TIME_FRONT': 0.0,
+            'INACTIVE_TIME_START': 0.0,
+
+            # 0 --> Bend Backwards, 1 --> Bend Forward, 2 --> Keep shin straight, 3 --> Deep squat
+            'DISPLAY_TEXT': np.full((4,), False),
+            'COUNT_FRAMES': np.zeros((4,), dtype=np.int64),
+
+            'LOWER_HIPS': False,
+
+            'INCORRECT_POSTURE': False,
+
+            'prev_state': None,
+            'curr_state':None,
+
+            'CURLS': 0,
+            'BAD_CURLS': 0
+        }
+
+        self.FEEDBACK_ID_MAP = {
+            0: ('BEND BACKWARDS', 215, (0, 153, 255)),
+            1: ('BEND FORWARD', 215, (0, 153, 255)),
+            2: ('KNEE FALLING OVER TOE', 170, (255, 80, 80)),
+            3: ('SQUAT TOO DEEP', 125, (255, 80, 80))
+        }
+
+    # def set_angle_calculation_strategy(self, angle_calculation_strategy: acs.AngleCalculationStrategy):
+    #     self.angle_calculation_strategy = angle_calculation_strategy
+
+    def calculate_angle(self, p1, p2, ref_tp=np.array([0,0])):
+        return self.angle_calculation.calculate_angle(p1,p2,ref_tp)
+
+    def _show_feedback(self, frame, c_frame, dict_maps, lower_hips_disp):
+
+        if lower_hips_disp:
+            self.cv_elem.draw_text(
+                frame,
+                'LOWER YOUR HIPS',
+                pos=(int(frame.shape[1] * 0.06), 80),
+                text_color=(0, 0, 0),
+                font_scale=1,
+                font_thickness=3,
+                text_color_bg=(255, 255, 0),
+                increased_size=3
+            )
+
+        for idx in np.where(c_frame)[0]:
+            self.cv_elem.draw_text(
+                frame,
+                dict_maps[idx][0],
+                pos=(int(frame.shape[1] * 0.06), dict_maps[idx][1]),
+                text_color=(255, 255, 230),
+                font_scale=1,
+                font_thickness=3,
+                text_color_bg=dict_maps[idx][2],
+                increased_size=3
+            )
+
+        return frame
+
+    def draw_landmark_line(self, frame, p1, p2, color, thickness):
+        if not np.array_equal(p1, [0, 0]) and not np.array_equal(p2, [0, 0]):
+            cv2.line(frame, p1, p2, color, thickness, lineType=self.linetype)
+        return frame
+
+
+
+    def process(self, frame: np.array, curls=None):
+        play_sound = None
+
+        frame_height, frame_width, _ = frame.shape
+
+        # self.detector.process_frame(frame)
+        # Process the image.
+        keypoints = self.detector.get_coordinates()
+
+        if len(keypoints):
+            nose_coord = self.detector.get_landmark_coordinates('nose')
+            left_shldr_coord, left_elbow_coord, left_wrist_coord, left_hip_coord, left_knee_coord, left_ankle_coord = \
+                self.detector.get_landmark_coordinates('left')
+            right_shldr_coord, right_elbow_coord, right_wrist_coord, right_hip_coord, right_knee_coord, right_ankle_coord = \
+                self.detector.get_landmark_coordinates('right')
+
+            offset_angle = self.calculate_angle(left_shldr_coord, right_shldr_coord, nose_coord)
+
+            if offset_angle > self.thresholds['OFFSET_THRESH']:
+
+                display_inactivity = False
+
+                end_time = time.perf_counter()
+                self.state_tracker['INACTIVE_TIME_FRONT'] += end_time - self.state_tracker['start_inactive_time_front']
+                self.state_tracker['start_inactive_time_front'] = end_time
+
+                if self.state_tracker['INACTIVE_TIME_FRONT'] >= self.thresholds['INACTIVE_THRESH']:
+                    self.state_tracker['CURLS'] = 0
+                    self.state_tracker['BAD_CURLS'] = 0
+                    display_inactivity = True
+
+                cv2.circle(frame, nose_coord, 7, self.COLORS['white'], -1)
+                cv2.circle(frame, left_shldr_coord, 7, self.COLORS['yellow'], -1)
+                cv2.circle(frame, right_shldr_coord, 7, self.COLORS['magenta'], -1)
+
+                # if self.flip_frame:
+                #     frame = cv2.flip(frame, 1)
+
+                if display_inactivity or (time.time() - self.state_tracker['INACTIVE_TIME_START']) <= 3:
+                    cv2.putText(frame, 'Resetting CURLS due to inactivity!', (10, 90),
+                                self.font, 0.5, self.COLORS['red'], 2, lineType=self.linetype)
+                    play_sound = 'reset_counters'
+                    self.state_tracker['INACTIVE_TIME_FRONT'] = 0.0
+                    self.state_tracker['start_inactive_time_front'] = time.perf_counter()
+
+                    if not (time.time() - self.state_tracker['INACTIVE_TIME_START']) <= 3:
+                        self.state_tracker['INACTIVE_TIME_START'] = time.time()
+
+                self.cv_elem.draw_text(
+                    frame,
+                    "CORRECT " + str(self.state_tracker['CURLS']),
+                    pos=(int(frame_width * 0.06), int(frame_height - 80)),
+                    text_color=(10, 228, 72),
+                    font_scale=1,
+                    font_thickness=3,
+                    text_color_bg=self.COLORS['black'],
+                    increased_size=3
+                )
+
+                self.cv_elem.draw_text(
+                    frame,
+                    str(self.state_tracker['BAD_CURLS']) + " INCORRECT",
+                    pos=(int(frame_width * 0.78), int(frame_height - 80)),
+                    text_color=(254, 197, 251),
+                    font_scale=1,
+                    font_thickness=3,
+                    text_color_bg=self.COLORS['black'],
+                    increased_size=3
+                )
+
+                if curls is not None:
+                    self.cv_elem.draw_text(
+                        frame,
+                        "CURLS: " + str(self.state_tracker['CURLS'] + self.state_tracker['BAD_CURLS']) + '/' + str(
+                            curls),
+                        pos=(int(frame_width / 2.1), frame_height - 30),
+                        text_color=(255, 255, 255),
+                        font_scale=0.5,
+                        font_thickness=2,
+                        text_color_bg=self.COLORS['black']
+                    )
+
+                self.cv_elem.draw_text(
+                    frame,
+                    'CAMERA NOT ALIGNED PROPERLY!!!',
+                    pos=(30, 60),
+                    text_color=(255, 255, 230),
+                    font_scale=0.65,
+                    text_color_bg=(255, 153, 0),
+                )
+
+                self.cv_elem.draw_text(
+                    frame,
+                    'OFFSET ANGLE: ' + str(offset_angle),
+                    pos=(30, 30),
+                    text_color=(255, 255, 230),
+                    font_scale=0.65,
+                    text_color_bg=(255, 153, 0),
+                )
+
+                # Reset inactive times for side view.
+                self.state_tracker['start_inactive_time'] = time.perf_counter()
+                self.state_tracker['INACTIVE_TIME'] = 0.0
+                self.state_tracker['prev_state'] = None
+                self.state_tracker['curr_state'] = None
+
+            # Camera is aligned properly.
+            else:
+
+                self.state_tracker['INACTIVE_TIME_FRONT'] = 0.0
+                self.state_tracker['start_inactive_time_front'] = time.perf_counter()
+
+                dist_l = abs(left_ankle_coord[1] - left_shldr_coord[1])
+                dist_r = abs(right_ankle_coord[1] - right_shldr_coord)[1]
+
+                shldr_coord = None
+                elbow_coord = None
+                wrist_coord = None
+                hip_coord = None
+                knee_coord = None
+                ankle_coord = None
+                foot_coord = None # for MP Strategy
+
+                if dist_l > dist_r:
+                    shldr_coord = left_shldr_coord
+                    elbow_coord = left_elbow_coord
+                    wrist_coord = left_wrist_coord
+                    hip_coord = left_hip_coord
+                    knee_coord = left_knee_coord
+                    ankle_coord = left_ankle_coord
+
+                    multiplier = -1
+
+                else:
+                    shldr_coord = right_shldr_coord
+                    elbow_coord = right_elbow_coord
+                    wrist_coord = right_wrist_coord
+                    hip_coord = right_hip_coord
+                    knee_coord = right_knee_coord
+                    ankle_coord = right_ankle_coord
+
+                    multiplier = 1
+
+                # --- Calculation vertical angles ----
+
+                hip_vertical_angle = self.calculate_angle(shldr_coord, np.array([hip_coord[0], 0]), hip_coord)
+                cv2.ellipse(frame, hip_coord, (30, 30),
+                            angle=0, startAngle=-90, endAngle=-90 + multiplier * hip_vertical_angle,
+                            color=self.COLORS['white'], thickness=3, lineType=self.linetype)
+
+                self.cv_elem.draw_dotted_line(frame, hip_coord, start=hip_coord[1] - 80, end=hip_coord[1] + 20,
+                                 line_color=self.COLORS['purple'])
+
+                knee_vertical_angle = self.calculate_angle(hip_coord, np.array([knee_coord[0], 0]), knee_coord)
+                cv2.ellipse(frame, knee_coord, (20, 20),
+                            angle=0, startAngle=-90, endAngle=-90 - multiplier * knee_vertical_angle,
+                            color=self.COLORS['white'], thickness=3, lineType=self.linetype)
+
+                self.cv_elem.draw_dotted_line(frame, knee_coord, start=knee_coord[1] - 50, end=knee_coord[1] + 20,
+                                 line_color=self.COLORS['purple'])
+
+                ankle_vertical_angle = self.calculate_angle(knee_coord, np.array([ankle_coord[0], 0]), ankle_coord)
+                cv2.ellipse(frame, ankle_coord, (30, 30),
+                            angle=0, startAngle=-90, endAngle=-90 + multiplier * ankle_vertical_angle,
+                            color=self.COLORS['white'], thickness=3, lineType=self.linetype)
+
+                self.cv_elem.draw_dotted_line(frame, ankle_coord, start=ankle_coord[1] - 50, end=ankle_coord[1] + 20,
+                                 line_color=self.COLORS['purple'])
+
+                # --- Plotting landmarks if it wasn't implemented in the detector
+                #
+                if not self.detector.is_plotted:
+                    # plotting landmarks
+                    self.draw_landmark_line(frame, shldr_coord, elbow_coord, self.COLORS['pink'], 4)
+                    self.draw_landmark_line(frame, wrist_coord, elbow_coord, self.COLORS['pink'], 4)
+                    self.draw_landmark_line(frame, shldr_coord, hip_coord, self.COLORS['pink'], 4)
+                    self.draw_landmark_line(frame, knee_coord, hip_coord, self.COLORS['pink'], 4)
+                    self.draw_landmark_line(frame, ankle_coord, knee_coord, self.COLORS['pink'], 4)
+
+                    # plotting edges of landmarks
+                    cv2.circle(frame, shldr_coord, 7, self.COLORS['white'], -1, lineType=self.linetype)
+                    cv2.circle(frame, elbow_coord, 7, self.COLORS['white'], -1, lineType=self.linetype)
+                    cv2.circle(frame, wrist_coord, 7, self.COLORS['white'], -1, lineType=self.linetype)
+                    cv2.circle(frame, hip_coord, 7, self.COLORS['white'], -1, lineType=self.linetype)
+                    cv2.circle(frame, knee_coord, 7, self.COLORS['white'], -1, lineType=self.linetype)
+                    cv2.circle(frame, ankle_coord, 7, self.COLORS['white'], -1, lineType=self.linetype)
+
+                current_state = self.exercise.get_state(int(knee_vertical_angle))
+                self.state_tracker['curr_state'] = current_state
+                self.exercise._update_state_sequence(current_state, self.state_tracker)
+
+                # --- Computing parts of automata
+
+                # print('\r', self.state_tracker['state_seq'], current_state, self.state_tracker['DISPLAY_TEXT'], self.state_tracker['COUNT_FRAMES'], end='')
+
+                if current_state == 's1':
+
+                    if len(self.state_tracker['state_seq']) == 3 and not self.state_tracker['INCORRECT_POSTURE']:
+                        self.state_tracker['CURLS'] += 1
+                        play_sound = str(self.state_tracker['CURLS'])
+
+                    elif 's2' in self.state_tracker['state_seq'] and len(self.state_tracker['state_seq']) == 1:
+                        self.state_tracker['BAD_CURLS'] += 1
+                        play_sound = 'incorrect'
+
+                    elif self.state_tracker['INCORRECT_POSTURE']:
+                        self.state_tracker['BAD_CURLS'] += 1
+                        play_sound = 'incorrect'
+
+                    self.state_tracker['state_seq'] = []
+                    self.state_tracker['INCORRECT_POSTURE'] = False
+
+                    # --- End of computing
+
+                # --- Perform feedback
+
+                else:
+                    if hip_vertical_angle > self.thresholds['HIP_THRESH'][1]:
+                        self.state_tracker['DISPLAY_TEXT'][0] = True
+
+
+                    elif hip_vertical_angle < self.thresholds['HIP_THRESH'][0] and \
+                            self.state_tracker['state_seq'].count('s2') == 1:
+                        self.state_tracker['DISPLAY_TEXT'][1] = True
+
+                    if self.thresholds['KNEE_THRESH'][0] < knee_vertical_angle < self.thresholds['KNEE_THRESH'][1] and \
+                            self.state_tracker['state_seq'].count('s2') == 1:
+                        self.state_tracker['LOWER_HIPS'] = True
+
+
+                    elif knee_vertical_angle > self.thresholds['KNEE_THRESH'][2]:
+                        self.state_tracker['DISPLAY_TEXT'][3] = True
+                        self.state_tracker['INCORRECT_POSTURE'] = True
+
+                    if (ankle_vertical_angle > self.thresholds['ANKLE_THRESH']):
+                        self.state_tracker['DISPLAY_TEXT'][2] = True
+                        self.state_tracker['INCORRECT_POSTURE'] = True
+
+                # --- Inactivity computing
+
+                display_inactivity = False
+
+                if self.state_tracker['curr_state'] == self.state_tracker['prev_state']:
+
+                    end_time = time.perf_counter()
+                    self.state_tracker['INACTIVE_TIME'] += end_time - self.state_tracker['start_inactive_time']
+                    self.state_tracker['start_inactive_time'] = end_time
+
+                    if self.state_tracker['INACTIVE_TIME'] >= self.thresholds['INACTIVE_THRESH']:
+                        self.state_tracker['CURLS'] = 0
+                        self.state_tracker['BAD_CURLS'] = 0
+                        display_inactivity = True
+
+                else:
+                    self.state_tracker['start_inactive_time'] = time.perf_counter()
+                    self.state_tracker['INACTIVE_TIME'] = 0.0
+
+                # ---
+
+                hip_text_coord_x = hip_coord[0] + 10
+                knee_text_coord_x = knee_coord[0] + 15
+                ankle_text_coord_x = ankle_coord[0] + 10
+
+                # if self.flip_frame:
+                #     frame = cv2.flip(frame, 1)
+                #     hip_text_coord_x = frame_width - hip_coord[0] + 10
+                #     knee_text_coord_x = frame_width - knee_coord[0] + 15
+                #     ankle_text_coord_x = frame_width - ankle_coord[0] + 10
+
+                if 's3' in self.state_tracker['state_seq'] or current_state == 's1':
+                    self.state_tracker['LOWER_HIPS'] = False
+
+                self.state_tracker['COUNT_FRAMES'][self.state_tracker['DISPLAY_TEXT']] += 1
+
+                frame = self._show_feedback(frame, self.state_tracker['COUNT_FRAMES'], self.FEEDBACK_ID_MAP,
+                                            self.state_tracker['LOWER_HIPS'])
+
+                if display_inactivity or (time.time() - self.state_tracker['INACTIVE_TIME_START']) <= 3:
+                    cv2.putText(frame, 'Resetting CURLS due to inactivity!', (10, 90),
+                                self.font, 0.5, self.COLORS['red'], 2, lineType=self.linetype)
+                    play_sound = 'reset_counters'
+                    self.state_tracker['INACTIVE_TIME_FRONT'] = 0.0
+                    self.state_tracker['start_inactive_time_front'] = time.perf_counter()
+
+                    if not (time.time() - self.state_tracker['INACTIVE_TIME_START']) <= 3:
+                        self.state_tracker['INACTIVE_TIME_START'] = time.time()
+
+                cv2.putText(frame, str(int(hip_vertical_angle)), (hip_text_coord_x, hip_coord[1]), self.font, 0.6,
+                            self.COLORS['light_green'], 2, lineType=self.linetype)
+                cv2.putText(frame, str(int(knee_vertical_angle)), (knee_text_coord_x, knee_coord[1] + 10), self.font,
+                            0.6, self.COLORS['light_green'], 2, lineType=self.linetype)
+                cv2.putText(frame, str(int(ankle_vertical_angle)), (ankle_text_coord_x, ankle_coord[1]), self.font, 0.6,
+                            self.COLORS['light_green'], 2, lineType=self.linetype)
+
+                self.cv_elem.draw_text(
+                    frame,
+                    "CORRECT " + str(self.state_tracker['CURLS']),
+                    pos=(int(frame_width * 0.06), int(frame_height - 80)),
+                    text_color=(10, 228, 72),
+                    font_scale=1,
+                    font_thickness=3,
+                    text_color_bg=self.COLORS['black'],
+                    increased_size=3
+                )
+
+                self.cv_elem.draw_text(
+                    frame,
+                    str(self.state_tracker['BAD_CURLS']) + " INCORRECT",
+                    pos=(int(frame_width * 0.78), int(frame_height - 80)),
+                    text_color=(254, 197, 251),
+                    font_scale=1,
+                    font_thickness=3,
+                    text_color_bg=self.COLORS['black'],
+                    increased_size=3
+                )
+
+                if curls is not None:
+                    self.cv_elem.draw_text(
+                        frame,
+                        "CURLS: " + str(self.state_tracker['CURLS'] + self.state_tracker['BAD_CURLS']) + '/' + str(
+                            curls),
+                        pos=(int(frame_width / 2.1), frame_height - 30),
+                        text_color=(255, 255, 255),
+                        font_scale=0.5,
+                        font_thickness=2,
+                        text_color_bg=self.COLORS['black']
+                    )
+
+                self.state_tracker['DISPLAY_TEXT'][
+                    self.state_tracker['COUNT_FRAMES'] > self.thresholds['CNT_FRAME_THRESH']] = False
+                self.state_tracker['COUNT_FRAMES'][
+                    self.state_tracker['COUNT_FRAMES'] > self.thresholds['CNT_FRAME_THRESH']] = 0
+                self.state_tracker['prev_state'] = current_state
+
+
+
+        # --- if len(keypoints)
+
+        else:
+            # if self.flip_frame:
+            #     frame = cv2.flip(frame, 1)
+
+            end_time = time.perf_counter()
+            self.state_tracker['INACTIVE_TIME'] += end_time - self.state_tracker['start_inactive_time']
+
+            display_inactivity = False
+
+            if self.state_tracker['INACTIVE_TIME'] >= self.thresholds['INACTIVE_THRESH'] or (time.time() - self.state_tracker['INACTIVE_TIME_START']) <= 3:
+                self.state_tracker['CURLS'] = 0
+                self.state_tracker['BAD_CURLS'] = 0
+                cv2.putText(frame, 'Resetting CURLS due to inactivity!!!', (10, frame_height - 25), self.font, 0.7, self.COLORS['red'], 2)
+                display_inactivity = True
+                if not (time.time() - self.state_tracker['INACTIVE_TIME_START']) <= 3:
+                    self.state_tracker['INACTIVE_TIME_START'] = time.time()
+
+            self.state_tracker['start_inactive_time'] = end_time
+
+            self.cv_elem.draw_text(
+                frame,
+                "CORRECT " + str(self.state_tracker['CURLS']),
+                pos=(int(frame_width * 0.06), int(frame_height - 80)),
+                text_color=(10, 228, 72),
+                font_scale=1,
+                font_thickness=3,
+                text_color_bg=self.COLORS['black'],
+                increased_size=3
+            )
+
+            self.cv_elem.draw_text(
+                frame,
+                str(self.state_tracker['BAD_CURLS']) + " INCORRECT",
+                pos=(int(frame_width * 0.78), int(frame_height - 80)),
+                text_color=(254, 197, 251),
+                font_scale=1,
+                font_thickness=3,
+                text_color_bg=self.COLORS['black'],
+                increased_size=3
+            )
+
+            if curls is not None:
+                self.cv_elem.draw_text(
+                    frame,
+                    "CURLS: " + str(self.state_tracker['CURLS'] + self.state_tracker['BAD_CURLS']) + '/' + str(
+                        curls),
+                    pos=(int(frame_width / 2.1), frame_height - 30),
+                    text_color=(255, 255, 255),
+                    font_scale=0.5,
+                    font_thickness=2,
+                    text_color_bg=self.COLORS['black']
+                )
+
+            if display_inactivity or (time.time() - self.state_tracker['INACTIVE_TIME_START']) <= 3:
+                cv2.putText(frame, 'Resetting CURLS due to inactivity!', (10, 90),
+                            self.font, 0.5, self.COLORS['red'], 2, lineType=self.linetype)
+                play_sound = 'reset_counters'
+                self.state_tracker['INACTIVE_TIME_FRONT'] = 0.0
+                self.state_tracker['start_inactive_time_front'] = time.perf_counter()
+
+                if not (time.time() - self.state_tracker['INACTIVE_TIME_START']) <= 3:
+                    self.state_tracker['INACTIVE_TIME_START'] = time.time()
+
+            # Reset all other state variables
+
+            self.state_tracker['prev_state'] = None
+            self.state_tracker['curr_state'] = None
+            self.state_tracker['INACTIVE_TIME_FRONT'] = 0.0
+            self.state_tracker['INCORRECT_POSTURE'] = False
+            self.state_tracker['DISPLAY_TEXT'] = np.full((3,), False)
+            self.state_tracker['COUNT_FRAMES'] = np.zeros((3,), dtype=np.int64)
+            self.state_tracker['start_inactive_time_front'] = time.perf_counter()
+
+        return frame, play_sound
+---
+/Users/egorken/PycharmProjects/course work/src/strategies/pose_processor/__init__.py
+__init__.py:
+
+
+---
+/Users/egorken/PycharmProjects/course work/src/strategies/pose_processor/pose_processor.py
+pose_processor.py:
+
+# pose_processor.py
+
+from abc import ABC, abstractmethod
+import cv2
+import numpy as np
+from src.strategies import angle_calculation_strategy as acs
+from src.strategies import detection_strategy as dc
+
+from src.models import opencv_elements
+
+
+class PoseProcessor(ABC):
+    def __init__(self, detection_strategy: dc.DetectionStrategy,
+                 angle_calculation_strategy: acs.AngleCalculationStrategy, level=0):
+
+        self.detector = detection_strategy
+        self.angle_calculation = angle_calculation_strategy
+
+        self.cv_elem = opencv_elements.OpenCVElements
+
+        # Font type
+        self.font = cv2.FONT_HERSHEY_SIMPLEX
+        # line type
+        self.linetype = cv2.LINE_AA
+        # set radius to draw arc
+        self.radius = 30
+        self.COLORS = {
+            'black': (14, 16, 15),
+            'blue': (0, 127, 255),
+            'red': (255, 50, 50),
+            'green': (0, 255, 127),
+            'light_green': (100, 233, 127),
+            'yellow': (255, 255, 0),
+            'magenta': (255, 0, 255),
+            'white': (255, 255, 255),
+            'cyan': (0, 255, 255),
+            'light_blue': (102, 204, 255),
+            'purple': (143, 126, 213),
+            'pink': (229, 156, 209)
+        }
+
+
+    @abstractmethod
+    def process(self, frame: np.array, curls):
+        pass
+---
+/Users/egorken/PycharmProjects/course work/src/strategies/pose_processor/dumbbell_processor.py
+dumbbell_processor.py:
+
+# dumbbell_processor.py
+
+from src.strategies.pose_processor.pose_processor import PoseProcessor
+import time
+import cv2
+import numpy as np
+from src.strategies import angle_calculation_strategy as acs
+from src.strategies import detection_strategy as dc
+from src.models import exercise as exr
+
+
+class DumbbellProcessor(PoseProcessor):
+    def __init__(self, detection_strategy: dc.DetectionStrategy,
+                 angle_calculation_strategy: acs.AngleCalculationStrategy, level=0):
+        super().__init__(detection_strategy, angle_calculation_strategy, level)
+
+        self.exercise = exr.DumbellExercise(level)
+        self.thresholds = self.exercise.get_thresholds()
+
+        self.state_tracker = {
+            'state_seq': [],
+
+            'NEAR_HAND': False,
+
+            'start_inactive_time': time.perf_counter(),
+            'start_inactive_time_front': time.perf_counter(),
+            'INACTIVE_TIME': 0.0,
+            'INACTIVE_TIME_FRONT': 0.0,
+            'INACTIVE_TIME_START': 0.0,
+
+            # 0 -> LOWER YOUR WRIST, 1 -> HIGHER YOUR WRIST, 2 -> KEEP YOUR HAND NEAR THE BODY
+            'DISPLAY_TEXT': np.full((3,), False),
+            'COUNT_FRAMES': np.zeros((3,), dtype=np.int64),
+
+            'INCORRECT_POSTURE': False,
+
+            'prev_state': None,
+            'curr_state': None,
+
+            'CURLS': 0,
+            'BAD_CURLS': 0
+        }
+
+        self.FEEDBACK_ID_MAP = {
+            0: ('LOWER YOUR WRIST', 125, self.COLORS['purple']),
+            1: ('HIGHER YOUR WRIST', 125, self.COLORS['pink']),
+            2: ('KEEP YOUR HAND NEAR THE BODY', 60, (255, 80, 80))
+        }
+
+    def calculate_angle(self, p1, p2, ref_pt=np.array([0, 0])):
+        return self.angle_calculation.calculate_angle(p1, p2, ref_pt)
+
+    def _show_feedback(self, frame, c_frame, dict_maps, near_hand_disp):
+        if near_hand_disp:
+            self.cv_elem.draw_text(
+                frame,
+                'HAND TOO FAR FROM BODY',
+                pos=(int(frame.shape[1] * 0.06), 60),
+                text_color=(0, 0, 0),
+                font_scale=1,
+                font_thickness=3,
+                text_color_bg=(255, 255, 0),
+                increased_size=3
+            )
+            c_frame[2] = False
+
+        # if c_frame[0]: c_frame[1] = False
+        for idx in np.where(c_frame)[0]:
+            self.cv_elem.draw_text(
+                frame,
+                dict_maps[idx][0],
+                pos=(int(frame.shape[1] * 0.06), dict_maps[idx][1]),
+                text_color=(255, 255, 230),
+                font_scale=1,
+                font_thickness=3,
+                text_color_bg=dict_maps[idx][2],
+                increased_size=3
+            )
+        return frame
+
+    def draw_landmark_line(self, frame, p1, p2, color, thickness):
+        if not np.array_equal(p1, [0, 0]) and not np.array_equal(p2, [0, 0]):
+            cv2.line(frame, p1, p2, color, thickness, lineType=self.linetype)
+        return frame
+
+    def process(self, frame: np.array, curls=None):
+        frame_height, frame_width, _ = frame.shape
+
+        keypoints = self.detector.get_coordinates()
+
+        if len(keypoints):
+            nose_coord = self.detector.get_landmark_coordinates('nose')
+            left_shldr_coord, left_elbow_coord, left_wrist_coord, left_hip_coord, left_knee_coord, left_ankle_coord = \
+                self.detector.get_landmark_coordinates('left')
+            right_shldr_coord, right_elbow_coord, right_wrist_coord, right_hip_coord, right_knee_coord, right_ankle_coord = \
+                self.detector.get_landmark_coordinates('right')
+
+            offset_angle = self.calculate_angle(left_shldr_coord, right_shldr_coord, nose_coord)
+
+            if offset_angle > self.thresholds['OFFSET_THRESH']:
+                display_inactivity = False
+
+                end_time = time.perf_counter()
+                self.state_tracker['INACTIVE_TIME_FRONT'] += end_time - self.state_tracker[
+                    'start_inactive_time_front']
+                self.state_tracker['start_inactive_time_front'] = end_time
+
+                if self.state_tracker['INACTIVE_TIME_FRONT'] >= self.thresholds['INACTIVE_THRESH']:
+                    self.state_tracker['CURLS'] = 0
+                    self.state_tracker['BAD_CURLS'] = 0
+                    display_inactivity = True
+
+                cv2.circle(frame, nose_coord, 7, self.COLORS['white'], -1)
+                cv2.circle(frame, left_shldr_coord, 7, self.COLORS['yellow'], -1)
+                cv2.circle(frame, right_shldr_coord, 7, self.COLORS['magenta'], -1)
+
+                if display_inactivity or (time.time() - self.state_tracker['INACTIVE_TIME_START']) <= 3:
+                    cv2.putText(frame, 'Resetting CURLS due to inactivity!', (10, 90),
+                                self.font, 0.5, self.COLORS['red'], 2, lineType=self.linetype)
+                    play_sound = 'reset_counters'
+                    self.state_tracker['INACTIVE_TIME_FRONT'] = 0.0
+                    self.state_tracker['start_inactive_time_front'] = time.perf_counter()
+
+                    if not (time.time() - self.state_tracker['INACTIVE_TIME_START']) <= 3:
+                        self.state_tracker['INACTIVE_TIME_START'] = time.time()
+
+                self.cv_elem.draw_text(
+                    frame,
+                    "CORRECT " + str(self.state_tracker['CURLS']),
+                    pos=(int(frame_width * 0.06), int(frame_height - 80)),
+                    text_color=(10, 228, 72),
+                    font_scale=1,
+                    font_thickness=3,
+                    text_color_bg=self.COLORS['black'],
+                    increased_size=3
+                )
+
+                self.cv_elem.draw_text(
+                    frame,
+                    str(self.state_tracker['BAD_CURLS']) + " INCORRECT",
+                    pos=(int(frame_width * 0.78), int(frame_height - 80)),
+                    text_color=(254, 197, 251),
+                    font_scale=1,
+                    font_thickness=3,
+                    text_color_bg=self.COLORS['black'],
+                    increased_size=3
+                )
+
+                if curls is not None:
+                    self.cv_elem.draw_text(
+                        frame,
+                        "CURLS: " + str(self.state_tracker['CURLS'] + self.state_tracker['BAD_CURLS']) + '/' + str(
+                            curls),
+                        pos=(int(frame_width / 2.1), frame_height - 30),
+                        text_color=(255, 255, 255),
+                        font_scale=0.5,
+                        font_thickness=2,
+                        text_color_bg=self.COLORS['black']
+                    )
+
+                self.cv_elem.draw_text(
+                    frame,
+                    'CAMERA NOT ALIGNED PROPERLY!!!',
+                    pos=(30, 60),
+                    text_color=(255, 255, 255),
+                    font_scale=0.65,
+                    text_color_bg=(255, 153, 0),
+                )
+
+                self.cv_elem.draw_text(
+                    frame,
+                    'OFFSET ANGLE: ' + str(offset_angle),
+                    pos=(30, 30),
+                    text_color=(255, 255, 255),
+                    font_scale=0.65,
+                    text_color_bg=(255, 153, 0),
+                )
+
+                # Reset inactive times for side view.
+                self.state_tracker['start_inactive_time'] = time.perf_counter()
+                self.state_tracker['INACTIVE_TIME'] = 0.0
+                self.state_tracker['prev_state'] = None
+                self.state_tracker['curr_state'] = None
+
+                # Camera is aligned properly.
+            else:
+                self.state_tracker['INACTIVE_TIME_FRONT'] = 0.0
+                self.state_tracker['start_inactive_time_front'] = time.perf_counter()
+
+                dist_l = abs(left_elbow_coord[1] - left_shldr_coord[1])
+                dist_r = abs(right_elbow_coord[1] - right_shldr_coord)[1]
+
+                shldr_coord = None
+                elbow_coord = None
+                wrist_coord = None
+
+                if nose_coord[0] <= left_shldr_coord[0]:
+                    shldr_coord = left_shldr_coord
+                    elbow_coord = left_elbow_coord
+                    wrist_coord = left_wrist_coord
+
+                    multiplier = -1
+
+                else:
+                    shldr_coord = right_shldr_coord
+                    elbow_coord = right_elbow_coord
+                    wrist_coord = right_wrist_coord
+
+                    multiplier = 1
+
+                # --- Calculation angles ----
+
+                elbow_angle = self.calculate_angle(shldr_coord, wrist_coord, elbow_coord)
+                cv2.ellipse(frame, elbow_coord, (30, 30),
+                            angle=elbow_angle, startAngle=0, endAngle=0,
+                            color=self.COLORS['white'], thickness=3, lineType=self.linetype)
+
+                shldr_angle = abs(180 - self.calculate_angle(elbow_coord, np.array([shldr_coord[0], 0]), shldr_coord))
+                if shldr_coord[0] >= elbow_coord[0]:
+                    cv2.ellipse(frame, shldr_coord, (30, 30),
+                                angle=0, startAngle=90 - multiplier * shldr_angle, endAngle=90,
+                                color=self.COLORS['white'], thickness=3, lineType=self.linetype)
+                else:
+                    cv2.ellipse(frame, shldr_coord, (30, 30),
+                                angle=0, startAngle=90 + multiplier * shldr_angle, endAngle=90,
+                                color=self.COLORS['white'], thickness=3, lineType=self.linetype)
+
+                self.cv_elem.draw_dotted_line(frame, shldr_coord, start=shldr_coord[1] - 20, end=shldr_coord[1] + 50,
+                                              line_color=self.COLORS['purple'])
+
+                if not self.detector.is_plotted:
+                    # plotting landmarks
+                    self.draw_landmark_line(frame, shldr_coord, elbow_coord, self.COLORS['pink'], 4)
+                    self.draw_landmark_line(frame, wrist_coord, elbow_coord, self.COLORS['pink'], 4)
+
+                    # plotting edges of landmarks
+                    cv2.circle(frame, shldr_coord, 7, self.COLORS['white'], -1, lineType=self.linetype)
+                    cv2.circle(frame, elbow_coord, 7, self.COLORS['white'], -1, lineType=self.linetype)
+                    cv2.circle(frame, wrist_coord, 7, self.COLORS['white'], -1, lineType=self.linetype)
+
+                current_state = self.exercise.get_state(int(elbow_angle))
+                self.state_tracker['curr_state'] = current_state
+                print(f'\r {current_state}',end='')
+                self.exercise._update_state_sequence(current_state, self.state_tracker)
+
+                # --- Computing parts of automata
+
+                # print('\r', self.state_tracker['state_seq'], current_state, self.state_tracker['DISPLAY_TEXT'], self.state_tracker['COUNT_FRAMES'], self.state_tracker['NEAR_HAND'], end='')
+
+                if current_state == 's1':
+
+                    if len(self.state_tracker['state_seq']) == 3 and not self.state_tracker['INCORRECT_POSTURE']:
+                        self.state_tracker['CURLS'] += 1
+                        play_sound = str(self.state_tracker['CURLS'])
+
+                    elif 's2' in self.state_tracker['state_seq'] and len(self.state_tracker['state_seq']) == 1:
+                        self.state_tracker['BAD_CURLS'] += 1
+                        play_sound = 'incorrect'
+
+                    elif self.state_tracker['INCORRECT_POSTURE']:
+                        self.state_tracker['BAD_CURLS'] += 1
+                        play_sound = 'incorrect'
+
+                    self.state_tracker['state_seq'] = []
+                    self.state_tracker['INCORRECT_POSTURE'] = False
+
+                    # --- End of computing
+
+                # --- Perform feedback
+
+                else:
+                    if elbow_angle < self.thresholds['ELBOW_THRESH'][0]:
+                        self.state_tracker['DISPLAY_TEXT'][0] = True
+
+                    elif elbow_angle > self.thresholds['ELBOW_THRESH'][1] and \
+                            self.state_tracker['state_seq'].count('s2') == 1:
+                        self.state_tracker['DISPLAY_TEXT'][1] = True
+
+                    if self.thresholds['HAND_THRESH'][0] < shldr_angle < self.thresholds['HAND_THRESH'][1] and \
+                            self.state_tracker['state_seq'].count('s2') == 1:
+                        self.state_tracker['DISPLAY_TEXT'][2] = True
+
+                    elif shldr_angle > self.thresholds['HAND_THRESH'][2]:
+                        self.state_tracker['NEAR_HAND'] = True
+                        self.state_tracker['INCORRECT_POSTURE'] = True
+
+                # --- Inactivity computing
+
+                display_inactivity = False
+
+                if self.state_tracker['curr_state'] == self.state_tracker['prev_state']:
+
+                    end_time = time.perf_counter()
+                    self.state_tracker['INACTIVE_TIME'] += end_time - self.state_tracker['start_inactive_time']
+                    self.state_tracker['start_inactive_time'] = end_time
+
+                    if self.state_tracker['INACTIVE_TIME'] >= self.thresholds['INACTIVE_THRESH']:
+                        self.state_tracker['CURLS'] = 0
+                        self.state_tracker['BAD_CURLS'] = 0
+                        display_inactivity = True
+
+                else:
+                    self.state_tracker['start_inactive_time'] = time.perf_counter()
+                    self.state_tracker['INACTIVE_TIME'] = 0.0
+
+                # ---
+
+                elbow_text_coord_x = elbow_coord[0] + 10
+                shldr_text_coord_x = shldr_coord[0] + 15
+
+                if current_state == 's1':
+                    self.state_tracker['NEAR_HAND'] = False
+
+                self.state_tracker['COUNT_FRAMES'][self.state_tracker['DISPLAY_TEXT']] += 1
+
+                frame = self._show_feedback(frame, self.state_tracker['COUNT_FRAMES'],
+                                            self.FEEDBACK_ID_MAP, self.state_tracker['NEAR_HAND'])
+
+                if display_inactivity or (time.time() - self.state_tracker['INACTIVE_TIME_START']) <= 3:
+                    cv2.putText(frame, 'Resetting CURLS due to inactivity!', (10, 90),
+                                self.font, 0.5, self.COLORS['red'], 2, lineType=self.linetype)
+                    play_sound = 'reset_counters'
+                    self.state_tracker['INACTIVE_TIME_FRONT'] = 0.0
+                    self.state_tracker['start_inactive_time_front'] = time.perf_counter()
+
+                    if not (time.time() - self.state_tracker['INACTIVE_TIME_START']) <= 3:
+                        self.state_tracker['INACTIVE_TIME_START'] = time.time()
+
+                cv2.putText(frame, str(int(elbow_angle)), (elbow_text_coord_x, elbow_coord[1]), self.font, 0.6,
+                            self.COLORS['light_green'], 2, lineType=self.linetype)
+                cv2.putText(frame, str(int(shldr_angle)), (shldr_text_coord_x, shldr_coord[1] + 10),
+                            self.font,
+                            0.6, self.COLORS['light_green'], 2, lineType=self.linetype)
+
+                # print(f"\r{self.state_tracker['state_seq']}", end='')
+
+                self.cv_elem.draw_text(
+                    frame,
+                    "CORRECT " + str(self.state_tracker['CURLS']),
+                    pos=(int(frame_width * 0.06), int(frame_height - 80)),
+                    text_color=(10, 228, 72),
+                    font_scale=1,
+                    font_thickness=3,
+                    text_color_bg=self.COLORS['black'],
+                    increased_size=3
+                )
+
+                self.cv_elem.draw_text(
+                    frame,
+                    str(self.state_tracker['BAD_CURLS']) + " INCORRECT",
+                    pos=(int(frame_width * 0.78), int(frame_height - 80)),
+                    text_color=(254, 197, 251),
+                    font_scale=1,
+                    font_thickness=3,
+                    text_color_bg=self.COLORS['black'],
+                    increased_size=3
+                )
+
+                if curls is not None:
+                    self.cv_elem.draw_text(
+                        frame,
+                        "CURLS: " + str(self.state_tracker['CURLS'] + self.state_tracker['BAD_CURLS']) + '/' + str(
+                            curls),
+                        pos=(int(frame_width / 2.1), frame_height - 30),
+                        text_color=(255, 255, 255),
+                        font_scale=0.5,
+                        font_thickness=2,
+                        text_color_bg=self.COLORS['black']
+                    )
+
+                self.state_tracker['DISPLAY_TEXT'][
+                    self.state_tracker['COUNT_FRAMES'] > self.thresholds['CNT_FRAME_THRESH']] = False
+                self.state_tracker['COUNT_FRAMES'][
+                    self.state_tracker['COUNT_FRAMES'] > self.thresholds['CNT_FRAME_THRESH']] = 0
+                self.state_tracker['prev_state'] = current_state
+
+
+        # --- if len(keypoints)
+
+        else:
+            # if self.flip_frame:
+            #     frame = cv2.flip(frame, 1)
+
+            end_time = time.perf_counter()
+            self.state_tracker['INACTIVE_TIME'] += end_time - self.state_tracker['start_inactive_time']
+
+            display_inactivity = False
+
+            if self.state_tracker['INACTIVE_TIME'] >= self.thresholds['INACTIVE_THRESH'] or (
+                    time.time() - self.state_tracker['INACTIVE_TIME_START']) <= 3:
+                self.state_tracker['CURLS'] = 0
+                self.state_tracker['BAD_CURLS'] = 0
+                cv2.putText(frame, 'Resetting CURLS due to inactivity!!!', (10, frame_height - 25), self.font, 0.7,
+                            self.COLORS['red'], 2)
+                display_inactivity = True
+                if not (time.time() - self.state_tracker['INACTIVE_TIME_START']) <= 3:
+                    self.state_tracker['INACTIVE_TIME_START'] = time.time()
+
+            self.state_tracker['start_inactive_time'] = end_time
+
+            self.cv_elem.draw_text(
+                frame,
+                "CORRECT " + str(self.state_tracker['CURLS']),
+                pos=(int(frame_width * 0.06), int(frame_height - 80)),
+                text_color=(10, 228, 72),
+                font_scale=1,
+                font_thickness=3,
+                text_color_bg=self.COLORS['black'],
+                increased_size=3
+            )
+
+            self.cv_elem.draw_text(
+                frame,
+                str(self.state_tracker['BAD_CURLS']) + " INCORRECT",
+                pos=(int(frame_width * 0.78), int(frame_height - 80)),
+                text_color=(254, 197, 251),
+                font_scale=1,
+                font_thickness=3,
+                text_color_bg=self.COLORS['black'],
+                increased_size=3
+            )
+
+            if curls is not None:
+                self.cv_elem.draw_text(
+                    frame,
+                    "CURLS: " + str(self.state_tracker['CURLS'] + self.state_tracker['BAD_CURLS']) + '/' + str(
+                        curls),
+                    pos=(int(frame_width / 2.1), frame_height - 30),
+                    text_color=(255, 255, 255),
+                    font_scale=0.5,
+                    font_thickness=2,
+                    text_color_bg=self.COLORS['black']
+                )
+
+            if display_inactivity or (time.time() - self.state_tracker['INACTIVE_TIME_START']) <= 3:
+                cv2.putText(frame, 'Resetting CURLS due to inactivity!', (10, 90),
+                            self.font, 0.5, self.COLORS['red'], 2, lineType=self.linetype)
+                play_sound = 'reset_counters'
+                self.state_tracker['INACTIVE_TIME_FRONT'] = 0.0
+                self.state_tracker['start_inactive_time_front'] = time.perf_counter()
+
+                if not (time.time() - self.state_tracker['INACTIVE_TIME_START']) <= 3:
+                    self.state_tracker['INACTIVE_TIME_START'] = time.time()
+
+            # Reset all other state variables
+
+            self.state_tracker['prev_state'] = None
+            self.state_tracker['curr_state'] = None
+            self.state_tracker['INACTIVE_TIME_FRONT'] = 0.0
+            self.state_tracker['INCORRECT_POSTURE'] = False
+            self.state_tracker['DISPLAY_TEXT'] = np.full((5,), False)
+            self.state_tracker['COUNT_FRAMES'] = np.zeros((5,), dtype=np.int64)
+            self.state_tracker['start_inactive_time_front'] = time.perf_counter()
+
+        return frame
+
+---
+/Users/egorken/PycharmProjects/course work/src/strategies/pose_processor/__pycache__/pose_processor.cpython-310.pyc
+pose_processor.cpython-310.pyc:
+
+Ошибка при чтении файла: 'utf-8' codec can't decode byte 0xe3 in position 16: invalid continuation byte
+---
+/Users/egorken/PycharmProjects/course work/src/strategies/pose_processor/__pycache__/squats_processor.cpython-310.pyc
+squats_processor.cpython-310.pyc:
+
+Ошибка при чтении файла: 'utf-8' codec can't decode byte 0x8c in position 8: invalid start byte
+---
+/Users/egorken/PycharmProjects/course work/src/strategies/pose_processor/__pycache__/dumbbell_processor.cpython-310.pyc
+dumbbell_processor.cpython-310.pyc:
+
+Ошибка при чтении файла: 'utf-8' codec can't decode byte 0xb0 in position 8: invalid start byte
+---
+/Users/egorken/PycharmProjects/course work/src/strategies/pose_processor/__pycache__/__init__.cpython-310.pyc
+__init__.cpython-310.pyc:
+
+Ошибка при чтении файла: 'utf-8' codec can't decode byte 0xe3 in position 16: invalid continuation byte
+---
+/Users/egorken/PycharmProjects/course work/src/models/opencv_elements.py
+opencv_elements.py:
+
+# opencv_elements.py
+
+import cv2
+
+class OpenCVElements:
+    @staticmethod
+    def draw_rounded_rect(frame, rect_start, rect_end, corner_width, box_color, increased_size=0):
+        """method for drawing rounded rectangle"""
+        x1, y1 = rect_start
+        x2, y2 = rect_end
+
+        x1 -= increased_size
+        y1 -= increased_size
+        x2 += increased_size
+        y2 += increased_size
+
+        w = corner_width + increased_size
+
+        # draw filled rectangles
+        cv2.rectangle(frame, (x1 + w, y1), (x2 - w, y1 + w), box_color, -1)
+        cv2.rectangle(frame, (x1 + w, y2 - w), (x2 - w, y2), box_color, -1)
+        cv2.rectangle(frame, (x1, y1 + w), (x1 + w, y2 - w), box_color, -1)
+        cv2.rectangle(frame, (x2 - w, y1 + w), (x2, y2 - w), box_color, -1)
+        cv2.rectangle(frame, (x1 + w, y1 + w), (x2 - w, y2 - w), box_color, -1)
+
+        # draw filled ellipses
+        cv2.ellipse(frame, (x1 + w, y1 + w), (w, w),
+                    angle=0, startAngle=-90, endAngle=-180, color=box_color, thickness=-1)
+
+        cv2.ellipse(frame, (x2 - w, y1 + w), (w, w),
+                    angle=0, startAngle=0, endAngle=-90, color=box_color, thickness=-1)
+
+        cv2.ellipse(frame, (x1 + w, y2 - w), (w, w),
+                    angle=0, startAngle=90, endAngle=180, color=box_color, thickness=-1)
+
+        cv2.ellipse(frame, (x2 - w, y2 - w), (w, w),
+                    angle=0, startAngle=0, endAngle=90, color=box_color, thickness=-1)
+
+        return frame
+
+    @staticmethod
+    def draw_dotted_line(frame, lm_coord, start, end, line_color):
+        pix_step = 0
+
+        for i in range(start, end + 1, 8):
+            cv2.circle(frame, (lm_coord[0], i + pix_step), 2, line_color, -1, lineType=cv2.LINE_AA)
+
+        return frame
+
+    @staticmethod
+    def draw_text(
+            frame,
+            msg,
+            width=8,
+            font=cv2.FONT_HERSHEY_SIMPLEX,
+            pos=(0, 0),
+            font_scale=1,
+            font_thickness=2,
+            text_color=(0, 255, 0),
+            text_color_bg=(0, 0, 0),
+            box_offset=(20, 10),
+            increased_size=0
+    ):
+        offset = tuple([i+increased_size for i in box_offset])
+        x, y = pos
+        text_size, _ = cv2.getTextSize(msg, font, font_scale, font_thickness)
+        text_w, text_h = text_size
+        rec_start = tuple(p - o for p, o in zip(pos, offset))
+        rec_end = tuple(m + n - o for m, n, o in zip((x + text_w, y + text_h), offset, (25, 0)))
+
+        img = OpenCVElements.draw_rounded_rect(frame, rec_start, rec_end, width, text_color_bg, increased_size)
+
+        cv2.putText(
+            img,
+            msg,
+            (int(rec_start[0] + 6), int(y + text_h + font_scale - 1)),
+            font,
+            font_scale,
+            text_color,
+            font_thickness,
+            cv2.LINE_AA,
+        )
+
+        return text_size
+
+
+
+---
+/Users/egorken/PycharmProjects/course work/src/models/.DS_Store
+.DS_Store:
+
+Ошибка при чтении файла: 'utf-8' codec can't decode byte 0xff in position 1082: invalid start byte
+---
+/Users/egorken/PycharmProjects/course work/src/models/__init__.py
+__init__.py:
+
+
+---
+/Users/egorken/PycharmProjects/course work/src/models/exercise.py
+exercise.py:
+
+# exercise.py
+
+from abc import ABC, abstractmethod
+
+class Exercise:
+    def __init__(self):
+        # name, parameters maybe
+        # Инициализация упражнения
+        pass
+
+    @abstractmethod
+    def _get_thresholds_beginner(self):
+        pass
+
+    @abstractmethod
+    def _get_thresholds_pro(self):
+        pass
+    
+    @abstractmethod
+    def get_thresholds(self):
+        pass
+
+class SquatExercise(Exercise):
+
+    def __init__(self, level=0):
+        super().__init__()
+
+        self.thresholds = None
+        self._ANGLE_HIP_KNEE_VERT_BEGINNER = {
+            'NORMAL': (0, 32),
+            'TRANS': (35, 65),
+            'PASS': (70, 95)
+        }
+        self.thresholds_beginner = {
+            'HIP_KNEE_VERT': self._ANGLE_HIP_KNEE_VERT_BEGINNER,
+
+            'HIP_THRESH': [10, 50],
+            'ANKLE_THRESH': 45,
+            'KNEE_THRESH': [50, 70, 95],
+
+            'OFFSET_THRESH': 45.0,
+            'INACTIVE_THRESH': 25.0,
+
+            'CNT_FRAME_THRESH': 50
+        }
+
+        self._ANGLE_HIP_KNEE_VERT_PRO = {
+            'NORMAL': (0, 32),
+            'TRANS': (35, 65),
+            'PASS': (80, 95)
+        }
+        self.thresholds_pro = {
+            'HIP_KNEE_VERT': self._ANGLE_HIP_KNEE_VERT_PRO,
+
+            'HIP_THRESH': [15, 50],
+            'ANKLE_THRESH': 30,
+            'KNEE_THRESH': [50, 80, 95],
+
+            'OFFSET_THRESH': 45.0,
+            'INACTIVE_THRESH': 15.0,
+
+            'CNT_FRAME_THRESH': 50
+
+        }
+        
+        self.set_level(level)
+
+    def set_level(self, level=0):
+        """setting the level of difficulty, 
+        where 
+        0 = beginner, 1 = pro
+        """    
+        if level:
+            self.thresholds = self.thresholds_pro
+        else:
+            self.thresholds = self.thresholds_beginner
+
+    def _get_thresholds_beginner(self):
+        return self.thresholds_beginner
+
+    def _get_thresholds_pro(self):
+        return self.thresholds_pro
+    
+    def get_thresholds(self):
+        return self.thresholds
+
+    def get_state(self, knee_angle):
+
+        knee = None
+
+        if self.thresholds['HIP_KNEE_VERT']['NORMAL'][0] <= knee_angle <= self.thresholds['HIP_KNEE_VERT']['NORMAL'][1]:
+            knee = 1
+        elif self.thresholds['HIP_KNEE_VERT']['TRANS'][0] <= knee_angle <= self.thresholds['HIP_KNEE_VERT']['TRANS'][1]:
+            knee = 2
+        elif self.thresholds['HIP_KNEE_VERT']['PASS'][0] <= knee_angle <= self.thresholds['HIP_KNEE_VERT']['PASS'][1]:
+            knee = 3
+
+        return f's{knee}' if knee else None
+
+    def _update_state_sequence(self, state, state_tracker):
+        if state == 's2':
+            if (('s3' not in state_tracker['state_seq']) and (state_tracker['state_seq'].count('s2')) == 0) or \
+                    (('s3' in state_tracker['state_seq']) and (state_tracker['state_seq'].count('s2') == 1)):
+                state_tracker['state_seq'].append(state)
+
+        elif state == 's3':
+            if (state not in state_tracker['state_seq']) and 's2' in state_tracker['state_seq']:
+                state_tracker['state_seq'].append(state)
+
+class DumbellExercise(Exercise):
+    def __init__(self, level=0):
+        super().__init__()
+
+        self.thresholds = None
+        self._ANGLE_HIP_KNEE_VERT_BEGINNER = {
+            'NORMAL': (180, 110),
+            'TRANS': (110, 70),
+            'PASS': (70, 60)
+        }
+        self.thresholds_beginner = {
+            'SHLDR_ELBOW_WRIST': self._ANGLE_HIP_KNEE_VERT_BEGINNER,
+
+            'ELBOW_THRESH': [50, 60],
+            'HAND_THRESH': [12, 20, 35],
+
+            'OFFSET_THRESH': 45.0,
+            'INACTIVE_THRESH': 25.0,
+            'CNT_FRAME_THRESH': 50
+        }
+
+        self._ANGLE_HIP_KNEE_VERT_PRO = {
+            'NORMAL': (180, 110),
+            'TRANS': (110, 60),
+            'PASS': (60, 50)
+        }
+        self.thresholds_pro = {
+            'SHLDR_ELBOW_WRIST': self._ANGLE_HIP_KNEE_VERT_PRO,
+
+            'ELBOW_THRESH': [50, 60],
+            'HAND_THRESH': [12, 20, 35],
+
+            'OFFSET_THRESH': 45.0,
+            'INACTIVE_THRESH': 25.0,
+            'CNT_FRAME_THRESH': 50
+        }
+
+        self.set_level(level)
+
+    def set_level(self, level=0):
+        """setting the level of difficulty,
+        where
+        0 = beginner, 1 = pro
+        """
+        if level:
+            self.thresholds = self.thresholds_pro
+        else:
+            self.thresholds = self.thresholds_beginner
+
+    def _get_thresholds_beginner(self):
+        return self.thresholds_beginner
+
+    def _get_thresholds_pro(self):
+        return self.thresholds_pro
+
+    def get_thresholds(self):
+        return self.thresholds
+
+    def get_state(self, elbow_angle):
+
+        elbow = None
+
+        if self.thresholds['SHLDR_ELBOW_WRIST']['NORMAL'][0] >= elbow_angle >= self.thresholds['SHLDR_ELBOW_WRIST']['NORMAL'][1]:
+            elbow = 1
+        elif self.thresholds['SHLDR_ELBOW_WRIST']['TRANS'][0] >= elbow_angle >= self.thresholds['SHLDR_ELBOW_WRIST']['TRANS'][1]:
+            elbow = 2
+        elif self.thresholds['SHLDR_ELBOW_WRIST']['PASS'][0] >= elbow_angle >= self.thresholds['SHLDR_ELBOW_WRIST']['PASS'][1]:
+            elbow = 3
+
+        return f's{elbow}' if elbow else None
+
+    def _update_state_sequence(self, state, state_tracker):
+        if state == 's2':
+            if (('s3' not in state_tracker['state_seq']) and (state_tracker['state_seq'].count('s2')) == 0) or \
+                    (('s3' in state_tracker['state_seq']) and (state_tracker['state_seq'].count('s2') == 1)):
+                state_tracker['state_seq'].append(state)
+
+        elif state == 's3':
+            if (state not in state_tracker['state_seq']) and 's2' in state_tracker['state_seq']:
+                state_tracker['state_seq'].append(state)
+---
+/Users/egorken/PycharmProjects/course work/src/models/weights/yolov8m-pose.pt
+yolov8m-pose.pt:
+
+Ошибка при чтении файла: 'utf-8' codec can't decode byte 0x80 in position 64: invalid start byte
+---
+/Users/egorken/PycharmProjects/course work/src/models/weights/yolov8x-pose.pt
+yolov8x-pose.pt:
+
+Ошибка при чтении файла: 'utf-8' codec can't decode byte 0x80 in position 64: invalid start byte
+---
+/Users/egorken/PycharmProjects/course work/src/models/weights/yolov8l-pose.pt
+yolov8l-pose.pt:
+
+Ошибка при чтении файла: 'utf-8' codec can't decode byte 0x80 in position 64: invalid start byte
+---
+/Users/egorken/PycharmProjects/course work/src/models/weights/yolov8n-pose.pt
+yolov8n-pose.pt:
+
+Ошибка при чтении файла: 'utf-8' codec can't decode byte 0x80 in position 64: invalid start byte
+---
+/Users/egorken/PycharmProjects/course work/src/models/weights/yolov8s-pose.pt
+yolov8s-pose.pt:
+
+Ошибка при чтении файла: 'utf-8' codec can't decode byte 0x80 in position 64: invalid start byte
+---
+/Users/egorken/PycharmProjects/course work/src/models/__pycache__/opencv_elements.cpython-310.pyc
+opencv_elements.cpython-310.pyc:
+
+Ошибка при чтении файла: 'utf-8' codec can't decode byte 0xac in position 8: invalid start byte
+---
+/Users/egorken/PycharmProjects/course work/src/models/__pycache__/exercise.cpython-310.pyc
+exercise.cpython-310.pyc:
+
+Ошибка при чтении файла: 'utf-8' codec can't decode byte 0xb3 in position 8: invalid start byte
+---
+/Users/egorken/PycharmProjects/course work/src/models/__pycache__/__init__.cpython-310.pyc
+__init__.cpython-310.pyc:
+
+Ошибка при чтении файла: 'utf-8' codec can't decode byte 0xca in position 9: invalid continuation byte
+---
+/Users/egorken/PycharmProjects/course work/src/__pycache__/__init__.cpython-310.pyc
+__init__.cpython-310.pyc:
+
+Ошибка при чтении файла: 'utf-8' codec can't decode byte 0xca in position 9: invalid continuation byte
+---
+/Users/egorken/PycharmProjects/course work/src/view/main_window.py
+main_window.py:
+
+import sys
+from PySide6.QtWidgets import QApplication, QMainWindow
+from PySide6.QtUiTools import QUiLoader
+from PySide6.QtCore import QFile, QIODevice
+from src.controllers import main_window_controller
+import os
+
+
+class MainWindow(QMainWindow):
+    def __init__(self):
+        super(MainWindow, self).__init__()
+        self.controller = None
+
+    def create(self):
+        ui_file_name = "main-new.ui"
+        ui_file = QFile(os.path.join(os.path.dirname(__file__), fr'../ui/{ui_file_name}'))
+        if not ui_file.open(QFile.ReadOnly):
+            print(f"Cannot open {ui_file_name}: {ui_file.errorString()}")
+            sys.exit(-1)
+        loader = QUiLoader()
+        self.window = loader.load(ui_file)
+        ui_file.close()
+        if not self.window:
+            print(loader.errorString())
+            sys.exit(-1)
+
+        self.controller = main_window_controller.MainWindowController(self.window)
+
+        # invents processed by controller
+        self.window.settings.clicked.connect(lambda: self.controller.clicked_settings())
+        self.window.stream.currentIndexChanged.connect(lambda: self.controller.chosen_stream())
+        self.window.exercise.currentIndexChanged.connect(lambda: self.controller.chosen_exercise())
+        self.window.start_button.clicked.connect(lambda: self.controller.clicked_start())
+        self.window.folder_button.clicked.connect(lambda: self.controller.clicked_dir())
+
+        self.window.setWindowTitle("AI Trainer")
+        return self.window
+
+    def show(self):
+        self.window.show()
+        return self.window
+
+    def closeEvent(self, QCloseEvent):
+        self.controller.close()
+        pass
+
+
+if __name__ == '__main__':
+    app = QApplication([])
+    w = MainWindow().create()
+    w.show()
+    sys.exit(app.exec())
+
+---
+/Users/egorken/PycharmProjects/course work/src/view/__init__.py
+__init__.py:
+
+
+---
+/Users/egorken/PycharmProjects/course work/src/view/settings.py
+settings.py:
+
+import sys
+from PySide6.QtWidgets import QApplication, QWidget
+from PySide6.QtUiTools import QUiLoader
+from PySide6.QtCore import QFile, QIODevice
+from src.controllers import settings_controller
+import os
+
+class Settings(QWidget):
+    def __init__(self):
+        super(Settings, self).__init__()
+        self.controller = None
+        self._settings_dict = settings_controller
+
+    def create(self):
+        ui_file_name = "settings.ui"
+        ui_file = QFile(os.path.join(os.path.dirname(__file__), fr'../ui/{ui_file_name}'))
+        if not ui_file.open(QFile.ReadOnly):
+            print(f"Cannot open {ui_file_name}: {ui_file.errorString()}")
+            sys.exit(-1)
+        loader = QUiLoader()
+        self.window_sets = loader.load(ui_file)
+        ui_file.close()
+        if not self.window_sets:
+            print(loader.errorString())
+            sys.exit(-1)
+
+        self.controller = settings_controller.SettingsController(self.window_sets)
+
+        # invents processed by controller
+        self.window_sets.save_button.clicked.connect(lambda: self.controller.clicked_save())
+        self.window_sets.folder_button.clicked.connect(lambda: self.controller.clicked_dir())
+        self.window_sets.delete_button.clicked.connect(lambda: self.controller.clicked_delete())
+
+        self.window_sets.setWindowTitle("Settings")
+        return self.window_sets
+
+    def get_settings(self):
+        return self.controller.settings_dict
+
+    def show(self):
+        self.window_sets.show()
+        return self.window_sets
+
+    def closeEvent(self, QCloseEvent):
+        self.controller.close()
+        pass
+---
+/Users/egorken/PycharmProjects/course work/src/view/__pycache__/settings.cpython-310.pyc
+settings.cpython-310.pyc:
+
+Ошибка при чтении файла: 'utf-8' codec can't decode byte 0xe3 in position 16: invalid continuation byte
+---
+/Users/egorken/PycharmProjects/course work/src/view/__pycache__/main_window.cpython-310.pyc
+main_window.cpython-310.pyc:
+
+Ошибка при чтении файла: 'utf-8' codec can't decode byte 0x95 in position 8: invalid start byte
+---
+/Users/egorken/PycharmProjects/course work/src/view/__pycache__/__init__.cpython-310.pyc
+__init__.cpython-310.pyc:
+
+Ошибка при чтении файла: 'utf-8' codec can't decode byte 0x83 in position 8: invalid start byte
+---
+/Users/egorken/PycharmProjects/course work/src/controllers/opencv_controller.py
+opencv_controller.py:
+
+# opencv_controller.py
+
+import time
+import cv2
+from src.strategies.pose_processor import squats_processor, dumbbell_processor
+
+
+# В opencv_controller.py
+class OpenCVController:
+    def __init__(self, detection_strategy=None,  angle_calculation_strategy=None,
+                 selected_exercise=None):
+        self.angle_calculation_strategy = angle_calculation_strategy
+        self.detection_strategy = detection_strategy
+        self.selected_exercise = selected_exercise
+        self.pose_processor = None
+
+    def set_selected_exercise(self, exercise_name):
+        self.selected_exercise = exercise_name
+
+    def set_angle_calculation_strategy(self, strategy):
+        self.angle_calculation_strategy = strategy
+
+    def set_detection_strategy(self, strategy):
+        self.detection_strategy = strategy
+
+    def set_pose_processor_strategy(self, strategy):
+        self.pose_processor = strategy
+
+    def setup(self, stream=0, level=0, video_path=None):
+        if stream:
+            self.vid = cv2.VideoCapture(1)
+        else:
+            self.vid = cv2.VideoCapture(video_path)
+            # self.vid = cv2.VideoCapture('/Users/egorken/Downloads/How to bodyweight squat.mp4')
+            # self.vid = cv2.VideoCapture('/Users/egorken/Downloads/10 Min Squat Workout with 10 Variations - No Repeats No Talking.mp4')
+            # self.vid = cv2.VideoCapture('/Users/egorken/Downloads/bicep curls.mp4')
+
+        if self.selected_exercise is None or \
+                self.angle_calculation_strategy is None or \
+                self.detection_strategy is None:
+            raise ValueError("All required components isn't installed. Install them first.")
+
+        # setting chosen strategies
+        self.set_detection_strategy(self.detection_strategy)
+        self.set_angle_calculation_strategy(self.angle_calculation_strategy)
+
+        # choosing pose_processor strategy
+        if self.selected_exercise == "Squats":
+            self.set_pose_processor_strategy(squats_processor.SquatsProcessor(self.detection_strategy, self.angle_calculation_strategy, level))
+        elif self.selected_exercise == "Dumbbell":
+            self.set_pose_processor_strategy(dumbbell_processor.DumbbellProcessor(self.detection_strategy, self.angle_calculation_strategy, level))
+        else:
+            raise ValueError(f"Unknown exercise: {self.selected_exercise}")
+        return self
+
+    def process(self, show_fps=False, curls=None, plot=False):
+        pTime = 0
+
+        try:
+            while self.vid.isOpened():
+                _, self.frame = self.vid.read()
+                self.frame = self.detection_strategy.process_frame(self.frame, plot=plot)
+
+                try:
+                    self.pose_processor.process(self.frame, curls=curls)
+                except Exception as ex:
+                    print(f'pose_processor exception: {ex}')
+
+
+                if show_fps:
+                    cTime = time.time()
+                    fps = 1 / (cTime - pTime)
+                    pTime = cTime
+                    cv2.putText(self.frame, f'fps: {int(fps)}', (1180, 45), cv2.FONT_HERSHEY_PLAIN, 1.2,
+                                 (255, 255, 255), 2)
+
+                cv2.imshow(f'AI Trainer: {self.selected_exercise} training', self.frame)
+
+                if cv2.waitKey(1) & 0xFF == ord('q'):
+                    break
+        except cv2.error as ex:
+            print(f'opencv_controller: {ex}')
+
+        self.vid.release()
+        cv2.destroyAllWindows()
+---
+/Users/egorken/PycharmProjects/course work/src/controllers/__init__.py
+__init__.py:
+
+
+---
+/Users/egorken/PycharmProjects/course work/src/controllers/main_window_controller.py
+main_window_controller.py:
+
+# main_window_controller.py
+
+from PySide6.QtWidgets import QMessageBox, QFileDialog
+from src.view import settings
+from src.controllers import opencv_controller
+from src.strategies import detection_strategy
+from src.strategies import angle_calculation_strategy
+
+class MainWindowController:
+    def __init__(self, window):
+        self._window = window
+        self.opencv_controller = None
+        self.sets = settings.Settings()
+        self.sets.create()
+
+    @property
+    def window(self):
+        return self._window
+
+    @window.setter
+    def window(self, new):
+        self._window = new
+
+    def clicked_settings(self):
+        self.sets.show()
+
+    def clicked_start(self):
+        text = self.window.curls.text()
+        style_sheet = self.window.curls.styleSheet()
+        try:
+            number = int(text)
+            if 1 <= number <= 50:
+                self.window.curls.setStyleSheet(style_sheet.rstrip('border-bottom: 1px solid red;'))
+                print(f"Entered number {number} is correct!. Starting...")
+
+                settings_dict = self.sets.get_settings()
+
+                if len(settings_dict) > 0:
+                    if settings_dict['path'] != '':
+                        self.detector = detection_strategy.YOLOStrategy(imgsz=settings_dict['imgsz'], weights_path=settings_dict['path'], conf=settings_dict['conf'], iou=settings_dict['iou']).create_model()
+                    else:
+                        self.detector = detection_strategy.YOLOStrategy(imgsz=settings_dict['imgsz'], conf=settings_dict['conf'], iou=settings_dict['iou']).create_model()
+                else:
+                    self.detector = detection_strategy.YOLOStrategy().create_model()
+
+                angle = angle_calculation_strategy.Angle2DCalculation()
+                self.opencv_controller = opencv_controller.OpenCVController(self.detector, angle, self.chosen_exercise())
+                if self.chosen_stream():
+                    self.opencv_controller.setup(stream=self.chosen_stream(), level=self.get_level())
+                else:
+                    self.opencv_controller.setup(stream=self.chosen_stream(), level=self.get_level(), video_path=self.get_path())
+                if len(settings_dict) > 0:
+                    self.opencv_controller.process(show_fps=settings_dict['fps'], curls=number, plot=settings_dict['plot'])
+                else:
+                    self.opencv_controller.process(show_fps=False, curls=number, plot=False)
+            else:
+                # setting a style with a red border to indicate invalid input
+                self.window.curls.setStyleSheet(f"{style_sheet} border-bottom: 1px solid red;")
+                QMessageBox.warning(self.window, "Warning", "Enter number from 1 to 50.")
+        except ValueError as v:
+            print(v)
+            # setting a style with a red border to indicate incorrect input
+            self.window.curls.setStyleSheet(f"{style_sheet} border-bottom: 1px solid red;")
+            QMessageBox.warning(self.window, "Warning", "Enter correct number.")
+
+    def get_path(self):
+        return self.window.file.text()
+
+    def clicked_dir(self):
+        dialog = QFileDialog()
+        fname = dialog.getOpenFileName(self.window, 'Open file', '/home')[0]
+        self.window.file.setText(fname)
+
+    def chosen_stream(self):
+        if self.window.stream.currentText() == 'Vid':
+            self.window.file_label.setEnabled(True)
+            self.window.file.setEnabled(True)
+            self.window.folder_button.setEnabled(True)
+            return 0
+        else:
+            self.window.file_label.setEnabled(False)
+            self.window.file.setEnabled(False)
+            self.window.folder_button.setEnabled(False)
+            return 1
+
+    def chosen_exercise(self):
+        return self.window.exercise.currentText()
+
+    def get_level(self):
+        if self.window.radioButton.pressed: return 0
+        return 1
+
+
+
+
+---
+/Users/egorken/PycharmProjects/course work/src/controllers/settings_controller.py
+settings_controller.py:
+
+# settings_controller.py
+
+from PySide6.QtWidgets import QMessageBox, QFileDialog
+
+class SettingsController:
+    def __init__(self, window):
+        self._settings_dict = {}
+        self._window = window
+        self.opencv_controller = None
+
+    @property
+    def window(self):
+        return self._window
+
+    @window.setter
+    def window(self, new):
+        self._window = new
+
+    def get_path(self):
+        print(self.window.file.text())
+        return self.window.file.text()
+
+    def clicked_dir(self):
+        dialog = QFileDialog()
+        fname = dialog.getOpenFileName(self.window, 'Open file', '/home')[0]
+        self.window.file.setText(fname)
+
+    def choose_param(self):
+        return (self.window.cb1.isChecked(), self.window.cb2.isChecked())
+
+    def set_param(self, p1=False, p2=False):
+        self.window.cb1.setTristate(p1)
+        self.window.cb2.setTristate(p2)
+        return p1, p2
+
+
+    def chosen_size(self):
+        return self.window.imgsz.text()
+
+    def chosen_conf(self):
+        return self.window.conf.text()
+
+    def chosen_iou(self):
+        return self.window.iou.text()
+
+    def clicked_save(self):
+        self.fps, self.plot = self.choose_param()
+        self.settings_dict = {
+            'path': self.get_path(),
+            'imgsz': int(self.chosen_size()),
+            'conf': float(self.chosen_conf()),
+            'iou': float(self.chosen_iou()),
+            'fps': int(self.fps),
+            'plot': bool(self.plot)
+        }
+        print(self.settings_dict)
+
+        self.window.close()
+
+    def clicked_delete(self):
+        self.fps, self.plot = self.set_param()
+        self.window.file.setText('')
+        self.window.imgsz.setText(str(320))
+        self.window.conf.setText(str(0.25))
+        self.window.iou.setText(str(0.7))
+
+        self.settings_dict = {
+            'path': self.get_path(),
+            'imgsz': int(self.chosen_size()),
+            'conf': float(self.chosen_conf()),
+            'iou': float(self.chosen_iou()),
+            'fps': int(self.fps),
+            'plot': bool(self.plot)
+        }
+        print(self.settings_dict)
+
+    @property
+    def settings_dict(self):
+        return self._settings_dict
+
+    @settings_dict.setter
+    def settings_dict(self, value):
+        self._settings_dict = value
+
+
+
+
+
+
+
+---
+/Users/egorken/PycharmProjects/course work/src/controllers/__pycache__/opencv_controller.cpython-310.pyc
+opencv_controller.cpython-310.pyc:
+
+Ошибка при чтении файла: 'utf-8' codec can't decode byte 0xa1 in position 8: invalid start byte
+---
+/Users/egorken/PycharmProjects/course work/src/controllers/__pycache__/main_window_controller.cpython-310.pyc
+main_window_controller.cpython-310.pyc:
+
+Ошибка при чтении файла: 'utf-8' codec can't decode byte 0x98 in position 8: invalid start byte
+---
+/Users/egorken/PycharmProjects/course work/src/controllers/__pycache__/settings_controller.cpython-310.pyc
+settings_controller.cpython-310.pyc:
+
+Ошибка при чтении файла: 'utf-8' codec can't decode byte 0x98 in position 8: invalid start byte
+---
+/Users/egorken/PycharmProjects/course work/src/controllers/__pycache__/__init__.cpython-310.pyc
+__init__.cpython-310.pyc:
+
+Ошибка при чтении файла: 'utf-8' codec can't decode byte 0xe4 in position 8: invalid continuation byte

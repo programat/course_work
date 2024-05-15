@@ -1,4 +1,4 @@
-# pose_processor.py
+# exercise_processor.py
 
 from abc import ABC, abstractmethod
 import cv2

@@ -1,0 +1,54 @@
+{
+  "exercise_name": "Squats",
+  "landmark_features_dict": {
+    "left": ["shoulder", "elbow", "wrist", "hip", "knee", "ankle"],
+    "right": ["shoulder", "elbow", "wrist", "hip", "knee", "ankle"],
+    "nose": ["nose"]
+  },
+  "angles": [
+    {"name": "hip_vertical_angle", "point1": "hip", "point2": "shoulder", "vertical": true},
+    {"name": "knee_vertical_angle", "point1": "knee", "point2": "hip", "vertical": true},
+    {"name": "ankle_vertical_angle", "point1": "ankle", "point2": "knee", "vertical": true},
+    {"name": "offset_angle", "point1": "left_shoulder", "point2": "right_shoulder", "ref_point": "nose"}
+  ],
+  "state_machine": {
+    "states": [
+      {"id": "s1", "name": "Начальное положение", "feedback": [], "condition": "knee_vertical_angle < 32"},
+      {"id": "s2", "name": "Сгибание", "feedback": [1, 2], "condition": "knee_vertical_angle >= 35 and knee_vertical_angle < 65"},
+      {"id": "s3", "name": "Разгибание", "feedback": [0, 3], "condition": "knee_vertical_angle >= 70"}
+    ],
+    "transitions": [],
+    "success_sequence": ["s1", "s2", "s3", "s1"]
+  },
+  "thresholds": {
+    "beginner": {
+      "angle_thresh": {
+        "hip_vertical_angle": [10, 50],
+        "ankle_vertical_angle": 45,
+        "knee_vertical_angle": [50, 70, 95]
+      },
+      "OFFSET_THRESH": 45.0,
+      "INACTIVE_THRESH": 25.0,
+      "CNT_FRAME_THRESH": 50
+    },
+    "pro": {
+      "angle_thresh": {
+        "hip_vertical_angle": [15, 50],
+        "ankle_vertical_angle": 30,
+        "knee_vertical_angle": [50, 80, 95]
+      },
+      "OFFSET_THRESH": 45.0,
+      "INACTIVE_THRESH": 15.0,
+      "CNT_FRAME_THRESH": 50
+    }
+  },
+  "feedback_messages": [
+    {"message": "BEND BACKWARDS", "color": [215, 0, 153, 255], "critical": false},
+    {"message": "BEND FORWARD", "color": [215, 0, 153, 255], "critical": false},
+    {"message": "KNEE FALLING OVER TOE", "color": [170, 255, 80, 80], "critical": true, "additional_drawing": [
+      {"type": "line", "point1": "knee", "point2": "ankle", "color": [255, 80, 80], "thickness": 2}
+    ]},
+    {"message": "SQUAT TOO DEEP", "color": [125, 255, 80, 80], "critical": true}
+  ],
+  "inactivity_time": 5
+}

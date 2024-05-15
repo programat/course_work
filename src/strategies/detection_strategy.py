@@ -108,7 +108,9 @@ class YOLOStrategy(DetectionStrategy):
     def get_landmark_coordinates(self, feature):
         if feature == 'nose':
             return self.get_coordinates()[0][self.landmark_features_dict[feature]]
-        if feature == 'left' or 'right':
+        if feature.lower() in ['left', 'right']:
+            # return self.get_coordinates()[0][self.landmark_features_dict[feature].values()]
+
             shldr_coord = self.get_coordinates()[0][self.landmark_features_dict[feature]['shoulder']]
             elbow_coord = self.get_coordinates()[0][self.landmark_features_dict[feature]['elbow']]
             wrist_coord = self.get_coordinates()[0][self.landmark_features_dict[feature]['wrist']]

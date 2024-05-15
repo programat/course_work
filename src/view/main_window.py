@@ -5,11 +5,11 @@ from PySide6.QtCore import QFile, QIODevice
 from src.controllers import main_window_controller
 import os
 
+
 class MainWindow(QMainWindow):
     def __init__(self):
         super(MainWindow, self).__init__()
         self.controller = None
-
 
     def create(self):
         ui_file_name = "main-new.ui"
@@ -43,6 +43,7 @@ class MainWindow(QMainWindow):
     def closeEvent(self, QCloseEvent):
         self.controller.close()
         pass
+
 
 if __name__ == '__main__':
     app = QApplication([])
