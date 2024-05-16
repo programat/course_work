@@ -61,14 +61,14 @@ class OpenCVController:
     def process(self, show_fps=False, curls=None, plot=False):
         pTime = 0
 
-        self.set_pose_processor_strategy(exercise_processor.ExerciseProcessor(self.detection_strategy, self.angle_calculation_strategy, '../strategies/squats.json'))
+        self.set_pose_processor_strategy(exercise_processor.ExerciseProcessor(self.detection_strategy, self.angle_calculation_strategy, '../strategies/dumbbell.json'))
 
         try:
             while self.vid.isOpened():
                 _, self.frame = self.vid.read()
                 # TODO: device mps:0 while
                 # (TypeError: can't convert mps:0 device type tensor to numpy. Use Tensor.cpu() to copy the tensor to host memory first.)
-                self.frame = self.detection_strategy.process_frame(self.frame, plot=plot)
+                self.frame = self.detection_strategy.process_frame(self.frame, plot=plot, device='mps')
 
                 try:
                     self.pose_processor.process(self.frame, curls=curls)
@@ -99,12 +99,13 @@ class OpenCVController:
 if __name__ == '__main__':
     from src.strategies import detection_strategy, angle_calculation_strategy
 
-    detector = detection_strategy.YOLOStrategy().create_model()
+    detector = detection_strategy.YOLOStrategy(imgsz=512, weights_path='/Users/egorken/PycharmProjects/course work/src/models/weights/yolov8m-pose.pt').create_model()
     angle = angle_calculation_strategy.Angle2DCalculation()
     chosen_exercise = 'Test'
 
     opencv_controller = OpenCVController(detector, angle, chosen_exercise)
-    video_path = r'/Users/egorken/Downloads/10 Min Squat Workout with 10 Variations - No Repeats No Talking.mp4'
+    # video_path = r'/Users/egorken/Downloads/10 Min Squat Workout with 10 Variations - No Repeats No Talking.mp4'
     # video_path = r'/Users/egorken/Downloads/How to bodyweight squat.mp4'
+    video_path = r'/Users/egorken/Downloads/bicep curls.mp4'
     opencv_controller.setup(stream=0, video_path=video_path)
-    opencv_controller.process(curls=20, plot=False)
+    opencv_controller.process(curls=20, plot=False, show_fps=True)

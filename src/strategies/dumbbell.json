@@ -1,0 +1,72 @@
+{
+  "exercise_name": "Dumbbell Curls",
+  "landmark_features_dict": {
+    "left": ["shoulder", "elbow", "wrist"],
+    "right": ["shoulder", "elbow", "wrist"],
+    "nose": ["nose"]
+  },
+  "angles": [
+    {"name": "elbow_angle", "point1": "elbow", "point2": "wrist", "ref_point": "shoulder"},
+    {"name": "shoulder_angle", "point1": "shoulder", "point2": "elbow", "vertical": true},
+    {"name": "offset_angle", "point1": "left_shoulder", "point2": "right_shoulder", "ref_point": "nose"}
+  ],
+  "state_machine": {
+    "beginner": {
+      "states": [
+        {"id": "s1", "name": "Начальное положение", "condition": "elbow_angle > 110"},
+        {"id": "s2", "name": "Подъем", "condition": "elbow_angle <= 110 and elbow_angle > 70"},
+        {"id": "s3", "name": "Опускание", "condition": "elbow_angle <= 70"}
+      ],
+      "success_sequence": ["s1", "s2", "s3", "s1"]
+    },
+    "pro": {
+      "states": [
+        {"id": "s1", "name": "Начальное положение", "condition": "elbow_angle > 110"},
+        {"id": "s2", "name": "Подъем", "condition": "elbow_angle <= 110 and elbow_angle > 60"},
+        {"id": "s3", "name": "Опускание", "condition": "elbow_angle <= 60"}
+      ],
+      "success_sequence": ["s1", "s2", "s3", "s1"]
+    }
+  },
+  "thresholds": {
+    "beginner": {
+      "angle_thresh": {
+        "elbow_angle": [
+          {"min": 50, "max": null, "feedback": 0, "critical": false},
+          {"min": null, "max": 60, "feedback": 1, "critical": false}
+        ],
+        "shoulder_angle": [
+          {"min": 12, "max": 20, "feedback": 2, "critical": false},
+          {"min": null, "max": 35, "feedback": 3, "critical": true}
+        ]
+      },
+      "OFFSET_THRESH": 45.0,
+      "INACTIVE_THRESH": 25.0,
+      "CNT_FRAME_THRESH": 50
+    },
+    "pro": {
+      "angle_thresh": {
+        "elbow_angle": [
+          {"min": 50, "max": null, "feedback": 0, "critical": false},
+          {"min": null, "max": 60, "feedback": 1, "critical": false}
+        ],
+        "shoulder_angle": [
+          {"min": 12, "max": 20, "feedback": 2, "critical": false},
+          {"min": null, "max": 35, "feedback": 3, "critical": true}
+        ]
+      },
+      "OFFSET_THRESH": 45.0,
+      "INACTIVE_THRESH": 15.0,
+      "CNT_FRAME_THRESH": 50
+    }
+  },
+  "feedback_messages": [
+    {"message": "LOWER YOUR WRIST", "color": [125, 143, 126, 213]},
+    {"message": "HIGHER YOUR WRIST", "color": [125, 229, 156, 209]},
+    {"message": "KEEP YOUR HAND NEAR THE BODY", "color": [60, 255, 80, 80]},
+    {"message": "HAND TOO FAR FROM BODY", "color": [60, 255, 80, 80], "additional_drawing": [
+      {"type": "line", "point1": "shoulder", "point2": "elbow", "color": [255, 80, 80], "thickness": 2}
+    ]}
+  ],
+  "inactivity_time": 5
+}

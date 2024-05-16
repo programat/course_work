@@ -99,7 +99,10 @@ class YOLOStrategy(DetectionStrategy):
         # тут обдумать трек для нескольких людей
 
     def get_coordinates(self):
-        res_coord = [r.keypoints.xy.to(int).numpy() for r in self.results]
+        if self.results[0].keypoints.xy.device.type == 'mps':
+            res_coord = [r.keypoints.xy.to(int).cpu().numpy() for r in self.results]
+        else:
+            res_coord = [r.keypoints.xy.to(int).numpy() for r in self.results]
         return res_coord[0]
 
     def get_landmark_features(self):

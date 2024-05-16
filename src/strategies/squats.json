@@ -12,20 +12,36 @@
     {"name": "offset_angle", "point1": "left_shoulder", "point2": "right_shoulder", "ref_point": "nose"}
   ],
   "state_machine": {
-    "states": [
-      {"id": "s1", "name": "Начальное положение", "feedback": [], "condition": "knee_vertical_angle < 32"},
-      {"id": "s2", "name": "Сгибание", "feedback": [1, 2], "condition": "knee_vertical_angle >= 35 and knee_vertical_angle < 65"},
-      {"id": "s3", "name": "Разгибание", "feedback": [0, 3], "condition": "knee_vertical_angle >= 70"}
-    ],
-    "transitions": [],
-    "success_sequence": ["s1", "s2", "s3", "s1"]
+    "beginner": {
+      "states": [
+        {"id": "s1", "name": "Начальное положение", "condition": "knee_vertical_angle < 35"},
+        {"id": "s2", "name": "Сгибание", "condition": "knee_vertical_angle >= 35 and knee_vertical_angle < 65"},
+        {"id": "s3", "name": "Разгибание", "condition": "knee_vertical_angle >= 70"}
+      ],
+      "success_sequence": ["s1", "s2", "s3", "s1"]
+    },
+    "pro": {
+      "states": [
+        {"id": "s1", "name": "Начальное положение", "condition": "knee_vertical_angle < 30"},
+        {"id": "s2", "name": "Сгибание", "condition": "knee_vertical_angle >= 30 and knee_vertical_angle < 60"},
+        {"id": "s3", "name": "Разгибание", "condition": "knee_vertical_angle >= 65"}
+      ],
+      "success_sequence": ["s1", "s2", "s3", "s1"]
+    }
   },
   "thresholds": {
     "beginner": {
       "angle_thresh": {
-        "hip_vertical_angle": [10, 50],
-        "ankle_vertical_angle": 45,
-        "knee_vertical_angle": [50, 70, 95]
+        "hip_vertical_angle": [
+          {"min": 10, "max": 50, "feedback": 0, "critical": false}
+        ],
+        "ankle_vertical_angle": [
+          {"min": null, "max": 45, "feedback": 2, "critical": true}
+        ],
+        "knee_vertical_angle": [
+          {"min": 55, "max": 60, "feedback": 3, "critical": false},
+          {"min": null, "max": 60, "feedback": 4, "critical": true}
+        ]
       },
       "OFFSET_THRESH": 45.0,
       "INACTIVE_THRESH": 25.0,
@@ -33,22 +49,30 @@
     },
     "pro": {
       "angle_thresh": {
-        "hip_vertical_angle": [15, 50],
-        "ankle_vertical_angle": 30,
-        "knee_vertical_angle": [50, 80, 95]
+        "hip_vertical_angle": [
+          {"min": 15, "max": 50, "feedback": 0, "critical": false}
+        ],
+        "ankle_vertical_angle": [
+          {"min": null, "max": 30, "feedback": 2, "critical": true}
+        ],
+        "knee_vertical_angle": [
+          {"min": 50, "max": 80, "feedback": 3, "critical": false},
+          {"min": null, "max": 95, "feedback": 4, "critical": true}
+        ]
       },
       "OFFSET_THRESH": 45.0,
-      "INACTIVE_THRESH": 15.0,
+      "INACTIVE_THRESH": 25.0,
       "CNT_FRAME_THRESH": 50
     }
   },
   "feedback_messages": [
-    {"message": "BEND BACKWARDS", "color": [215, 0, 153, 255], "critical": false},
-    {"message": "BEND FORWARD", "color": [215, 0, 153, 255], "critical": false},
-    {"message": "KNEE FALLING OVER TOE", "color": [170, 255, 80, 80], "critical": true, "additional_drawing": [
+    {"message": "CORRECT HIP ANGLE", "color": [215, 0, 153, 255]},
+    {"message": "BEND FORWARD", "color": [215, 0, 153, 255]},
+    {"message": "KNEE FALLING OVER TOE", "color": [170, 255, 80, 80], "additional_drawing": [
       {"type": "line", "point1": "knee", "point2": "ankle", "color": [255, 80, 80], "thickness": 2}
     ]},
-    {"message": "SQUAT TOO DEEP", "color": [125, 255, 80, 80], "critical": true}
+    {"message": "KEEP YOUR BACK STRAIGHT", "color": [125, 255, 80, 80]},
+    {"message": "SQUAT TOO DEEP", "color": [125, 255, 80, 80]}
   ],
   "inactivity_time": 5
 }
