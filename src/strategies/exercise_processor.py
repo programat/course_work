@@ -18,6 +18,7 @@ class ExerciseProcessor:
         self.thresholds_pro = exercise_data['thresholds']['pro']
         self.feedback_messages = exercise_data['feedback_messages']
         self.inactivity_time = exercise_data['inactivity_time']
+        self.dominant_side_points = exercise_data['dominant_side_points']
 
         self.current_state = self.state_machine["beginner" if level == 0 else "pro"]["states"][0]['id']
         self.set_level(level)
@@ -82,17 +83,42 @@ class ExerciseProcessor:
 
     def calculate_angle(self, angle_data, keypoint_coords):
         if "vertical" in angle_data and angle_data["vertical"]:
-            # Vertical angle calculation (CORRECTED)
-            dominant_side = "left" if keypoint_coords["left_ankle"][1] > keypoint_coords["right_ankle"][1] else "right"
-            p1 = keypoint_coords[f"{dominant_side}_{angle_data['point1']}"]
-            p2 = keypoint_coords[f"{dominant_side}_{angle_data['point2']}"]
-            return self.angle_calculation.calculate_angle(p2, np.array([p2[0], 0]), p1)
+            # Vertical angle calculation
+            dominant_side = self.get_dominant_side(keypoint_coords)
+            #  Исправление:  проверяем  наличие  префикса  в  angle_data['point1']
+            if not angle_data['point1'].startswith(('left_', 'right_')):
+                p1 = keypoint_coords[f"{dominant_side}_{angle_data['point1']}"]
+                p2 = keypoint_coords[f"{dominant_side}_{angle_data['point2']}"]
+            else:  #  Если  префикс  уже  есть,  используем  angle_data['point1']  как  есть
+                p1 = keypoint_coords[angle_data['point1']]
+                p2 = keypoint_coords[angle_data['point2']]
+            return abs((angle_data.get("direction") == "down") * (-180) + self.angle_calculation.calculate_angle(p2, np.array([p2[0], 0]), p1))
         else:
             # Standard angle calculation
-            p1 = keypoint_coords[angle_data["point1"]]
-            p2 = keypoint_coords[angle_data["point2"]]
-            ref_pt = keypoint_coords[angle_data["ref_point"]]
+            dominant_side = self.get_dominant_side(keypoint_coords)
+            #  Исправление:  проверяем  наличие  префикса  в  angle_data['point1'],  angle_data['point2']  и  angle_data['ref_point']
+            if not angle_data['point1'].startswith(('left_', 'right_')):
+                p1 = keypoint_coords[f"{dominant_side}_{angle_data['point1']}"]
+            else:
+                p1 = keypoint_coords[angle_data['point1']]
+            if not angle_data['point2'].startswith(('left_', 'right_')):
+                p2 = keypoint_coords[f"{dominant_side}_{angle_data['point2']}"]
+            else:
+                p2 = keypoint_coords[angle_data['point2']]
+            if angle_data['ref_point'] == "nose":
+                ref_pt = keypoint_coords["nose"]  # Используем "nose" без префикса
+            else:
+                if not angle_data['ref_point'].startswith(('left_', 'right_')):
+                    ref_pt = keypoint_coords[f"{dominant_side}_{angle_data['ref_point']}"]
+                else:
+                    ref_pt = keypoint_coords[angle_data['ref_point']]
             return self.angle_calculation.calculate_angle(p1, p2, ref_pt)
+
+    def get_dominant_side(self, keypoint_coords):
+        #  Получаем  названия  точек  из  dominant_side_points
+        point1, point2 = self.dominant_side_points
+        #  Определяем  dominant_side  на  основе  положения  указанных  точек
+        return "left" if keypoint_coords[f"left_{point1}"][1] > keypoint_coords[f"right_{point2}"][1] else "right"
 
     def check_offset_angle(self, angles):
         threshold = self.thresholds['OFFSET_THRESH']
@@ -146,43 +172,48 @@ class ExerciseProcessor:
         return has_critical_error
 
     def _show_feedback(self, frame, keypoint_coords):
-        self.state_tracker['COUNT_FRAMES'][self.state_tracker['DISPLAY_TEXT']] += 1  #  Увеличиваем  счетчик  для  активных  фидбеков
+        self.state_tracker['COUNT_FRAMES'][self.state_tracker['DISPLAY_TEXT']] += 1  # Увеличиваем счетчик для активных фидбеков
 
-        active_feedback_count = np.sum(self.state_tracker['DISPLAY_TEXT'])  # Количество активных фидбеков
-        y_offset = 0  # Начальный сдвиг по y
+        # Начальная позиция по y для первого сообщения
+        y_position = 50
+        # Расстояние между сообщениями
+        message_spacing = 60
 
-        for i, display_feedback in enumerate(self.state_tracker['DISPLAY_TEXT']):
-            if display_feedback:  # Если фидбек активен
-                message = self.feedback_messages[i]  # Получаем сообщение по индексу
-                # Вычисляем позицию уведомления с учетом сдвига
-                pos = (int(frame.shape[1] * 0.06), int(message["color"][0]) + y_offset)
-                self.cv_elem.draw_text(
-                    frame,
-                    message["message"],
-                    pos=pos,  # Используем вычисленную позицию
-                    text_color=(255, 255, 230),
-                    font_scale=1,
-                    font_thickness=3,
-                    text_color_bg=message["color"][1:],
-                    increased_size=3
-                )
-                if "additional_drawing" in message:
-                    for drawing in message["additional_drawing"]:
-                        if drawing["type"] == "line":
-                            dominant_side = "left" if keypoint_coords["left_ankle"][1] > keypoint_coords["right_ankle"][
-                                1] else "right"
-                            p1 = keypoint_coords[f"{dominant_side}_{drawing['point1']}"]
-                            p2 = keypoint_coords[f"{dominant_side}_{drawing['point2']}"]
-                            color = drawing["color"]
-                            thickness = drawing["thickness"]
-                            cv2.line(frame, p1, p2, color, thickness, lineType=self.linetype)
+        # Проверяем, что текущее состояние не s1
+        if self.current_state != 's1':
+            for i, display_feedback in enumerate(self.state_tracker['DISPLAY_TEXT']):
+                if display_feedback:  # Если фидбек активен
+                    message = self.feedback_messages[i]  # Получаем сообщение по индексу
+                    # Вычисляем позицию уведомления с учетом сдвига
+                    pos = (int(frame.shape[1] * 0.06), y_position)
+                    self.cv_elem.draw_text(
+                        frame,
+                        message["message"],
+                        pos=pos,  # Используем вычисленную позицию
+                        text_color=(255, 255, 230),
+                        font_scale=1,
+                        font_thickness=3,
+                        text_color_bg=message["color"][1:],
+                        increased_size=3
+                    )
+                    if "additional_drawing" in message:
+                        for drawing in message["additional_drawing"]:
+                            if drawing["type"] == "line":
+                                dominant_side = self.get_dominant_side(keypoint_coords)
+                                p1 = keypoint_coords[f"{dominant_side}_{drawing['point1']}"]
+                                p2 = keypoint_coords[f"{dominant_side}_{drawing['point2']}"]
+                                color = drawing["color"]
+                                thickness = drawing["thickness"]
+                                cv2.line(frame, p1, p2, color, thickness, lineType=self.linetype)
 
-                # Увеличиваем сдвиг по y для следующего уведомления
-                y_offset += 70  # Можно  изменить  величину  сдвига
+                    # Увеличиваем сдвиг по y для следующего уведомления
+                    y_position += message_spacing
 
-        #  Деактивируем  фидбек,  если  счетчик  превысил  CNT_FRAME_THRESH
-        self.state_tracker['DISPLAY_TEXT'][self.state_tracker['COUNT_FRAMES'] > self.thresholds['CNT_FRAME_THRESH']] = False
-        self.state_tracker['COUNT_FRAMES'][self.state_tracker['COUNT_FRAMES'] > self.thresholds['CNT_FRAME_THRESH']] = 0
+        # Деактивируем фидбек, если счетчик превысил CNT_FRAME_THRESH
+        self.state_tracker['DISPLAY_TEXT'][
+            self.state_tracker['COUNT_FRAMES'] > self.thresholds['CNT_FRAME_THRESH']] = False
+        self.state_tracker['COUNT_FRAMES'][
+            self.state_tracker['COUNT_FRAMES'] > self.thresholds['CNT_FRAME_THRESH']] = 0
 
         return frame
 
@@ -302,26 +333,100 @@ class ExerciseProcessor:
                 self.state_tracker['INACTIVE_TIME_FRONT'] = 0.0
                 self.state_tracker['start_inactive_time_front'] = time.perf_counter()
                 # Determine dominant side
-                dist_l = abs(keypoint_coords["left_ankle"][1] - keypoint_coords["left_shoulder"][1])
-                dist_r = abs(keypoint_coords["right_ankle"][1] - keypoint_coords["right_shoulder"][1])
-                dominant_side = "left" if dist_l > dist_r else "right"
+                dominant_side = self.get_dominant_side(keypoint_coords)
 
                 # Draw angle visualizations (ellipses and lines) ONLY FOR DOMINANT SIDE
                 for angle_data in self.angles:
                     if "vertical" in angle_data and angle_data["vertical"]:
-                        point1 = f"{dominant_side}_{angle_data['point1']}"
-                        point2 = f"{dominant_side}_{angle_data['point2']}"
+                        point1 = f"{dominant_side}_{angle_data['point1']}" if not angle_data['point1'].startswith(
+                            ('left_', 'right_')) else angle_data['point1']
+                        point2 = f"{dominant_side}_{angle_data['point2']}" if not angle_data['point2'].startswith(
+                            ('left_', 'right_')) else angle_data['point2']
                         p1 = keypoint_coords[point1]
                         p2 = keypoint_coords[point2]
                         angle_value = angles[angle_data["name"]]
+
+                        # Определение направления дуги и начального угла
+                        if angle_data["direction"] == "up":
+                            start_angle = -90
+                            if dominant_side == "left":
+                                if angle_data['point1'] == "ankle":
+                                    end_angle = start_angle - angle_value
+                                elif angle_data['point1'] == "knee":
+                                    end_angle = start_angle + angle_value
+                                elif angle_data['point1'] == "hip":
+                                    end_angle = start_angle - angle_value
+                                else:
+                                    end_angle = start_angle + angle_value
+                            else:  # dominant_side == "right"
+                                if angle_data['point1'] == "ankle":
+                                    end_angle = start_angle + angle_value
+                                elif angle_data['point1'] == "knee":
+                                    end_angle = start_angle - angle_value
+                                elif angle_data['point1'] == "hip":
+                                    end_angle = start_angle + angle_value
+                                else:
+                                    end_angle = start_angle - angle_value
+                        else:  # angle_data["direction"] == "down"
+                            start_angle = 90
+                            if dominant_side == "left":
+                                if angle_data['point1'] == "knee":
+                                    end_angle = start_angle + angle_value
+                                elif angle_data['point1'] == "hip":
+                                    end_angle = start_angle - angle_value
+                                elif angle_data['point1'] == "shoulder":
+                                    end_angle = start_angle + angle_value
+                                else:
+                                    end_angle = start_angle - angle_value
+                            else:  # dominant_side == "right"
+                                if angle_data['point1'] == "knee":
+                                    end_angle = start_angle - angle_value
+                                elif angle_data['point1'] == "hip":
+                                    end_angle = start_angle + angle_value
+                                elif angle_data['point1'] == "shoulder":
+                                    end_angle = start_angle - angle_value
+                                else:
+                                    end_angle = start_angle + angle_value
+
                         cv2.ellipse(frame, p1, (30, 30),
-                                    angle=0, startAngle=-90, endAngle=-90 + angle_value,
+                                    angle=0, startAngle=start_angle, endAngle=end_angle,
                                     color=self.COLORS['white'], thickness=3, lineType=self.linetype)
-                        self.cv_elem.draw_dotted_line(frame, p1, start=p1[1] - 80, end=p1[1] + 20,
-                                                     line_color=self.COLORS['purple'])
+
+                        # Отрисовка вертикальной линии выше или ниже точки
+                        line_start = (p1[0], p1[1] - 80) if angle_data["direction"] == "up" else (p1[0], p1[1] + 80)
+                        line_end = (p1[0], p1[1] + 20) if angle_data["direction"] == "up" else (p1[0], p1[1] - 20)
+                        if line_start[1] > line_end[1]:
+                            line_end, line_start = (int(line_start[0]), int(line_start[1])), (int(line_end[0]), int(line_end[1]))
+                        self.cv_elem.draw_dotted_line(frame, p1, start=line_start[1], end=line_end[1],
+                                                      line_color=self.COLORS['purple'])
+
                         cv2.putText(frame, str(int(angle_value)), (p1[0] + 10, p1[1]), self.font, 0.6,
                                     self.COLORS['light_green'], 2, lineType=self.linetype)
-                # --- Plotting landmarks if it wasn't implemented in the detector
+                    elif angle_data["name"] != "offset_angle":
+                        #  Отрисовка обычного угла
+                        point1 = f"{dominant_side}_{angle_data['point1']}" if not angle_data['point1'].startswith(
+                            ('left_', 'right_')) else angle_data['point1']
+                        point2 = f"{dominant_side}_{angle_data['point2']}" if not angle_data['point2'].startswith(
+                            ('left_', 'right_')) else angle_data['point2']
+                        #  Исправление:  обрабатываем  точку  "nose"  отдельно
+                        ref_point = angle_data['ref_point'] if angle_data[
+                                                                   'ref_point'] == "nose" else f"{dominant_side}_{angle_data['ref_point']}" if not \
+                        angle_data['ref_point'].startswith(('left_', 'right_')) else angle_data['ref_point']
+
+                        p1 = keypoint_coords[point1]
+                        p2 = keypoint_coords[point2]
+                        ref_pt = keypoint_coords[ref_point]
+                        angle_value = angles[angle_data["name"]]
+
+                        #  Отрисовка эллипса
+                        cv2.ellipse(frame, ref_pt, (30, 30),
+                                    angle=angle_value, startAngle=0, endAngle=0,
+                                    color=self.COLORS['white'], thickness=3, lineType=self.linetype)
+
+                        #  Отрисовка  текста  со  значением  угла
+                        cv2.putText(frame, str(int(angle_value)), (ref_pt[0] + 10, ref_pt[1]), self.font, 0.6,
+                                    self.COLORS['light_green'], 2, lineType=self.linetype)
+                        # --- Plotting landmarks if it wasn't implemented in the detector
                 #
                 if not self.detector.is_plotted:
                     # plotting landmarks ONLY FOR DOMINANT SIDE AND ONLY FOR POINTS IN JSON

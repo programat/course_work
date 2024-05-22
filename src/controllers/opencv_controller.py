@@ -66,8 +66,6 @@ class OpenCVController:
         try:
             while self.vid.isOpened():
                 _, self.frame = self.vid.read()
-                # TODO: device mps:0 while
-                # (TypeError: can't convert mps:0 device type tensor to numpy. Use Tensor.cpu() to copy the tensor to host memory first.)
                 self.frame = self.detection_strategy.process_frame(self.frame, plot=plot, device='mps')
 
                 try:
@@ -106,6 +104,6 @@ if __name__ == '__main__':
     opencv_controller = OpenCVController(detector, angle, chosen_exercise)
     # video_path = r'/Users/egorken/Downloads/10 Min Squat Workout with 10 Variations - No Repeats No Talking.mp4'
     # video_path = r'/Users/egorken/Downloads/How to bodyweight squat.mp4'
-    video_path = r'/Users/egorken/Downloads/bicep curls.mp4'
+    video_path = r'/Users/egorken/Downloads/bicep curls good.mp4'
     opencv_controller.setup(stream=0, video_path=video_path)
     opencv_controller.process(curls=20, plot=False, show_fps=True)

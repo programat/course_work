@@ -1,29 +1,30 @@
 {
   "exercise_name": "Squats",
+  "dominant_side_points": ["wrist", "wrist"],
   "landmark_features_dict": {
     "left": ["shoulder", "elbow", "wrist", "hip", "knee", "ankle"],
     "right": ["shoulder", "elbow", "wrist", "hip", "knee", "ankle"],
     "nose": ["nose"]
   },
   "angles": [
-    {"name": "hip_vertical_angle", "point1": "hip", "point2": "shoulder", "vertical": true},
-    {"name": "knee_vertical_angle", "point1": "knee", "point2": "hip", "vertical": true},
-    {"name": "ankle_vertical_angle", "point1": "ankle", "point2": "knee", "vertical": true},
+    {"name": "hip_vertical_angle", "point1": "hip", "point2": "shoulder", "vertical": true, "direction": "up"},
+    {"name": "knee_vertical_angle", "point1": "knee", "point2": "hip", "vertical": true, "direction":  "up"},
+    {"name": "ankle_vertical_angle", "point1": "ankle", "point2": "knee", "vertical": true, "direction": "up"},
     {"name": "offset_angle", "point1": "left_shoulder", "point2": "right_shoulder", "ref_point": "nose"}
   ],
   "state_machine": {
     "beginner": {
       "states": [
         {"id": "s1", "name": "Начальное положение", "condition": "knee_vertical_angle < 35"},
-        {"id": "s2", "name": "Сгибание", "condition": "knee_vertical_angle >= 35 and knee_vertical_angle < 65"},
-        {"id": "s3", "name": "Разгибание", "condition": "knee_vertical_angle >= 70"}
+        {"id": "s2", "name": "Сгибание", "condition": "knee_vertical_angle >= 30 and knee_vertical_angle < 50"},
+        {"id": "s3", "name": "Разгибание", "condition": "knee_vertical_angle >= 55"}
       ],
       "success_sequence": ["s1", "s2", "s3", "s1"]
     },
     "pro": {
       "states": [
         {"id": "s1", "name": "Начальное положение", "condition": "knee_vertical_angle < 30"},
-        {"id": "s2", "name": "Сгибание", "condition": "knee_vertical_angle >= 30 and knee_vertical_angle < 60"},
+        {"id": "s2", "name": "Сгибание", "condition": "knee_vertical_angle >= 30 and knee_vertical_angle < 50"},
         {"id": "s3", "name": "Разгибание", "condition": "knee_vertical_angle >= 65"}
       ],
       "success_sequence": ["s1", "s2", "s3", "s1"]
@@ -39,8 +40,8 @@
           {"min": null, "max": 45, "feedback": 2, "critical": true}
         ],
         "knee_vertical_angle": [
-          {"min": 55, "max": 60, "feedback": 3, "critical": false},
-          {"min": null, "max": 60, "feedback": 4, "critical": true}
+          {"min": 50, "max": 80, "feedback": 3, "critical": false},
+          {"min": null, "max": 85, "feedback": 4, "critical": true}
         ]
       },
       "OFFSET_THRESH": 45.0,

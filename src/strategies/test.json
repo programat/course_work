@@ -1,0 +1,127 @@
+{
+  "exercise_name": "Dumbbell Bicep Curl",
+  "dominant_side_points": [
+    "wrist",
+    "elbow"
+  ],
+  "landmark_features_dict": {
+    "left": [
+      "shoulder",
+      "elbow",
+      "wrist"
+    ],
+    "right": [
+      "shoulder",
+      "elbow",
+      "wrist"
+    ],
+    "nose": [
+      "nose"
+    ]
+  },
+  "angles": [
+    {
+      "name": "elbow_angle",
+      "point1": "right_shoulder",
+      "point2": "right_elbow",
+      "ref_point": "right_wrist"
+    }
+  ],
+  "state_machine": {
+    "beginner": {
+      "states": [
+        {
+          "id": "s1",
+          "name": "Starting Position",
+          "condition": "elbow_angle > 150"
+        },
+        {
+          "id": "s2",
+          "name": "Lifting",
+          "condition": "elbow_angle < 60"
+        },
+        {
+          "id": "s3",
+          "name": "Lowering",
+          "condition": "elbow_angle > 120"
+        }
+      ],
+      "success_sequence": [
+        "s1",
+        "s2",
+        "s3",
+        "s1"
+      ]
+    },
+    "pro": {
+      "states": [
+        {
+          "id": "s1",
+          "name": "Starting Position",
+          "condition": "elbow_angle > 160"
+        },
+        {
+          "id": "s2",
+          "name": "Lifting",
+          "condition": "elbow_angle < 45"
+        },
+        {
+          "id": "s3",
+          "name": "Lowering",
+          "condition": "elbow_angle > 135"
+        }
+      ],
+      "success_sequence": [
+        "s1",
+        "s2",
+        "s3",
+        "s1"
+      ]
+    }
+  },
+  "thresholds": {
+    "beginner": {
+      "angle_thresh": {
+        "elbow_angle": [
+          {
+            "min": 40,
+            "max": 160,
+            "feedback": 0,
+            "critical": true
+          }
+        ]
+      },
+      "OFFSET_THRESH": 15,
+      "INACTIVE_THRESH": 2,
+      "CNT_FRAME_THRESH": 3
+    },
+    "pro": {
+      "angle_thresh": {
+        "elbow_angle": [
+          {
+            "min": 30,
+            "max": 170,
+            "feedback": 0,
+            "critical": true
+          }
+        ]
+      },
+      "OFFSET_THRESH": 10,
+      "INACTIVE_THRESH": 2,
+      "CNT_FRAME_THRESH": 3
+    }
+  },
+  "feedback_messages": [
+    {
+      "message": "Keep your elbow still and close to your body",
+      "color": [
+        0.8,
+        255,
+        0,
+        0
+      ],
+      "additional_drawing": []
+    }
+  ],
+  "inactivity_time": 2
+}

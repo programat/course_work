@@ -1,13 +1,14 @@
 {
   "exercise_name": "Dumbbell Curls",
+  "dominant_side_points": ["wrist", "wrist"],
   "landmark_features_dict": {
     "left": ["shoulder", "elbow", "wrist"],
     "right": ["shoulder", "elbow", "wrist"],
     "nose": ["nose"]
   },
   "angles": [
-    {"name": "elbow_angle", "point1": "elbow", "point2": "wrist", "ref_point": "shoulder"},
-    {"name": "shoulder_angle", "point1": "shoulder", "point2": "elbow", "vertical": true},
+    {"name": "elbow_angle", "point1": "shoulder", "point2": "wrist", "ref_point": "elbow"},
+    {"name": "shoulder_angle", "point1": "shoulder", "point2": "elbow", "vertical": true, "direction": "down"},
     {"name": "offset_angle", "point1": "left_shoulder", "point2": "right_shoulder", "ref_point": "nose"}
   ],
   "state_machine": {
@@ -37,12 +38,12 @@
         ],
         "shoulder_angle": [
           {"min": 12, "max": 20, "feedback": 2, "critical": false},
-          {"min": null, "max": 35, "feedback": 3, "critical": true}
+          {"min": null, "max": 21, "feedback": 3, "critical": true}
         ]
       },
       "OFFSET_THRESH": 45.0,
       "INACTIVE_THRESH": 25.0,
-      "CNT_FRAME_THRESH": 50
+      "CNT_FRAME_THRESH": 0
     },
     "pro": {
       "angle_thresh": {
@@ -52,7 +53,7 @@
         ],
         "shoulder_angle": [
           {"min": 12, "max": 20, "feedback": 2, "critical": false},
-          {"min": null, "max": 35, "feedback": 3, "critical": true}
+          {"min": null, "max": 25, "feedback": 3, "critical": true}
         ]
       },
       "OFFSET_THRESH": 45.0,
